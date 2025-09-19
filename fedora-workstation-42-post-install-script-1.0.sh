@@ -13,6 +13,7 @@ dnf_packages=(
     "gparted"
     "gnome-tweaks"
     "tree"
+    "kdeconnectd"
     "mangohud"
     "gamemode"
 )
@@ -72,7 +73,7 @@ echo -e "${HEADER}###########################################################${N
 echo
 echo -e "${INFO}Ao ser executado, este script irá:${NOCOLOR}"
 echo -e "1. Instalar o \"snapd\" e adicionar os repositórios \"Flathub\" e \"RPM Fusion\"."
-echo -e "2. Instalar, dos repositórios do Fedora, os pacotes: gparted,"
+echo -e "2. Instalar, dos repositórios do Fedora, os pacotes: gparted,kdeconnectd"
 echo -e "   gnome-tweaks, mangohud, gamemode e tree."
 echo -e "3. Instalar os flatpaks: Bottles, Menu Editor, Eye Dropper, Flatseal, FreeTube, LocalSend,"
 echo -e "   PeaZip, ProtonPlus, Proton VPN, Proton Pass, Notesnook, Gimp, Upscayl, Microsoft Edge"
