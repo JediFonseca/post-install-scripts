@@ -13,6 +13,7 @@ dnf_packages=(
     "gparted"
     "gnome-tweaks"
     "tree"
+    "gnome-themes-extra"
     "kdeconnectd"
     "mangohud"
     "gamemode"
@@ -40,6 +41,7 @@ flatpak_packages=(
     "com.valvesoftware.Steam"
     "net.lutris.Lutris"
     "org.videolan.VLC"
+    "org.gtk.Gtk3theme.Adwaita-dark"
 )
 
 snap_packages=(
@@ -73,11 +75,11 @@ echo -e "${HEADER}###########################################################${N
 echo
 echo -e "${INFO}Ao ser executado, este script irá:${NOCOLOR}"
 echo -e "1. Instalar o \"snapd\" e adicionar os repositórios \"Flathub\" e \"RPM Fusion\"."
-echo -e "2. Instalar, dos repositórios do Fedora, os pacotes: gparted,kdeconnectd"
+echo -e "2. Instalar, dos repositórios do Fedora, os pacotes: gparted,kdeconnectd, gnome-themes-extra,"
 echo -e "   gnome-tweaks, mangohud, gamemode e tree."
 echo -e "3. Instalar os flatpaks: Bottles, Menu Editor, Eye Dropper, Flatseal, FreeTube, LocalSend,"
 echo -e "   PeaZip, ProtonPlus, Proton VPN, Proton Pass, Notesnook, Gimp, Upscayl, Microsoft Edge"
-echo -e "   Video Downloader, MKVToolNix GUI, MangoHud, GNOME Extensions Manager, Steam, Lutris e VLC."
+echo -e "   Video Downloader, MKVToolNix GUI, MangoHud, GNOME Extensions Manager, Steam, GTK3 Adwaita Dark, Lutris e VLC."
 echo -e "4. Instalar o pacote Snap: copilot-desktop."
 echo -e "5. Instalar pacotes multimídia e Vulkan."
 echo -e "6. Baixar, no formato .rpm, os instaladores dos apps: TeraBox, Proton Authenticator e AppImageLauncher."
