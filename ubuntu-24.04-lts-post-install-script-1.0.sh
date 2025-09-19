@@ -94,6 +94,7 @@ echo
 
 echo -e "${INFO}Instalando o pacote \"flatpak\" e adicionando o repositório \"Flathub\".${NOCOLOR}"
 echo
+sudo apt update
 sudo apt install -y flatpak
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 echo
@@ -111,7 +112,6 @@ echo
 # Instalando pacotes do APT:
 echo -e "${INFO}Iniciando instalação dos pacotes \"apt\".${NOCOLOR}"
 echo
-sudo apt update
 sudo apt install -y "${apt_packages[@]}"
     if [ $? -ne 0 ]; then
         echo -e "${ERRORS}A instalação de um ou mais pacotes falhou. Verifique os nomes dos pacotes.${NOCOLOR}"
