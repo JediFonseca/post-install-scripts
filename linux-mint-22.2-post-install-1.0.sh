@@ -15,6 +15,7 @@ apt_packages=(
     "mangohud"
     "gamemode"
     "vlc"
+    "kdeconnect"
 )
 
 flatpak_packages=(
@@ -63,16 +64,16 @@ ERRORS='\033[0;31m' # Erros
 # ---FASE 0 - Mensagem inicial---
 #--------------------------------
 
-echo -e "${HEADER}########################################################${NOCOLOR}"
-echo -e "${HEADER}##   Script de pós instalação do Ubuntu 24.04.3 LTS   ##${NOCOLOR}"
-echo -e "${HEADER}########################################################${NOCOLOR}"
+echo -e "${HEADER}#####################################################${NOCOLOR}"
+echo -e "${HEADER}##   Script de pós instalação do Linux Mint 22.2   ##${NOCOLOR}"
+echo -e "${HEADER}#####################################################${NOCOLOR}"
 echo
 echo -e "${INFO}Ao ser executado, este script irá:${NOCOLOR}"
 echo -e "1. Remover o bloqueio do Linux Mint para instalação de pacotes Snap."
 echo -e "2. Instalar o pacote \"snapd\" e adicionar o repositório \"Flathub\"."
-echo -e "3. Instalar, dos repositórios do Mint, os pacotes: gparted, mangohud, VLC, gamemode e tree."
+echo -e "3. Instalar, dos repositórios do Mint, os pacotes: kdeconnect, gparted, mangohud, VLC, gamemode e tree."
 echo -e "4. Instalar os flatpaks: Bottles, Eye Dropper, Flatseal, FreeTube, LocalSend,"
-echo -e "   PeaZip, ProtonPlus, Proton VPN, Proton Pass, Notesnook, Gimp, Upscayl, Microsoft Edge"
+echo -e "   PeaZip, ProtonPlus, Proton VPN, Proton Pass, Notesnook, Gimp, Upscayl, Microsoft Edge,"
 echo -e "   Video Downloader, Steam, Lutris, MKVToolNix GUI e MangoHud."
 echo -e "5. Instalar o pacote Snap: copilot-desktop"
 echo -e "6. Baixar, no formato .deb, os instaladores dos apps: TeraBox, Proton Authenticator e AppImageLauncher."
@@ -94,7 +95,7 @@ sudo apt update
 sudo apt install -y snapd
 echo -e "${INFO}Criando link simbólico para Snapd...${NOCOLOR}"
 sudo ln -s /var/lib/snapd/snap /snap
-echo -e "${INFO}Instalando o pacote \"flatpak\" e adicionando o repositório \"Flathub\".${NOCOLOR}"
+echo -e "${INFO}Instalando o \"snapd\" e adicionando o repositório \"Flathub\".${NOCOLOR}"
 echo
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 echo
