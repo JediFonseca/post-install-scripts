@@ -152,15 +152,27 @@ sudo snap install "${snap_packages[@]}"
         echo -e "${SUCCESS}Snaps instalados com sucesso.${NOCOLOR}"
     fi
 
-#Instalação de Codecs multimídia e Vulkan.
+#Instalação de Codecs multimídia.
 echo
 echo -e "${INFO}Instalando codecs multimídia do \"RPM Fusion\".${NOCOLOR}"
-sudo dnf -y install ffmpeg-free ffmpeg
-sudo dnf -y update @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
-sudo dnf -y install mesa-va-drivers mesa-va-drivers-freeworld
-sudo dnf -y install mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
-sudo dnf -y install mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686
-sudo dnf -y install mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686
+
+sudo dnf install gstreamer1-plugins-base gstreamer1-plugins-good gstreamer1-plugins-bad-free gstreamer1-plugins-ugly gstreamer1-plugin-openh264 gstreamer1-libav
+sudo dnf install gstreamer1-plugins-bad-free-extras gstreamer1-plugins-bad-freeworld gstreamer1-plugins-ugly-free
+sudo dnf install gstreamer1-vaapi
+sudo dnf install ffmpeg x264 x265 x264-libs x265-libs
+sudo dnf install libdvdread libdvdnav
+sudo dnf install lame faac faad2 flac wavpack opus libvorbis
+sudo dnf install compat-ffmpeg4
+sudo dnf install openh264
+sudo dnf install libde265 libheif
+sudo dnf install twolame speex
+sudo dnf install libmpcdec libmad
+sudo dnf install a52dec libmpeg2
+sudo dnf install libdca libdv
+
+# Fontes da Microsoft, para maior compatibilidade
+sudo dnf install curl cabextract xorg-x11-font-utils fontconfig
+sudo rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 
 echo -e "${INFO}Fase de instalação dos pacotes finalizada.${NOCOLOR}"
 
