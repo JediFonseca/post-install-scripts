@@ -16,6 +16,11 @@ apt_packages=(
     "gamemode"
     "vlc"
     "kdeconnect"
+    "qemu-kvm"
+    "libvirt-daemon-system"
+    "libvirt-clients"
+    "bridge-utils"
+    "virtinst"
 )
 
 flatpak_packages=(
@@ -71,7 +76,8 @@ echo
 echo -e "${INFO}Ao ser executado, este script irá:${NOCOLOR}"
 echo -e "1. Remover o bloqueio do Linux Mint para instalação de pacotes Snap."
 echo -e "2. Instalar o pacote \"snapd\" e adicionar o repositório \"Flathub\"."
-echo -e "3. Instalar, dos repositórios do Mint, os pacotes: kdeconnect, gparted, mangohud, VLC, gamemode e tree."
+echo -e "3. Instalar, dos repositórios do Mint, os pacotes: qemu-kvm,libvirt-daemon-system, libvirt-clients
+echo -e     bridge-utils, virtinst, kdeconnect, gparted, mangohud, VLC, gamemode e tree."
 echo -e "4. Instalar os flatpaks: Bottles, Eye Dropper, Flatseal, FreeTube, LocalSend,"
 echo -e "   PeaZip, ProtonPlus, Proton VPN, Proton Pass, Notesnook, Gimp, Upscayl, Microsoft Edge,"
 echo -e "   Video Downloader, Steam, Lutris, MKVToolNix GUI e MangoHud."
