@@ -17,6 +17,11 @@ apt_packages=(
     "tree"
     "mangohud"
     "gamemode"
+    "qemu-kvm"
+    "libvirt-daemon-system"
+    "libvirt-clients"
+    "bridge-utils"
+    "virtinst"
 )
 
 flatpak_packages=(
@@ -75,7 +80,8 @@ echo
 echo -e "${INFO}Ao ser executado, este script irá:${NOCOLOR}"
 echo -e "1. Instalar o pacote \"flatpak\" e adicionar o repositório \"Flathub\"."
 echo -e "2. Instalar, dos repositórios do Ubuntu, os pacotes: gparted, gnome-software, gnome-tweaks,"
-echo -e "   mangohud, gamemode, tree e gnome-software-plugin-flatpak."
+echo -e "   mangohud, gamemode, tree, gnome-software-plugin-flatpak, qemu-kvm,libvirt-daemon-system,"
+echo -e "   bridge-utils, virtinst e libvirt-clients."
 echo -e "3. Instalar os flatpaks: Bottles, Menu Editor, Eye Dropper, Flatseal, FreeTube, LocalSend,"
 echo -e "   PeaZip, ProtonPlus, Proton VPN, Proton Pass, Notesnook, Gimp, Upscayl, Microsoft Edge"
 echo -e "   Video Downloader, MKVToolNix GUI, VLC, MangoHud e GNOME Extensions Manager."
