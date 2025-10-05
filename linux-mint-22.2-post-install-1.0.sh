@@ -61,6 +61,10 @@ appimages_downloads=(
     "https://github.com/JediFonseca/mass_renamer/releases/download/Mass_Renamer-2.2/mass_renamer-2.2-x86_64.AppImage"
 )
 
+binaries_downloads=(
+    "https://www.remotemouse.net/downloads/linux/RemoteMouse_x86_64.zip"
+)
+
 # Paleta de cores
 HEADER='\033[0;36m'  # Ciano - para títulos.
 SUCCESS='\033[0;32m' # Verde - para mensagens de sucesso.
@@ -88,7 +92,8 @@ echo -e "   Media Downloader, Steam, Lutris, MKVToolNix GUI e MangoHud."
 echo -e "5. Instalar o pacote Snap: copilot-desktop"
 echo -e "6. Baixar, no formato .deb, os instaladores dos apps: TeraBox, Proton Authenticator e AppImageLauncher."
 echo -e "7. Baixar, em AppImage, o app: Mass Renamer."
-echo -e "8. Instalar os pacotes .deb baixados."
+echo -e "8. Baixar o binário para Linux do Remote Mouse."
+echo -e "9. Instalar os pacotes .deb baixados."
 echo
 echo -e -n "${INFO}Pressione ENTER para iniciar instalação das dependências ou CTRL+C para cancelar.${NOCOLOR}"
 read
@@ -158,19 +163,27 @@ echo
 echo -e -n "${INFO}Pressione ENTER para baixar os arquivos .deb ou CTRL+C para cancelar.${NOCOLOR}"
 read
 
-#-----------------------------------------------------
-# ---FASE 3 Downloads dos arquivos .deb e .appimage---
-#-----------------------------------------------------
+#---------------------------------------------------------------
+# ---FASE 3 Downloads dos arquivos .deb, binários e .appimage---
+#---------------------------------------------------------------
 
+# Downloads dos .deb:
 echo -e "${INFO}Iniciando o download dos pacotes .deb...${NOCOLOR}"
 mkdir -p "$HOME/Downloads/Debs"
 wget --show-progress -P "$HOME/Downloads/Debs" "${deb_downloads[@]}"
 
+# Downloads dos .AppImage:
 echo -e "${INFO}Iniciando o download dos pacotes AppImage...${NOCOLOR}"
 mkdir -p "$HOME/Downloads/AppImages"
 wget --show-progress -P "$HOME/Downloads/AppImages" "${appimages_downloads[@]}"
-echo -e "${INFO}Tornando os AppImages executáveis...${NOCOLOR}"
 
+# Downloads dos binários:
+echo -e "${INFO}Iniciando o download dos binários...${NOCOLOR}"
+mkdir -p "$HOME/Downloads/Binaries"
+wget --show-progress -P "$HOME/Downloads/Binaries" "${binaries_downloads[@]}"
+
+# Ajustando permissões de execução e finalizando:
+echo -e "${INFO}Tornando os AppImages executáveis...${NOCOLOR}"
 chmod +x "$HOME/Downloads/AppImages/"*.AppImage
 
 echo -e "${INFO}Fase de Downloads finalizada.${NOCOLOR}"
@@ -183,6 +196,7 @@ read
 #------------------------------------------
 
 echo -e "${INFO}Iniciando a instalação dos pacotes .deb.${NOCOLOR}"
+chmod +x "$HOME/Downloads/Debs/"*.deb
 sudo apt install -y "$HOME/Downloads/Debs/"*.deb
     if [ $? -ne 0 ]; then
         echo -e "${ERRORS}A instalação de um pacote .deb ou mais falhou. Tentando corrigir...${NOCOLOR}"
