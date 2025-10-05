@@ -21,6 +21,9 @@ apt_packages=(
     "libvirt-clients"
     "bridge-utils"
     "virtinst"
+    "gpaste-2"
+    "gir1.2-gpaste-2"
+    "linux-tools-generic"
 )
 
 flatpak_packages=(
@@ -50,7 +53,7 @@ snap_packages=(
 
 deb_downloads=(
     "https://proton.me/download/authenticator/linux/ProtonAuthenticator_1.1.4_amd64.deb"
-    "https://data.nephobox.com/issue/terabox/Linux/1.41.5/TeraBox_1.41.5_amd64.deb"
+    "https://data.nephobox.com/issue/terabox/Linux/1.42.2/TeraBox_1.42.2_amd64.deb"
     "https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-1/appimagelauncher_3.0.0-alpha-4-gha275.0bcc75d_amd64.deb"
 )
 
@@ -76,8 +79,9 @@ echo
 echo -e "${INFO}Ao ser executado, este script irá:${NOCOLOR}"
 echo -e "1. Remover o bloqueio do Linux Mint para instalação de pacotes Snap."
 echo -e "2. Instalar o pacote \"snapd\" e adicionar o repositório \"Flathub\"."
-echo -e "3. Instalar, dos repositórios do Mint, os pacotes: qemu-kvm,libvirt-daemon-system, libvirt-clients
-echo -e     bridge-utils, virtinst, kdeconnect, gparted, mangohud, VLC, gamemode e tree."
+echo -e "3. Instalar, dos repositórios do Mint, os pacotes: qemu-kvm,libvirt-daemon-system, libvirt-clients, gpaste-2,"
+echo -e "   gir1.2-gpaste-2, bridge-utils, virtinst, kdeconnect, gparted, mangohud, VLC, gamemode, tree,"
+echo -e "   linux-tools-generic."
 echo -e "4. Instalar os flatpaks: Bottles, Eye Dropper, Flatseal, FreeTube, LocalSend,"
 echo -e "   PeaZip, ProtonPlus, Proton VPN, Proton Pass, Notesnook, Gimp, Upscayl, Microsoft Edge,"
 echo -e "   Video Downloader, Steam, Lutris, MKVToolNix GUI e MangoHud."
