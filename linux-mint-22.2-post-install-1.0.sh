@@ -49,6 +49,7 @@ flatpak_packages=(
     "net.lutris.Lutris"
     "com.github.Flacon"
     "org.hydrogenmusic.Hydrogen"
+    "org.qbittorrent.qBittorrent"
 )
 
 snap_packages=(
@@ -90,7 +91,7 @@ echo -e "2. Instalar o pacote \"snapd\" e adicionar o repositório \"Flathub\"."
 echo -e "3. Instalar, dos repositórios do Mint, os pacotes: qemu-kvm,libvirt-daemon-system, libvirt-clients, gpaste-2,"
 echo -e "   gir1.2-gpaste-2, bridge-utils, virtinst, kdeconnect, gparted, mangohud, VLC, gamemode, tree,"
 echo -e "   linux-tools-generic, audacity, soundconverter e audacious."
-echo -e "4. Instalar os flatpaks: Bottles, Hydrogen, Flacon, Eye Dropper, Flatseal, FreeTube, LocalSend,"
+echo -e "4. Instalar os flatpaks: Bottles, qBittorrent, Hydrogen, Flacon, Eye Dropper, Flatseal, FreeTube, LocalSend,"
 echo -e "   PeaZip, ProtonPlus, Proton VPN, Proton Pass, Notesnook, Gimp, Upscayl,"
 echo -e "   Media Downloader, Steam, Lutris, MKVToolNix GUI e MangoHud."
 echo -e "5. Instalar o pacote Snap: copilot-desktop"
