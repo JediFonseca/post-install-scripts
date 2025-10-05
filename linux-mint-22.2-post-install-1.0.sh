@@ -114,13 +114,13 @@ read
 #-------------------------------------------------
 
 echo -e "${INFO}Removendo o bloqueio de pacotes Snap do Linux Mint 22.2.${NOCOLOR}"
-sudo mv /etc/apt/preferences.d/nosnap.pref /etc/apt/preferences.d/nosnap.backup
+sudo rm /etc/apt/preferences.d/nosnap.pref
 echo -e "${INFO}Instalando o \"snapd\"...${NOCOLOR}"
 sudo apt update
 sudo apt install -y snapd
 echo -e "${INFO}Criando link simbólico para Snapd...${NOCOLOR}"
 sudo ln -s /var/lib/snapd/snap /snap
-echo -e "${INFO}Instalando o \"snapd\" e adicionando o repositório \"Flathub\".${NOCOLOR}"
+echo -e "${INFO}Adicionando o repositório \"Flathub\"...${NOCOLOR}"
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 echo -e "${INFO}Fase de instalação de dependências finalizada.${NOCOLOR}"
 echo
