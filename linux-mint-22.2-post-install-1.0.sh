@@ -92,7 +92,6 @@ echo -e "8. Instalar os pacotes .deb baixados."
 echo
 echo -e -n "${INFO}Pressione ENTER para iniciar instalação das dependências ou CTRL+C para cancelar.${NOCOLOR}"
 read
-echo
 
 #-------------------------------------------------
 # ---FASE 1 - Resolvendo dependências do script---
@@ -106,15 +105,11 @@ sudo apt install -y snapd
 echo -e "${INFO}Criando link simbólico para Snapd...${NOCOLOR}"
 sudo ln -s /var/lib/snapd/snap /snap
 echo -e "${INFO}Instalando o \"snapd\" e adicionando o repositório \"Flathub\".${NOCOLOR}"
-echo
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-echo
 echo -e "${INFO}Fase de instalação de dependências finalizada.${NOCOLOR}"
-
 echo
 echo -e -n "${INFO}Pressione ENTER para instalar os pacotes \"apt\", flatpaks e snaps ou CTRL+C para cancelar.${NOCOLOR}"
 read
-echo
 
 #------------------------------------------------------------------------------
 # ---FASE 2 - Instalando pacotes dos repositórios oficiais, flatpaks e snaps---
@@ -122,7 +117,6 @@ echo
 
 # Instalando pacotes do APT:
 echo -e "${INFO}Iniciando instalação dos pacotes \"apt\".${NOCOLOR}"
-echo
 sudo apt install -y "${apt_packages[@]}"
     if [ $? -ne 0 ]; then
         echo -e "${ERRORS}A instalação de um ou mais pacotes falhou. Verifique os nomes dos pacotes.${NOCOLOR}"
@@ -142,7 +136,6 @@ sudo apt install -y "${apt_packages[@]}"
 
 # Instalação dos pacotes flatpak:
 echo -e "${INFO}Iniciando a instalação dos pacotes flatpak${NOCOLOR}"
-echo
 flatpak install -y flathub "${flatpak_packages[@]}"
     if [ $? -ne 0 ]; then
         echo -e "${ERRORS}A instalação de um ou mais flatpaks falhou. Verifique as IDs dos aplicativos.${NOCOLOR}"
@@ -152,7 +145,6 @@ flatpak install -y flathub "${flatpak_packages[@]}"
 
 # Instalação dos pacotes snap:
 echo -e "${INFO}Iniciando a instalação dos pacotes snap.${NOCOLOR}"
-echo
 sudo snap wait system seed.loaded
 sudo snap refresh
 sudo snap install "${snap_packages[@]}"
@@ -161,47 +153,36 @@ sudo snap install "${snap_packages[@]}"
     else
         echo -e "${SUCCESS}Snaps instalados com sucesso.${NOCOLOR}"
     fi
-echo
 echo -e "${INFO}Fase de instalação dos pacotes finalizada.${NOCOLOR}"
-
 echo
 echo -e -n "${INFO}Pressione ENTER para baixar os arquivos .deb ou CTRL+C para cancelar.${NOCOLOR}"
 read
-echo
 
 #-----------------------------------------------------
 # ---FASE 3 Downloads dos arquivos .deb e .appimage---
 #-----------------------------------------------------
 
 echo -e "${INFO}Iniciando o download dos pacotes .deb...${NOCOLOR}"
-echo
 mkdir -p "$HOME/Downloads/Debs"
 wget --show-progress -P "$HOME/Downloads/Debs" "${deb_downloads[@]}"
 
 echo -e "${INFO}Iniciando o download dos pacotes AppImage...${NOCOLOR}"
-echo
 mkdir -p "$HOME/Downloads/AppImages"
 wget --show-progress -P "$HOME/Downloads/AppImages" "${appimages_downloads[@]}"
-echo
 echo -e "${INFO}Tornando os AppImages executáveis...${NOCOLOR}"
 
-echo
 chmod +x "$HOME/Downloads/AppImages/"*.AppImage
 
-echo
 echo -e "${INFO}Fase de Downloads finalizada.${NOCOLOR}"
 echo
-
 echo -e -n "${INFO}Pressione ENTER para instalar os pacotes .deb ou CTRL+C para cancelar.${NOCOLOR}"
 read
-echo
 
 #------------------------------------------
 # ---FASE 4 Instalação dos arquivos .deb---
 #------------------------------------------
 
 echo -e "${INFO}Iniciando a instalação dos pacotes .deb.${NOCOLOR}"
-echo
 sudo apt install -y "$HOME/Downloads/Debs/"*.deb
     if [ $? -ne 0 ]; then
         echo -e "${ERRORS}A instalação de um pacote .deb ou mais falhou. Tentando corrigir...${NOCOLOR}"
@@ -217,7 +198,6 @@ sudo apt install -y "$HOME/Downloads/Debs/"*.deb
     else
         echo -e "${SUCCESS}Pacotes .deb instalados com sucesso.${NOCOLOR}"
     fi
-
+echo
 echo -e -n "${INFO}Script finalizado. Pressione ENTER para encerrar a execução.${NOCOLOR}"
 read
-echo
