@@ -200,7 +200,6 @@ read
 #------------------------------------------
 
 echo -e "${INFO}Iniciando a instalação dos pacotes .deb.${NOCOLOR}"
-chmod +x "$HOME/Downloads/Debs/"*.deb
 sudo apt install -y "$HOME/Downloads/Debs/"*.deb
     if [ $? -ne 0 ]; then
         echo -e "${ERRORS}A instalação de um pacote .deb ou mais falhou. Tentando corrigir...${NOCOLOR}"
