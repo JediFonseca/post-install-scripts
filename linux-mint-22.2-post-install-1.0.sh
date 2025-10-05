@@ -5,6 +5,10 @@
 # Autor: Jedielson da Fonseca----------------------------------------
 #--------------------------------------------------------------------
 
+#---------------------------------------------------
+# ---VERIFIQUE OS LINKS DE DOWNLOAD ANTES DE USAR---
+#---------------------------------------------------
+
 #-------------------------------------------------
 # ---Pacotes para instalação, downloads e cores---
 #-------------------------------------------------
@@ -84,6 +88,8 @@ ERRORS='\033[0;31m' # Erros
 echo -e "${HEADER}#####################################################${NOCOLOR}"
 echo -e "${HEADER}##   Script de pós instalação do Linux Mint 22.2   ##${NOCOLOR}"
 echo -e "${HEADER}#####################################################${NOCOLOR}"
+echo
+echo -e "${ERRORS}VERIFIQUE OS LINKS DE DOWNLOAD ANTES DE USAR${NOCOLOR}"
 echo
 echo -e "${INFO}Ao ser executado, este script irá:${NOCOLOR}"
 echo -e "1. Remover o bloqueio do Linux Mint para instalação de pacotes Snap."
