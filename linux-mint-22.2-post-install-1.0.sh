@@ -67,7 +67,7 @@ deb_downloads=(
 )
 
 appimages_downloads=(
-    "https://github.com/JediFonseca/mass_renamer/releases/download/Mass_Renamer-2.2/mass_renamer-2.2-x86_64.AppImage"
+    "https://github.com/JediFonseca/mass_renamer/releases/download/mass_renamer-2.3.1-bugfix/mass_renamer-2.3.1-x86_64.AppImage"
 )
 
 binaries_downloads=(
