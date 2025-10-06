@@ -223,5 +223,8 @@ sudo apt install -y "$HOME/Downloads/Debs/"*.deb
         echo -e "${SUCCESS}Pacotes .deb instalados com sucesso.${NOCOLOR}"
     fi
 echo
+echo -e "${INFO}Lembre-se de instalar o applet \"Gpaste Reloaded\" no gerenciador de applets do painel do Cinnamon${NOCOLOR}"
+echo -e "${INFO}para finalizar a instalação do mesmo.${NOCOLOR}"
+echo
 echo -e -n "${INFO}Script finalizado. Pressione ENTER para encerrar a execução.${NOCOLOR}"
 read
