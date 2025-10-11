@@ -29,7 +29,6 @@ apt_packages=(
     "gpaste-2"
     "gir1.2-gpaste-2"
     "linux-tools-generic"
-    "audacious"
     "soundconverter"
     "audacity"
 )
@@ -56,6 +55,7 @@ flatpak_packages=(
     "org.hydrogenmusic.Hydrogen"
     "org.qbittorrent.qBittorrent"
     "org.gnome.Boxes"
+    "org.strawberrymusicplayer.strawberry"
 )
 
 snap_packages=(
@@ -94,9 +94,9 @@ echo -e "1. Remover o bloqueio do Linux Mint para instalação de pacotes Snap."
 echo -e "2. Instalar o pacote \"snapd\" e adicionar o repositório \"Flathub\"."
 echo -e "3. Instalar, dos repositórios do Mint, os pacotes: qemu-kvm,libvirt-daemon-system, libvirt-clients, gpaste-2,"
 echo -e "   gir1.2-gpaste-2, bridge-utils, virtinst, kdeconnect, gparted, mangohud, VLC, gamemode, tree,"
-echo -e "   linux-tools-generic, audacity, xdotool, soundconverter e audacious."
+echo -e "   linux-tools-generic, audacity, xdotool e soundconverter."
 echo -e "4. Instalar os flatpaks: Bottles, qBittorrent, Hydrogen, Flacon, Eye Dropper, Flatseal, FreeTube, LocalSend,"
-echo -e "   PeaZip, ProtonPlus, Proton VPN, Proton Pass, GNOME Boxes, Notesnook, Gimp, Upscayl,"
+echo -e "   PeaZip, Strawberry, ProtonPlus, Proton VPN, Proton Pass, GNOME Boxes, Notesnook, Gimp, Upscayl,"
 echo -e "   Media Downloader, Steam, Lutris, MKVToolNix GUI e MangoHud."
 echo -e "5. Instalar o pacote Snap: copilot-desktop"
 echo -e "6. Baixar, no formato .deb, os instaladores dos apps: TeraBox, Proton Authenticator e AppImageLauncher."
