@@ -72,10 +72,6 @@ appimages_downloads=(
     "https://github.com/JediFonseca/mass_renamer/releases/download/mass_renamer-2.3.1-bugfix/mass_renamer-2.3.1-x86_64.AppImage"
 )
 
-binaries_downloads=(
-    "https://www.remotemouse.net/downloads/linux/RemoteMouse_x86_64.zip"
-)
-
 # Paleta de cores
 HEADER='\033[0;36m'  # Ciano - para títulos.
 SUCCESS='\033[0;32m' # Verde - para mensagens de sucesso.
@@ -189,11 +185,6 @@ wget --show-progress -P "$HOME/Downloads/Debs" "${deb_downloads[@]}"
 echo -e "${INFO}Iniciando o download dos pacotes AppImage...${NOCOLOR}"
 mkdir -p "$HOME/Downloads/AppImages"
 wget --show-progress -P "$HOME/Downloads/AppImages" "${appimages_downloads[@]}"
-
-# Downloads dos binários:
-echo -e "${INFO}Iniciando o download dos binários...${NOCOLOR}"
-mkdir -p "$HOME/Downloads/Binaries"
-wget --show-progress -P "$HOME/Downloads/Binaries" "${binaries_downloads[@]}"
 
 # Ajustando permissões de execução e finalizando:
 echo -e "${INFO}Tornando os AppImages executáveis...${NOCOLOR}"
