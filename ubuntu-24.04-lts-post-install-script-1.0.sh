@@ -15,13 +15,16 @@ apt_packages=(
     "gnome-software-plugin-flatpak"
     "gnome-tweaks"
     "tree"
+    "vlc"
     "mangohud"
     "gamemode"
-    "qemu-kvm"
     "libvirt-daemon-system"
     "libvirt-clients"
     "bridge-utils"
     "virtinst"
+    "linux-tools-generic"
+    "soundconverter"
+    "audacity"
 )
 
 flatpak_packages=(
@@ -38,12 +41,16 @@ flatpak_packages=(
     "com.notesnook.Notesnook"
     "org.gimp.GIMP"
     "org.upscayl.Upscayl"
-    "com.microsoft.Edge"
-    "com.github.unrud.VideoDownloader"
+    "com.markopejic.downloader"
     "org.bunkus.mkvtoolnix-gui"
     "org.freedesktop.Platform.VulkanLayer.MangoHud"
     "com.mattjakeman.ExtensionManager"
-    "org.videolan.VLC"
+    "com.github.Flacon"
+    "org.qbittorrent.qBittorrent"
+    "org.gnome.Boxes"
+    "org.strawberrymusicplayer.strawberry"
+    "com.valvesoftware.Steam"
+    "net.lutris.Lutris"
 )
 
 snap_packages=(
@@ -51,15 +58,13 @@ snap_packages=(
 )
 
 deb_downloads=(
-    "https://cdn.fastly.steamstatic.com/client/installer/steam.deb"
     "https://proton.me/download/authenticator/linux/ProtonAuthenticator_1.1.4_amd64.deb"
-    "https://data.nephobox.com/issue/terabox/Linux/1.41.5/TeraBox_1.41.5_amd64.deb"
-    "https://github.com/lutris/lutris/releases/download/v0.5.18/lutris_0.5.18_all.deb"
+    "https://data.nephobox.com/issue/terabox/Linux/1.42.2/TeraBox_1.42.2_amd64.deb"
     "https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-1/appimagelauncher_3.0.0-alpha-4-gha275.0bcc75d_amd64.deb"
 )
 
 appimages_downloads=(
-    "https://github.com/JediFonseca/mass_renamer/releases/download/Mass_Renamer-2.2/mass_renamer-2.2-x86_64.AppImage"
+    "https://github.com/JediFonseca/mass_renamer/releases/download/mass_renamer-2.3.1-bugfix/mass_renamer-2.3.1-x86_64.AppImage"
 )
 
 # Paleta de cores
@@ -77,16 +82,18 @@ echo -e "${HEADER}########################################################${NOCO
 echo -e "${HEADER}##   Script de pós instalação do Ubuntu 24.04.3 LTS   ##${NOCOLOR}"
 echo -e "${HEADER}########################################################${NOCOLOR}"
 echo
+echo -e "${ERRORS}VERIFIQUE OS LINKS DE DOWNLOAD ANTES DE USAR${NOCOLOR}"
+echo
 echo -e "${INFO}Ao ser executado, este script irá:${NOCOLOR}"
 echo -e "1. Instalar o pacote \"flatpak\" e adicionar o repositório \"Flathub\"."
-echo -e "2. Instalar, dos repositórios do Ubuntu, os pacotes: gparted, gnome-software, gnome-tweaks,"
-echo -e "   mangohud, gamemode, tree, gnome-software-plugin-flatpak, qemu-kvm,libvirt-daemon-system,"
-echo -e "   bridge-utils, virtinst e libvirt-clients."
-echo -e "3. Instalar os flatpaks: Bottles, Menu Editor, Eye Dropper, Flatseal, FreeTube, LocalSend,"
-echo -e "   PeaZip, ProtonPlus, Proton VPN, Proton Pass, Notesnook, Gimp, Upscayl, Microsoft Edge"
-echo -e "   Video Downloader, MKVToolNix GUI, VLC, MangoHud e GNOME Extensions Manager."
+echo -e "2. Instalar, dos repositórios do Ubuntu, os pacotes: gparted, vlc, gnome-software, gnome-tweaks,"
+echo -e "   mangohud, gamemode, tree, gnome-software-plugin-flatpak, linux-tools-generic, libvirt-daemon-system,"
+echo -e "   bridge-utils, soundconverter, audacity, virtinst e libvirt-clients."
+echo -e "3. Instalar os flatpaks: Bottles, qBittorrent, Menu Editor, Eye Dropper, Flatseal, FreeTube, LocalSend,"
+echo -e "   PeaZip, ProtonPlus, Proton VPN, Proton Pass, GNOME Boxes, Notesnook, Gimp, Upscayl, Steam, Flacon,"
+echo -e "   Media Downloader, MKVToolNix GUI, VLC, Strawberry, Lutris, MangoHud e GNOME Extensions Manager."
 echo -e "4. Instalar o pacote Snap: copilot-desktop"
-echo -e "5. Baixar, no formato .deb, os instaladores dos apps: TeraBox, Proton Authenticator, Steam, Lutris e AppImageLauncher."
+echo -e "5. Baixar, no formato .deb, os instaladores dos apps: TeraBox, Proton Authenticator e AppImageLauncher."
 echo -e "6. Baixar, em AppImage, o app: Mass Renamer."
 echo -e "7. Instalar os pacotes .deb baixados."
 echo
