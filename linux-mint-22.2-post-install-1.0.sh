@@ -42,7 +42,6 @@ flatpak_packages=(
     "io.github.peazip.PeaZip"
     "com.vysp3r.ProtonPlus"
     "com.protonvpn.www"
-    "me.proton.Pass"
     "com.notesnook.Notesnook"
     "org.gimp.GIMP"
     "org.upscayl.Upscayl"
@@ -64,6 +63,7 @@ snap_packages=(
 
 deb_downloads=(
     "https://proton.me/download/authenticator/linux/ProtonAuthenticator_1.1.4_amd64.deb"
+    "https://proton.me/download/pass/linux/proton-pass_1.32.10_amd64.deb"
     "https://data.nephobox.com/issue/terabox/Linux/1.42.2/TeraBox_1.42.2_amd64.deb"
     "https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-1/appimagelauncher_3.0.0-alpha-4-gha275.0bcc75d_amd64.deb"
 )
