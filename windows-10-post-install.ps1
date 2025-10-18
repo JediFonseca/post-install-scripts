@@ -56,8 +56,7 @@ $apps = @(
 
 # Links de download:
 $downloads = @(
-    "https://downloader.markopejic.com/static/Media%20Downloader%20v5.0.0%20Installer.zip",
-    "https://drivers.amd.com/drivers/whql-amd-software-adrenalin-edition-25.8.1-win10-win11-aug-vega-polaris.exe"
+    "https://downloader.markopejic.com/static/Media%20Downloader%20v5.0.0%20Installer.zip"
 )
 
 #-----------------------
@@ -133,4 +132,5 @@ Start-Process explorer.exe
 # Mensagem final
 
 Write-Host "Script finalizado. Pressione ENTER para encerrar a execução." -ForegroundColor Yellow
+
 Read-Host
