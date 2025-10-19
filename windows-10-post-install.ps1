@@ -56,7 +56,8 @@ $apps = @(
 
 # Links de download:
 $downloads = @(
-    "https://downloader.markopejic.com/static/Media%20Downloader%20v5.0.0%20Installer.zip"
+    "https://downloader.markopejic.com/static/Media%20Downloader%20v5.0.0%20Installer.zip",
+    "https://www.x360ce.com/files/x360ce.zip"
 )
 
 #-----------------------
@@ -105,14 +106,14 @@ New-Item -Path "$env:USERPROFILE\Downloads\EXEs" -ItemType Directory | Out-Null
 
 Write-Host "Fazendo o download dos EXEs..." -ForegroundColor Yellow
 
-# Define a pasta de destino
+# Pasta de destino
 $destino = "$env:USERPROFILE\Downloads\EXEs"
+New-Item -Path $destino -ItemType Directory -Force | Out-Null
 
-# Loop para baixar cada arquivo
+# Loop com status em MB
 foreach ($url in $downloads) {
-    $nomeArquivo = Split-Path $url -Leaf
-    $arquivoDestino = Join-Path $destino $nomeArquivo
-    Invoke-WebRequest -Uri $url -OutFile $arquivoDestino
+    $saida = Join-Path $destino (Split-Path $url -Leaf)
+    curl.exe -L -C - $url -o $saida -#
 }
 
 #----------------------------------------------
@@ -131,6 +132,9 @@ Start-Process explorer.exe
 
 # Mensagem final
 
-Write-Host "Script finalizado. Pressione ENTER para encerrar a execução." -ForegroundColor Yellow
-
+Write-Host "Script finalizado!" -ForegroundColor Yellow
+Write-Host "Pressione ENTER se você deseja abrir a página de download do driver da RX580 no site da AMD" -ForegroundColor Yellow
+Write-Host "ou CTRL+C para não abrir a página e encerrar a execução do script agora." -ForegroundColor Yellow
 Read-Host
+Start-Process "https://www.amd.com/pt/support/downloads/drivers.html/graphics/radeon-600-500-400/radeon-rx-500-series/radeon-rx-580.html"
+Write-Host "Você chegou ao final do script." -ForegroundColor Green
