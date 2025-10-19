@@ -79,8 +79,9 @@ Write-Host "   GOG Galaxy, Notesnook, Remote Mouse, VLC, Firefox, Audacity, Loca
 Write-Host "   Upscayl, qBittorrent, Hydrogen, Clementine, Terabox, Proton Pass e Proton Authenticator."
 Write-Host "2. Instalar os Microsoft Virtual C++ Redistributable de 32 e 64 bits nas versões de"
 Write-Host "   2005, 2008, 2010, 2012, 2013 e 2015+."
-Write-Host "3. Baixar os executáveis dos apps: Media Downloader e Driver AMD para a RX580 no Windows 11."
-Write-Host "4. Habilitar o menu de contexto clássico do Windows 10 e reiniciar o explorer."
+Write-Host "3. Baixar os executáveis dos apps: Media Downloader e x360ce."
+Write-Host "4. Habilitar o menu de contexto clássico e reiniciar o processo explorer.exe."
+Write-Host "5. (Opcional) Abrir o navegador padrão na página de download do driver da RX580."
 Write-Host ""
 Write-Host "Pressione ENTER para iniciar a execução do script ou CTRL+C para cancelar." -ForegroundColor Yellow
 Read-Host
@@ -108,7 +109,6 @@ Write-Host "Fazendo o download dos EXEs..." -ForegroundColor Yellow
 
 # Pasta de destino
 $destino = "$env:USERPROFILE\Downloads\EXEs"
-New-Item -Path $destino -ItemType Directory -Force | Out-Null
 
 # Loop com status em MB
 foreach ($url in $downloads) {
@@ -138,3 +138,4 @@ Write-Host "ou CTRL+C para não abrir a página e encerrar a execução do scrip
 Read-Host
 Start-Process "https://www.amd.com/pt/support/downloads/drivers.html/graphics/radeon-600-500-400/radeon-rx-500-series/radeon-rx-580.html"
 Write-Host "Você chegou ao final do script." -ForegroundColor Green
+
