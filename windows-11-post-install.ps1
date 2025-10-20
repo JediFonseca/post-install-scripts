@@ -56,7 +56,6 @@ $apps = @(
 # Links de download:
 $downloads = @(
     "https://downloader.markopejic.com/static/Media%20Downloader%20v5.0.0%20Installer.zip",
-    "https://drive.google.com/file/d/1JDifO0YWFcrpxBoRIHei9QCpw0IXZdkS/view?usp=drive_link",
     "https://www.x360ce.com/files/x360ce.zip"
 )
 
@@ -79,7 +78,7 @@ Write-Host "   GOG Galaxy, Notesnook, Remote Mouse, VLC, Firefox, Audacity, Loca
 Write-Host "   Upscayl, qBittorrent, Hydrogen, Terabox, Proton Pass e Proton Authenticator."
 Write-Host "2. Instalar os Microsoft Virtual C++ Redistributable de 32 e 64 bits nas versões de"
 Write-Host "   2005, 2008, 2010, 2012, 2013 e 2015+."
-Write-Host "3. Baixar os executáveis dos apps: Strawberry, Media Downloader e x360ce."
+Write-Host "3. Baixar os executáveis dos apps: Media Downloader e x360ce."
 Write-Host "4. Habilitar o menu de contexto clássico e reiniciar o processo explorer.exe."
 Write-Host "5. (Opcional) Abrir o navegador padrão na página de download do driver da RX580."
 Write-Host ""
@@ -138,6 +137,7 @@ Write-Host "ou CTRL+C para não abrir a página e encerrar a execução do scrip
 Read-Host
 Start-Process "https://www.amd.com/pt/support/downloads/drivers.html/graphics/radeon-600-500-400/radeon-rx-500-series/radeon-rx-580.html"
 Write-Host "Você chegou ao final do script." -ForegroundColor Green
+
 
 
 
