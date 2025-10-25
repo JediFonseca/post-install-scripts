@@ -30,7 +30,7 @@ flatpak_packages=(
     "com.vysp3r.ProtonPlus"
     "com.protonvpn.www"
     "me.proton.Pass"
-    "Automattic.Simplenote"
+    "com.simplenote.Simplenote"
     "org.gimp.GIMP"
     "org.upscayl.Upscayl"
     "com.microsoft.Edge"
