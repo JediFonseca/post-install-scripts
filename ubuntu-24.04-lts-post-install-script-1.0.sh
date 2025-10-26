@@ -62,6 +62,7 @@ deb_downloads=(
     "https://proton.me/download/pass/linux/proton-pass_1.32.10_amd64.deb"
     "https://data.nephobox.com/issue/terabox/Linux/1.42.2/TeraBox_1.42.2_amd64.deb"
     "https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-1/appimagelauncher_3.0.0-alpha-4-gha275.0bcc75d_amd64.deb"
+    "https://repo.steampowered.com/steam/archive/stable/steam_latest.deb"
 )
 
 appimages_downloads=(
@@ -91,11 +92,11 @@ echo -e "2. Instalar, dos repositórios do Ubuntu, os pacotes: gparted, vlc, gno
 echo -e "   mangohud, gamemode, tree, gnome-software-plugin-flatpak, linux-tools-generic, libvirt-daemon-system,"
 echo -e "   bridge-utils, soundconverter, audacity, virtinst e libvirt-clients."
 echo -e "3. Instalar os flatpaks: Bottles, qBittorrent, Menu Editor, Eye Dropper, Flatseal, FreeTube, LocalSend,"
-echo -e "   PeaZip, ProtonPlus, Proton VPN, GNOME Boxes, Simplenote, Gimp, Upscayl, Hydrogen, Steam, Flacon,"
+echo -e "   PeaZip, ProtonPlus, Proton VPN, GNOME Boxes, Simplenote, Gimp, Upscayl, Hydrogen, Flacon,"
 echo -e "   Media Downloader, MKVToolNix GUI, VLC, Strawberry, Lutris, MangoHud e GNOME Extensions Manager."
 echo -e "4. Instalar o pacote Snap: copilot-desktop"
 echo -e "5. Baixar, no formato .deb, os instaladores dos apps: Proton Pass, TeraBox,"
-echo -e "   Proton Authenticator e AppImageLauncher."
+echo -e "   Steam, Proton Authenticator e AppImageLauncher."
 echo -e "6. Baixar, em AppImage, o app: Mass Renamer."
 echo -e "7. Instalar os pacotes .deb baixados."
 echo
