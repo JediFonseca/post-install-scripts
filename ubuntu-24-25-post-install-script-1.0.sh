@@ -52,6 +52,7 @@ flatpak_packages=(
     "com.valvesoftware.Steam"
     "net.lutris.Lutris"
     "org.hydrogenmusic.Hydrogen"
+    "com.heroicgameslauncher.hgl"
 )
 
 snap_packages=(
@@ -93,7 +94,7 @@ echo -e "2. Instalar, dos repositórios do Ubuntu, os pacotes: gparted, vlc, gno
 echo -e "   mangohud, gamemode, tree, gnome-software-plugin-flatpak, linux-tools-generic, libvirt-daemon-system,"
 echo -e "   bridge-utils, xboxdrv, soundconverter, audacity, virtinst e libvirt-clients."
 echo -e "3. Instalar os flatpaks: Bottles, qBittorrent, Menu Editor, Eye Dropper, Flatseal, FreeTube, LocalSend,"
-echo -e "   PeaZip, ProtonPlus, Proton VPN, GNOME Boxes, Simplenote, Gimp, Upscayl, Hydrogen, Flacon,"
+echo -e "   PeaZip, ProtonPlus, Proton VPN, GNOME Boxes, Simplenote, Gimp, Upscayl, Hydrogen, Flacon, Heroic Launcher,"
 echo -e "   Media Downloader, MKVToolNix GUI, VLC, Strawberry, Lutris, MangoHud e GNOME Extensions Manager."
 echo -e "4. Instalar o pacote Snap: copilot-desktop (Desativado)"
 echo -e "5. Baixar, no formato .deb, os instaladores dos apps: Proton Pass, TeraBox,"
