@@ -33,8 +33,7 @@ flatpak_packages=(
     "com.simplenote.Simplenote"
     "org.gimp.GIMP"
     "org.upscayl.Upscayl"
-    "com.microsoft.Edge"
-    "com.github.unrud.VideoDownloader"
+    "com.markopejic.downloader"
     "org.bunkus.mkvtoolnix-gui"
     "org.freedesktop.Platform.VulkanLayer.MangoHud"
     "com.mattjakeman.ExtensionManager"
@@ -42,6 +41,10 @@ flatpak_packages=(
     "net.lutris.Lutris"
     "org.videolan.VLC"
     "org.gtk.Gtk3theme.Adwaita-dark"
+    "com.github.Flacon"
+    "org.qbittorrent.qBittorrent"
+    "org.strawberrymusicplayer.strawberry"
+    "org.hydrogenmusic.Hydrogen"
 )
 
 snap_packages=(
@@ -49,13 +52,13 @@ snap_packages=(
 )
 
 rpm_downloads=( 
-    "https://data.nephobox.com/issue/terabox/Linux/1.41.5/TeraBox-1.41.5.x86_64.rpm"
+    "https://data.nephobox.com/issue/terabox/Linux/1.42.2/TeraBox-1.42.2.x86_64.rpm"
     "https://proton.me/download/authenticator/linux/ProtonAuthenticator-1.1.4-1.x86_64.rpm"
-    "https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-1/appimagelauncher_3.0.0-alpha-4-gha275.0bcc75d_x86_64.rpm"
+    "https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-3/appimagelauncher_3.0.0-beta-2-gha287.96cb937_x86_64.rpm"
 )
 
 appimages_downloads=(
-    "https://github.com/JediFonseca/mass_renamer/releases/download/Mass_Renamer-2.2/mass_renamer-2.2-x86_64.AppImage"
+    "https://github.com/JediFonseca/mass_renamer/releases/download/mass_renamer-2.3.1-bugfix/mass_renamer-2.3.1-x86_64.AppImage"
 )
 
 # Paleta de cores
@@ -77,10 +80,11 @@ echo -e "${INFO}Ao ser executado, este script irá:${NOCOLOR}"
 echo -e "1. Instalar o \"snapd\" e adicionar os repositórios \"Flathub\" e \"RPM Fusion\"."
 echo -e "2. Instalar, dos repositórios do Fedora, os pacotes: gparted,kdeconnectd, gnome-themes-extra,"
 echo -e "   gnome-tweaks, mangohud, gamemode e tree."
-echo -e "3. Instalar os flatpaks: Bottles, Menu Editor, Eye Dropper, Flatseal, FreeTube, LocalSend,"
-echo -e "   PeaZip, ProtonPlus, Proton VPN, Proton Pass, Simplenote, Gimp, Upscayl, Microsoft Edge"
-echo -e "   Video Downloader, MKVToolNix GUI, MangoHud, GNOME Extensions Manager, Steam, GTK3 Adwaita Dark, Lutris e VLC."
-echo -e "4. Instalar o pacote Snap: copilot-desktop."
+echo -e "3. Instalar os flatpaks: Bottles, Menu Editor, Eye Dropper, Flatseal, Free Tube, Local Send, PeaZip,"
+echo -e "   Proton Plus, Proton VPN, Proton Pass, Simplenote, Gimp, Upscayl, Media Downloader,"
+echo -e "   MKV ToolNix GUI, Mangohud, Extension Manager, Steam, Lutris, VLC, GTK3 Adwaita Dark,"
+echo -e "   Flacon, qBittorrent, Strawberry e Hydrogen."
+echo -e "4. Instalar o pacote Snap: copilot-desktop. (Desativado)"
 echo -e "5. Instalar pacotes multimídia e Vulkan."
 echo -e "6. Baixar, no formato .rpm, os instaladores dos apps: TeraBox, Proton Authenticator e AppImageLauncher."
 echo -e "7. Baixar, em AppImage, o app: Mass Renamer."
@@ -141,16 +145,16 @@ flatpak install -y flathub "${flatpak_packages[@]}"
     fi
 
 # Instalação dos pacotes snap:
-echo -e "${INFO}Iniciando a instalação dos pacotes snap.${NOCOLOR}"
-echo
-sudo snap wait system seed.loaded
-sudo snap refresh
-sudo snap install "${snap_packages[@]}"
-    if [ $? -ne 0 ]; then
-        echo -e "${ERRORS}A instalação de um ou mais snaps falhou. Verifique os nomes dos pacotes.${NOCOLOR}"
-    else
-        echo -e "${SUCCESS}Snaps instalados com sucesso.${NOCOLOR}"
-    fi
+#echo -e "${INFO}Iniciando a instalação dos pacotes snap.${NOCOLOR}"
+#echo
+#sudo snap wait system seed.loaded
+#sudo snap refresh
+#sudo snap install "${snap_packages[@]}"
+#    if [ $? -ne 0 ]; then
+#        echo -e "${ERRORS}A instalação de um ou mais snaps falhou. Verifique os nomes dos pacotes.${NOCOLOR}"
+#    else
+#        echo -e "${SUCCESS}Snaps instalados com sucesso.${NOCOLOR}"
+#    fi
 
 #Instalação de Codecs multimídia.
 echo
@@ -221,6 +225,18 @@ sudo dnf install -y "$HOME/Downloads/RPMs/"*.rpm
         echo -e "${SUCCESS}Pacotes .rpm instalados com sucesso.${NOCOLOR}"
         echo
     fi
+
+#----------------------------------------------
+# ---Lembrete de nomes de extensões do GNOME---
+#----------------------------------------------
+
+echo -e "${INFO}Lembrete de nomes de extensões do GNOME:${NOCOLOR}"
+echo
+echo "• User Themes, by fmuellner;"
+echo "• GSConnect, by dlandau;"
+echo "• Display Configuration Switcher, by knokelmaat;"
+echo "• Quick Settings Audio Devices Renamer, by marcinjahn;"
+echo "• Quick Settings Audio Devices Hidder, by marcinjahn."
 
 echo -e -n "${INFO}Script finalizado. Pressione ENTER para encerrar a execução.${NOCOLOR}"
 read
