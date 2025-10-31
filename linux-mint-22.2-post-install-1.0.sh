@@ -56,6 +56,7 @@ flatpak_packages=(
     "org.qbittorrent.qBittorrent"
     "org.gnome.Boxes"
     "org.strawberrymusicplayer.strawberry"
+    "com.heroicgameslauncher.hgl"
 )
 
 snap_packages=(
@@ -97,7 +98,7 @@ echo -e "03. Instalar, dos repositórios do Mint, os pacotes: qemu-kvm,libvirt-d
 echo -e "   gir1.2-gpaste-2, bridge-utils, virtinst, kdeconnect, gparted, mangohud, VLC, gamemode, tree,"
 echo -e "   linux-tools-generic, xboxdrv, audacity, xdotool e soundconverter."
 echo -e "04. Instalar os flatpaks: Bottles, qBittorrent, Hydrogen, Flacon, Eye Dropper, Flatseal, FreeTube, LocalSend,"
-echo -e "   PeaZip, Strawberry, ProtonPlus, Proton VPN, GNOME Boxes, Simplenote, Gimp, Upscayl,"
+echo -e "   PeaZip, Strawberry, ProtonPlus, Proton VPN, GNOME Boxes, Simplenote, Gimp, Upscayl, Heroic Games Launcher,"
 echo -e "   Media Downloader, Steam, Lutris, MKVToolNix GUI e MangoHud."
 echo -e "05. Instalar o pacote Snap: copilot-desktop"
 echo -e "06. Baixar, no formato .deb, os instaladores dos apps: TeraBox, Proton Authenticator,"
