@@ -25,6 +25,7 @@ apt_packages=(
     "linux-tools-generic"
     "soundconverter"
     "audacity"
+    "xboxdrv"
 )
 
 flatpak_packages=(
@@ -59,9 +60,9 @@ snap_packages=(
 
 deb_downloads=(
     "https://proton.me/download/authenticator/linux/ProtonAuthenticator_1.1.4_amd64.deb"
-    "https://proton.me/download/pass/linux/proton-pass_1.32.10_amd64.deb"
+    "https://proton.me/download/pass/linux/proton-pass_1.32.11_amd64.deb"
     "https://data.nephobox.com/issue/terabox/Linux/1.42.2/TeraBox_1.42.2_amd64.deb"
-    "https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-1/appimagelauncher_3.0.0-alpha-4-gha275.0bcc75d_amd64.deb"
+    "https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-3/appimagelauncher_3.0.0-beta-2-gha287.96cb937_amd64.deb"
     "https://repo.steampowered.com/steam/archive/stable/steam_latest.deb"
 )
 
@@ -80,9 +81,9 @@ ERRORS='\033[0;31m' # Erros
 # ---FASE 0 - Mensagem inicial---
 #--------------------------------
 
-echo -e "${HEADER}########################################################${NOCOLOR}"
-echo -e "${HEADER}##   Script de pós instalação do Ubuntu 24.04.3 LTS   ##${NOCOLOR}"
-echo -e "${HEADER}########################################################${NOCOLOR}"
+echo -e "${HEADER}###############################################################${NOCOLOR}"
+echo -e "${HEADER}##   Script de pós instalação do Ubuntu 24.04.3 LTS e 25.10  ##${NOCOLOR}"
+echo -e "${HEADER}###############################################################${NOCOLOR}"
 echo
 echo -e "${ERRORS}VERIFIQUE OS LINKS DE DOWNLOAD ANTES DE USAR${NOCOLOR}"
 echo
@@ -90,7 +91,7 @@ echo -e "${INFO}Ao ser executado, este script irá:${NOCOLOR}"
 echo -e "1. Instalar o pacote \"flatpak\" e adicionar o repositório \"Flathub\"."
 echo -e "2. Instalar, dos repositórios do Ubuntu, os pacotes: gparted, vlc, gnome-software, gnome-tweaks,"
 echo -e "   mangohud, gamemode, tree, gnome-software-plugin-flatpak, linux-tools-generic, libvirt-daemon-system,"
-echo -e "   bridge-utils, soundconverter, audacity, virtinst e libvirt-clients."
+echo -e "   bridge-utils, xboxdrv, soundconverter, audacity, virtinst e libvirt-clients."
 echo -e "3. Instalar os flatpaks: Bottles, qBittorrent, Menu Editor, Eye Dropper, Flatseal, FreeTube, LocalSend,"
 echo -e "   PeaZip, ProtonPlus, Proton VPN, GNOME Boxes, Simplenote, Gimp, Upscayl, Hydrogen, Flacon,"
 echo -e "   Media Downloader, MKVToolNix GUI, VLC, Strawberry, Lutris, MangoHud e GNOME Extensions Manager."
@@ -99,6 +100,7 @@ echo -e "5. Baixar, no formato .deb, os instaladores dos apps: Proton Pass, Tera
 echo -e "   Steam, Proton Authenticator e AppImageLauncher."
 echo -e "6. Baixar, em AppImage, o app: Mass Renamer."
 echo -e "7. Instalar os pacotes .deb baixados."
+echo -e "8. Ativar o modo de energia \"performance\" para a CPU."
 echo
 echo -e -n "${INFO}Pressione ENTER para iniciar instalação das dependências ou CTRL+C para cancelar.${NOCOLOR}"
 read
@@ -222,6 +224,46 @@ sudo apt install -y "$HOME/Downloads/Debs/"*.deb
     else
         echo -e "${SUCCESS}Pacotes .deb instalados com sucesso.${NOCOLOR}"
     fi
+
+#---------------------------------------------------------------------
+# ---FASE 5 Selecionando o modo de energia "performance" para a CPU---
+#---------------------------------------------------------------------
+
+echo -e "${INFO}Pressione ENTER para identificar o modo de energia atual${NOCOLOR}"
+echo -e -n "${INFO}da sua CPU ou CTRL+C para cancelar...${NOCOLOR}"
+read
+echo
+
+# Identificando o modo atual da CPU.
+echo -e "${INFO}Verificando o modo de energia atual da sua CPU...${NOCOLOR}"
+cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+cpupower frequency-info
+echo -e "${INFO}Verifique, acima, o modo de energia atual da sua CPU.${NOCOLOR}"
+echo -e -n "${INFO}Pressione ENTER para ativar o modo \"performance\" ou CTRL+C para cancelar.${NOCOLOR}"
+read
+
+# Selecionando o modo "performance".
+sudo cpupower frequency-set -g performance
+echo -e "[Unit]\nDescription=Set CPU governor to performance mode\nAfter=cpupower.service\n\n[Service]\nExecStart=/usr/bin/cpupower frequency-set -g performance\nRemainAfterExit=true\n\n[Install]\nWantedBy=multi-user.target" | sudo tee /etc/systemd/system/cpupower-performance.service > /dev/null
+sudo systemctl enable cpupower-performance.service
+sudo systemctl start cpupower-performance.service
+
+# Identificando novamente o modo ativo da CPU.
+echo -e "${INFO}Verificando o modo de energia ativo para a sua CPU...${NOCOLOR}"
+cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+cpupower frequency-info
+
+#----------------------------------------------
+# ---Lembrete de nomes de extensões do GNOME---
+#----------------------------------------------
+
+echo -e "${INFO}Lembrete de nomes de extensões do GNOME:${NOCOLOR}"
+echo
+echo "• User Themes, by fmuellner;"
+echo "• GSConnect, by dlandau;"
+echo "• Display Configuration Switcher, by knokelmaat;"
+echo "• Quick Settings Audio Devices Renamer, by marcinjahn;"
+echo "• Quick Settings Audio Devices Hidder, by marcinjahn."
 
 echo -e -n "${INFO}Script finalizado. Pressione ENTER para encerrar a execução.${NOCOLOR}"
 read
