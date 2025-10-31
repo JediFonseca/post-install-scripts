@@ -31,6 +31,7 @@ apt_packages=(
     "linux-tools-generic"
     "soundconverter"
     "audacity"
+    "xboxdrv"
 )
 
 flatpak_packages=(
@@ -90,20 +91,21 @@ echo
 echo -e "${ERRORS}VERIFIQUE OS LINKS DE DOWNLOAD ANTES DE USAR${NOCOLOR}"
 echo
 echo -e "${INFO}Ao ser executado, este script irá:${NOCOLOR}"
-echo -e "1. Remover o bloqueio do Linux Mint para instalação de pacotes Snap."
-echo -e "2. Instalar o pacote \"snapd\" e adicionar o repositório \"Flathub\"."
-echo -e "3. Instalar, dos repositórios do Mint, os pacotes: qemu-kvm,libvirt-daemon-system, libvirt-clients, gpaste-2,"
+echo -e "01. Remover o bloqueio do Linux Mint para instalação de pacotes Snap."
+echo -e "02. Instalar o pacote \"snapd\" e adicionar o repositório \"Flathub\"."
+echo -e "03. Instalar, dos repositórios do Mint, os pacotes: qemu-kvm,libvirt-daemon-system, libvirt-clients, gpaste-2,"
 echo -e "   gir1.2-gpaste-2, bridge-utils, virtinst, kdeconnect, gparted, mangohud, VLC, gamemode, tree,"
-echo -e "   linux-tools-generic, audacity, xdotool e soundconverter."
-echo -e "4. Instalar os flatpaks: Bottles, qBittorrent, Hydrogen, Flacon, Eye Dropper, Flatseal, FreeTube, LocalSend,"
+echo -e "   linux-tools-generic, xboxdrv, audacity, xdotool e soundconverter."
+echo -e "04. Instalar os flatpaks: Bottles, qBittorrent, Hydrogen, Flacon, Eye Dropper, Flatseal, FreeTube, LocalSend,"
 echo -e "   PeaZip, Strawberry, ProtonPlus, Proton VPN, GNOME Boxes, Simplenote, Gimp, Upscayl,"
 echo -e "   Media Downloader, Steam, Lutris, MKVToolNix GUI e MangoHud."
-echo -e "5. Instalar o pacote Snap: copilot-desktop"
-echo -e "6. Baixar, no formato .deb, os instaladores dos apps: TeraBox, Proton Authenticator,"
+echo -e "05. Instalar o pacote Snap: copilot-desktop"
+echo -e "06. Baixar, no formato .deb, os instaladores dos apps: TeraBox, Proton Authenticator,"
 echo -e "   Proton Pass e AppImageLauncher."
-echo -e "7. Baixar, em AppImage, o app: Mass Renamer."
-echo -e "8. Baixar o binário para Linux do Remote Mouse."
-echo -e "9. Instalar os pacotes .deb baixados."
+echo -e "07. Baixar, em AppImage, o app: Mass Renamer."
+echo -e "08. Baixar o binário para Linux do Remote Mouse."
+echo -e "09. Instalar os pacotes .deb baixados."
+echo -e "10. Ativar o modo de energia \"performance\" para a CPU."
 echo
 echo -e -n "${INFO}Pressione ENTER para iniciar instalação das dependências ou CTRL+C para cancelar.${NOCOLOR}"
 read
@@ -159,15 +161,15 @@ flatpak install -y flathub "${flatpak_packages[@]}"
     fi
 
 # Instalação dos pacotes snap:
-echo -e "${INFO}Iniciando a instalação dos pacotes snap.${NOCOLOR}"
-sudo snap wait system seed.loaded
-sudo snap refresh
-sudo snap install "${snap_packages[@]}"
-    if [ $? -ne 0 ]; then
-        echo -e "${ERRORS}A instalação de um ou mais snaps falhou. Verifique os nomes dos pacotes.${NOCOLOR}"
-    else
-        echo -e "${SUCCESS}Snaps instalados com sucesso.${NOCOLOR}"
-    fi
+#echo -e "${INFO}Iniciando a instalação dos pacotes snap.${NOCOLOR}"
+#sudo snap wait system seed.loaded
+#sudo snap refresh
+#sudo snap install "${snap_packages[@]}"
+#    if [ $? -ne 0 ]; then
+#        echo -e "${ERRORS}A instalação de um ou mais snaps falhou. Verifique os nomes dos pacotes.${NOCOLOR}"
+#    else
+#        echo -e "${SUCCESS}Snaps instalados com sucesso.${NOCOLOR}"
+#    fi
 echo -e "${INFO}Fase de instalação dos pacotes finalizada.${NOCOLOR}"
 echo
 echo -e -n "${INFO}Pressione ENTER para baixar os arquivos .deb ou CTRL+C para cancelar.${NOCOLOR}"
@@ -219,6 +221,34 @@ sudo apt install -y "$HOME/Downloads/Debs/"*.deb
 echo
 echo -e "${INFO}Lembre-se de instalar o applet \"Gpaste Reloaded\" no gerenciador de applets do painel do Cinnamon${NOCOLOR}"
 echo -e "${INFO}para finalizar a instalação do mesmo.${NOCOLOR}"
+
+#---------------------------------------------------------------------
+# ---FASE 5 Selecionando o modo de energia "performance" para a CPU---
+#---------------------------------------------------------------------
+
+echo -e "${INFO}Pressione ENTER para identificar o modo de energia atual${NOCOLOR}"
+echo -e -n "${INFO}da sua CPU ou CTRL+C para cancelar...${NOCOLOR}"
+read
 echo
+
+# Identificando o modo atual da CPU.
+echo -e "${INFO}Verificando o modo de energia atual da sua CPU...${NOCOLOR}"
+cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+cpupower frequency-info
+echo -e "${INFO}Verifique, acima, o modo de energia atual da sua CPU.${NOCOLOR}"
+echo -e -n "${INFO}Pressione ENTER para ativar o modo \"performance\" ou CTRL+C para cancelar.${NOCOLOR}"
+read
+
+# Selecionando o modo "performance".
+sudo cpupower frequency-set -g performance
+echo -e "[Unit]\nDescription=Set CPU governor to performance mode\nAfter=cpupower.service\n\n[Service]\nExecStart=/usr/bin/cpupower frequency-set -g performance\nRemainAfterExit=true\n\n[Install]\nWantedBy=multi-user.target" | sudo tee /etc/systemd/system/cpupower-performance.service > /dev/null
+sudo systemctl enable cpupower-performance.service
+sudo systemctl start cpupower-performance.service
+
+# Identificando novamente o modo ativo da CPU.
+echo -e "${INFO}Verificando o modo de energia ativo para a sua CPU...${NOCOLOR}"
+cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+cpupower frequency-info
+
 echo -e -n "${INFO}Script finalizado. Pressione ENTER para encerrar a execução.${NOCOLOR}"
 read
