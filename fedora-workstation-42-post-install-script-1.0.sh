@@ -182,6 +182,8 @@ echo -e "${INFO}Iniciando o download dos pacotes AppImage...${NOCOLOR}"
 echo
 mkdir -p "$HOME/Downloads/AppImages"
 wget --show-progress -P "$HOME/Downloads/AppImages" "${appimages_downloads[@]}"
+echo -e "${INFO}Tornando os AppImages executáveis...${NOCOLOR}"
+chmod +x "$HOME/Downloads/AppImages/"*.AppImage
 
 echo
 echo -e "${INFO}Fase de Downloads finalizada.${NOCOLOR}"
