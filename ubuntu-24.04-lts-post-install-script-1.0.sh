@@ -95,7 +95,7 @@ echo -e "   bridge-utils, xboxdrv, soundconverter, audacity, virtinst e libvirt-
 echo -e "3. Instalar os flatpaks: Bottles, qBittorrent, Menu Editor, Eye Dropper, Flatseal, FreeTube, LocalSend,"
 echo -e "   PeaZip, ProtonPlus, Proton VPN, GNOME Boxes, Simplenote, Gimp, Upscayl, Hydrogen, Flacon,"
 echo -e "   Media Downloader, MKVToolNix GUI, VLC, Strawberry, Lutris, MangoHud e GNOME Extensions Manager."
-echo -e "4. Instalar o pacote Snap: copilot-desktop"
+echo -e "4. Instalar o pacote Snap: copilot-desktop (Desativado)"
 echo -e "5. Baixar, no formato .deb, os instaladores dos apps: Proton Pass, TeraBox,"
 echo -e "   Steam, Proton Authenticator e AppImageLauncher."
 echo -e "6. Baixar, em AppImage, o app: Mass Renamer."
