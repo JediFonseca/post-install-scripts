@@ -45,6 +45,7 @@ flatpak_packages=(
     "org.qbittorrent.qBittorrent"
     "org.strawberrymusicplayer.strawberry"
     "org.hydrogenmusic.Hydrogen"
+    "com.heroicgameslauncher.hgl"
 )
 
 snap_packages=(
@@ -81,7 +82,7 @@ echo -e "1. Instalar o \"snapd\" e adicionar os repositórios \"Flathub\" e \"RP
 echo -e "2. Instalar, dos repositórios do Fedora, os pacotes: gparted,kdeconnectd, gnome-themes-extra,"
 echo -e "   gnome-tweaks, mangohud, gamemode e tree."
 echo -e "3. Instalar os flatpaks: Bottles, Menu Editor, Eye Dropper, Flatseal, Free Tube, Local Send, PeaZip,"
-echo -e "   Proton Plus, Proton VPN, Proton Pass, Simplenote, Gimp, Upscayl, Media Downloader,"
+echo -e "   Proton Plus, Proton VPN, Proton Pass, Simplenote, Gimp, Upscayl, Media Downloader, Heroic Launcher,"
 echo -e "   MKV ToolNix GUI, Mangohud, Extension Manager, Steam, Lutris, VLC, GTK3 Adwaita Dark,"
 echo -e "   Flacon, qBittorrent, Strawberry e Hydrogen."
 echo -e "4. Instalar o pacote Snap: copilot-desktop. (Desativado)"
