@@ -224,8 +224,12 @@ sudo apt install -y "$HOME/Downloads/Debs/"*.deb
 # ---FASE 5 Ajustes extras---
 #----------------------------
 
+# Instalando o "steam-devices" para complementar a instalação da Steam em flatpak.
+echo -e "${INFO}Instalando o pacote \"steam-devices\" para complementar a instalação da Steam em flatpak.${NOCOLOR}"
+sudo apt install -y steam-devices
+
 # Adicionando permissão para que o mangohud em flatpak possa acessar a partição onde os jogos estão instalados.
-echo -e "${INFO} Adicionando permissão para que o mangohud em flatpak possa acessar a partição com os jogos.${NOCOLOR}"
+echo -e "${INFO}Adicionando permissão para que o mangohud em flatpak possa acessar a partição com os jogos.${NOCOLOR}"
 echo -e "${INFO}Para que esse ajuste funcione, a partição deve estar montada em \"'/mnt/Dados (Linux)\".${NOCOLOR}"
 echo
 echo -e -n "${INFO}Pressione ENTER para prosseguir ou CTRL+C para encerrar o script.${NOCOLOR}"
