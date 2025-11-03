@@ -235,12 +235,14 @@ echo -e "${INFO}Para que esse ajuste funcione, a partição deve estar montada e
 echo
 echo -e -n "${INFO}Pressione ENTER para prosseguir ou CTRL+C para encerrar o script.${NOCOLOR}"
 read
+echo -e "${HEADER}.${NOCOLOR}"
+echo -e "${HEADER}..${NOCOLOR}"
+echo -e "${HEADER}...${NOCOLOR}"
 flatpak override --user --filesystem='/mnt/Dados (Linux):rw' org.freedesktop.Platform.VulkanLayer.MangoHud
 
 echo -e "${INFO}Pressione ENTER para identificar o modo de energia atual${NOCOLOR}"
 echo -e -n "${INFO}da sua CPU ou CTRL+C para cancelar...${NOCOLOR}"
 read
-echo
 
 # Identificando o modo de energia atual da CPU.
 echo -e "${INFO}Verificando o modo de energia atual da sua CPU...${NOCOLOR}"
