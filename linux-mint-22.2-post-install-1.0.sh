@@ -220,16 +220,24 @@ sudo apt install -y "$HOME/Downloads/Debs/"*.deb
         echo -e "${SUCCESS}Pacotes .deb instalados com sucesso.${NOCOLOR}"
     fi
 
-#---------------------------------------------------------------------
-# ---FASE 5 Selecionando o modo de energia "performance" para a CPU---
-#---------------------------------------------------------------------
+#----------------------------
+# ---FASE 5 Ajustes extras---
+#----------------------------
+
+# Adicionando permissão para que o mangohud em flatpak possa acessar a partição onde os jogos estão instalados.
+echo -e "${INFO} Adicionando permissão para que o mangohud em flatpak possa acessar a partição com os jogos.${NOCOLOR}"
+echo -e "${INFO}Para que esse ajuste funcione, a partição deve estar montada em \"'/mnt/Dados (Linux)\".${NOCOLOR}"
+echo
+echo -e -n "${INFO}Pressione ENTER para prosseguir ou CTRL+C para encerrar o script.${NOCOLOR}"
+read
+flatpak override --user --filesystem='/mnt/Dados (Linux):rw' org.freedesktop.Platform.VulkanLayer.MangoHud
 
 echo -e "${INFO}Pressione ENTER para identificar o modo de energia atual${NOCOLOR}"
 echo -e -n "${INFO}da sua CPU ou CTRL+C para cancelar...${NOCOLOR}"
 read
 echo
 
-# Identificando o modo atual da CPU.
+# Identificando o modo de energia atual da CPU.
 echo -e "${INFO}Verificando o modo de energia atual da sua CPU...${NOCOLOR}"
 cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 cpupower frequency-info
