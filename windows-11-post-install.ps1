@@ -140,9 +140,9 @@ Start-Process explorer.exe
 #--------------------------------------------------------
 
 Write-Host "Habilitando o modo de energia Máximo Desempenho..." -ForegroundColor Yellow
-Write-Host "." -ForegroundColor Green
-Write-Host ".." -ForegroundColor Green
-Write-Host "..." -ForegroundColor Green
+Write-Host "." -ForegroundColor Cyan
+Write-Host ".." -ForegroundColor Cyan
+Write-Host "..." -ForegroundColor Cyan
 powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
 Write-Host "Modo de energia Máximo Desempenho habilitado." -ForegroundColor Yellow
 
@@ -154,3 +154,4 @@ Write-Host "ou CTRL+C para não abrir a página e encerrar a execução do scrip
 Read-Host
 Start-Process "https://www.amd.com/pt/support/downloads/drivers.html/graphics/radeon-600-500-400/radeon-rx-500-series/radeon-rx-580.html"
 Write-Host "Você chegou ao final do script." -ForegroundColor Green
+
