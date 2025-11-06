@@ -33,10 +33,12 @@ $apps = @(
     "qBittorrent.qBittorrent",
     "Hydrogen-Music.Hydrogen",
     "Baidu.TeraBox",
+    "Notepad++.Notepad++",
 
     # Proton Apps
     "Proton.ProtonPass",
     "Proton.ProtonAuthenticator",
+    "Proton.ProtonVPN",
 
     # Visual C++ Redistributables
     "Microsoft.VCRedist.2005.x86",
@@ -59,7 +61,7 @@ $downloads = @(
     "https://www.foobar2000.org/downloads/foobar2000-x64_v2.25.3.exe",
     "https://www.foobar2000.org/getcomponent/2e7ae2f1682c8cd507188453d6c590f6/foo_scrobble-1.6.0.22456.fb2k-component",
     "https://www.foobar2000.org/getcomponent/e49c218fdddd549e5e428dc63acb8aff/foo_openlyrics-v1.12.fb2k-component",
-    "https://www.oo-software.com/en/download/current/ooshutup10",
+    "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe",
     "https://gamedownloads.rockstargames.com/public/installer/Rockstar-Games-Launcher.exe",
     "https://github.com/cmdr-sheppard/strawberry/releases/download/1.2.10/StrawberrySetup-1.2.10.8.g04c6c862-msvc-x64.exe",
     "https://www.x360ce.com/files/x360ce.zip"
@@ -79,9 +81,9 @@ Write-Host "os links de download. SEMPRE execute este script como administrador.
 Write-Host ""
 Write-Host "Ao ser executado, este script irá:" -ForegroundColor Yellow
 Write-Host ""
-Write-Host "1. Instalar, com o winget, os pacotes: Steam, Epic Games Launcher, EA App, Ubisoft Connect,"
+Write-Host "1. Instalar, com o winget, os pacotes: Steam, Epic Games Launcher, EA App, Ubisoft Connect, Proton VPN"
 Write-Host "   GOG Galaxy, Simplenote, Remote Mouse, VLC, iTunes, Firefox, Audacity, Localsend, 7zip, Gimp,"
-Write-Host "   Upscayl, qBittorrent, Hydrogen, Terabox, Proton Pass e Proton Authenticator."
+Write-Host "   Upscayl, qBittorrent, Hydrogen, Notepad++, Terabox, Proton Pass e Proton Authenticator."
 Write-Host "2. Instalar os Microsoft Virtual C++ Redistributable de 32 e 64 bits nas versões de"
 Write-Host "   2005, 2008, 2010, 2012, 2013 e 2015+."
 Write-Host "3. Baixar os executáveis dos apps: Rockstar Launcher, Media Downloader, O&O ShutUp10++,"
@@ -156,5 +158,6 @@ Write-Host "ou CTRL+C para não abrir a página e encerrar a execução do scrip
 Read-Host
 Start-Process "https://www.amd.com/pt/support/downloads/drivers.html/graphics/radeon-600-500-400/radeon-rx-500-series/radeon-rx-580.html"
 Write-Host "Você chegou ao final do script." -ForegroundColor Green
+
 
 
