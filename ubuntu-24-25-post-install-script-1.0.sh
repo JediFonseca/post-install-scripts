@@ -26,6 +26,7 @@ apt_packages=(
     "soundconverter"
     "audacity"
     "xboxdrv"
+    "pipewire-audio-client-libraries"
 )
 
 flatpak_packages=(
@@ -92,7 +93,7 @@ echo -e "${INFO}Ao ser executado, este script irá:${NOCOLOR}"
 echo -e "1. Instalar o pacote \"flatpak\" e adicionar o repositório \"Flathub\"."
 echo -e "2. Instalar, dos repositórios do Ubuntu, os pacotes: gparted, vlc, gnome-software, gnome-tweaks,"
 echo -e "   mangohud, gamemode, tree, gnome-software-plugin-flatpak, linux-tools-generic, libvirt-daemon-system,"
-echo -e "   bridge-utils, xboxdrv, soundconverter, audacity, virtinst e libvirt-clients."
+echo -e "   bridge-utils, xboxdrv, soundconverter, pipewire-audio-client-libraries, audacity, virtinst e libvirt-clients."
 echo -e "3. Instalar os flatpaks: Bottles, qBittorrent, Menu Editor, Eye Dropper, Flatseal, FreeTube, LocalSend,"
 echo -e "   PeaZip, ProtonPlus, Proton VPN, GNOME Boxes, Simplenote, Gimp, Upscayl, Hydrogen, Flacon, Heroic Launcher,"
 echo -e "   Media Downloader, MKVToolNix GUI, VLC, Strawberry, Lutris, MangoHud e GNOME Extensions Manager."
