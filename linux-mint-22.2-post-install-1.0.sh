@@ -32,6 +32,7 @@ apt_packages=(
     "soundconverter"
     "audacity"
     "xboxdrv"
+    "pipewire-audio-client-libraries"
 )
 
 flatpak_packages=(
@@ -95,8 +96,9 @@ echo -e "${INFO}Ao ser executado, este script irá:${NOCOLOR}"
 echo -e "01. Remover o bloqueio do Linux Mint para instalação de pacotes Snap."
 echo -e "02. Instalar o pacote \"snapd\" e adicionar o repositório \"Flathub\"."
 echo -e "03. Instalar, dos repositórios do Mint, os pacotes: qemu-kvm, libvirt-daemon-system, libvirt-clients, gpaste-2,"
-echo -e "   gir1.2-gpaste-2, bridge-utils, virtinst, kdeconnect, gparted, mangohud, VLC, gamemode, tree,"
-echo -e "   linux-tools-generic, xboxdrv, steam-devices, audacity, xdotool e soundconverter."
+echo -e "   gir1.2-gpaste-2, bridge-utils, virtinst, kdeconnect, gparted, mangohud, VLC,"
+echo -e "   linux-tools-generic, xboxdrv, steam-devices, audacity, gamemode, tree,"
+echo -e "   pipewire-audio-client-libraries, xdotool e soundconverter."
 echo -e "04. Instalar os flatpaks: Bottles, qBittorrent, Hydrogen, Flacon, Eye Dropper, Flatseal, FreeTube, LocalSend,"
 echo -e "   PeaZip, Strawberry, ProtonPlus, Proton VPN, GNOME Boxes, Simplenote, Gimp, Upscayl, Heroic Games Launcher,"
 echo -e "   Media Downloader, Steam, Lutris, MKVToolNix GUI e MangoHud."
