@@ -63,7 +63,7 @@ $downloads = @(
     "https://www.foobar2000.org/getcomponent/e49c218fdddd549e5e428dc63acb8aff/foo_openlyrics-v1.12.fb2k-component",
     "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe",
     "https://gamedownloads.rockstargames.com/public/installer/Rockstar-Games-Launcher.exe",
-    "https://github.com/cmdr-sheppard/strawberry/releases/download/1.2.10/StrawberrySetup-1.2.10.8.g04c6c862-msvc-x64.exe",
+    "https://github.com/JediFonseca/strawberry/releases/download/1.2.15/StrawberrySetup-1.2.15.14.gd37fb741-msvc-x64.exe",
     "https://www.x360ce.com/files/x360ce.zip"
 )
 
@@ -159,6 +159,7 @@ Write-Host "ou CTRL+C para não abrir a página e encerrar a execução do scrip
 Read-Host
 Start-Process "https://www.amd.com/pt/support/downloads/drivers.html/graphics/radeon-600-500-400/radeon-rx-500-series/radeon-rx-580.html"
 Write-Host "Você chegou ao final do script." -ForegroundColor Green
+
 
 
 
