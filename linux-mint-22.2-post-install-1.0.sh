@@ -33,6 +33,7 @@ apt_packages=(
     "audacity"
     "xboxdrv"
     "pipewire-audio-client-libraries"
+    "xboxdrv"
 )
 
 flatpak_packages=(
@@ -44,7 +45,6 @@ flatpak_packages=(
     "io.github.peazip.PeaZip"
     "com.vysp3r.ProtonPlus"
     "com.protonvpn.www"
-    "com.simplenote.Simplenote"
     "org.gimp.GIMP"
     "org.upscayl.Upscayl"
     "com.markopejic.downloader"
@@ -58,6 +58,7 @@ flatpak_packages=(
     "org.gnome.Boxes"
     "org.strawberrymusicplayer.strawberry"
     "com.heroicgameslauncher.hgl"
+    "net.cozic.joplin_desktop"
 )
 
 snap_packages=(
@@ -66,9 +67,9 @@ snap_packages=(
 
 deb_downloads=(
     "https://proton.me/download/authenticator/linux/ProtonAuthenticator_1.1.4_amd64.deb"
-    "https://proton.me/download/pass/linux/proton-pass_1.32.10_amd64.deb"
+    "https://proton.me/download/pass/linux/proton-pass_1.33.0_amd64.deb"
     "https://data.nephobox.com/issue/terabox/Linux/1.42.2/TeraBox_1.42.2_amd64.deb"
-    "https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-1/appimagelauncher_3.0.0-alpha-4-gha275.0bcc75d_amd64.deb"
+    "https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-3/appimagelauncher_3.0.0-beta-2-gha287.96cb937_amd64.deb"
 )
 
 appimages_downloads=(
@@ -96,20 +97,19 @@ echo -e "${INFO}Ao ser executado, este script irá:${NOCOLOR}"
 echo -e "01. Remover o bloqueio do Linux Mint para instalação de pacotes Snap."
 echo -e "02. Instalar o pacote \"snapd\" e adicionar o repositório \"Flathub\"."
 echo -e "03. Instalar, dos repositórios do Mint, os pacotes: qemu-kvm, libvirt-daemon-system, libvirt-clients, gpaste-2,"
-echo -e "   gir1.2-gpaste-2, bridge-utils, virtinst, kdeconnect, gparted, mangohud, VLC,"
+echo -e "   gir1.2-gpaste-2, bridge-utils, virtinst, kdeconnect, xboxdrv, gparted, mangohud, VLC,"
 echo -e "   linux-tools-generic, xboxdrv, steam-devices, audacity, gamemode, tree,"
 echo -e "   pipewire-audio-client-libraries, xdotool e soundconverter."
 echo -e "04. Instalar os flatpaks: Bottles, qBittorrent, Hydrogen, Flacon, Eye Dropper, Flatseal, FreeTube, LocalSend,"
-echo -e "   PeaZip, Strawberry, ProtonPlus, Proton VPN, GNOME Boxes, Simplenote, Gimp, Upscayl, Heroic Games Launcher,"
+echo -e "   PeaZip, Strawberry, ProtonPlus, Proton VPN, GNOME Boxes, Joplin, Gimp, Upscayl, Heroic Games Launcher,"
 echo -e "   Media Downloader, Steam, Lutris, MKVToolNix GUI e MangoHud."
-echo -e "05. Instalar o pacote Snap: copilot-desktop"
-echo -e "06. Baixar, no formato .deb, os instaladores dos apps: TeraBox, Proton Authenticator,"
+echo -e "05. Baixar, no formato .deb, os instaladores dos apps: TeraBox, Proton Authenticator,"
 echo -e "   Proton Pass e AppImageLauncher."
-echo -e "07. Baixar, em AppImage, o app: Mass Renamer."
-echo -e "08. Baixar o binário para Linux do Remote Mouse."
-echo -e "09. Instalar os pacotes .deb baixados."
-echo -e "10. Conceder ao mangohud em flatpak acesso à partição dos jogos."
-echo -e "11. Ativar o modo de energia \"performance\" para a CPU."
+echo -e "06. Baixar, em AppImage, o app: Mass Renamer."
+echo -e "07. Baixar o binário para Linux do Remote Mouse."
+echo -e "08. Instalar os pacotes .deb baixados."
+echo -e "09. Conceder ao mangohud em flatpak acesso à partição dos jogos."
+echo -e "10. Ativar o modo de energia \"performance\" para a CPU."
 echo
 echo -e -n "${INFO}Pressione ENTER para iniciar instalação das dependências ou CTRL+C para cancelar.${NOCOLOR}"
 read
