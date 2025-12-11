@@ -21,7 +21,7 @@ $apps = @(
     "GOG.Galaxy",
 
     # Utilitários
-    "Automattic.Simplenote",
+    "Joplin.Joplin",
     "EmoteInteractive.RemoteMouse",
     "VideoLAN.VLC",
     "Mozilla.Firefox.pt-BR",
@@ -159,6 +159,7 @@ Write-Host "ou CTRL+C para não abrir a página e encerrar a execução do scrip
 Read-Host
 Start-Process "https://www.amd.com/pt/support/downloads/drivers.html/graphics/radeon-600-500-400/radeon-rx-500-series/radeon-rx-580.html"
 Write-Host "Você chegou ao final do script." -ForegroundColor Green
+
 
 
 
