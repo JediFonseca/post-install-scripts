@@ -60,7 +60,6 @@ $apps = @(
 
 # Links de download:
 $downloads = @(
-    "https://downloader.markopejic.com/static/Media%20Downloader%20v5.0.0%20Installer.zip",
     "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe",
     "https://fscharter-plugin-xplane.s3.eu-west-2.amazonaws.com/v2/FSCharter_SC.zip",
     "https://github.com/albar965/littlenavmap/releases/download/v3.0.18/LittleNavmap-win64-3.0.18-Install.exe",
@@ -161,6 +160,7 @@ Write-Host "ou CTRL+C para não abrir a página e encerrar a execução do scrip
 Read-Host
 Start-Process "https://www.amd.com/pt/support/downloads/drivers.html/graphics/radeon-600-500-400/radeon-rx-500-series/radeon-rx-580.html"
 Write-Host "Você chegou ao final do script." -ForegroundColor Green
+
 
 
 
