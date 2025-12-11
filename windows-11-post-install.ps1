@@ -85,10 +85,11 @@ Write-Host "Ao ser executado, este script irá:" -ForegroundColor Yellow
 Write-Host ""
 Write-Host "1. Instalar, com o winget, os pacotes: Steam, Epic Games Launcher, EA App, Ubisoft Connect, Proton VPN"
 Write-Host "   GOG Galaxy, Joplin, Remote Mouse, VLC, iTunes, Firefox, Audacity, Localsend, 7zip, Gimp,"
-Write-Host "   Upscayl, qBittorrent, Hydrogen, Notepad++, Terabox, Proton Pass e Proton Authenticator."
+Write-Host "   Upscayl, qBittorrent, Hydrogen, Notepad++, Terabox, Proton Pass, Proton Authenticator,"
+Write-Host "   Media Downloader e Hydra Launcher."
 Write-Host "2. Instalar os Microsoft Virtual C++ Redistributable de 32 e 64 bits nas versões de"
 Write-Host "   2005, 2008, 2010, 2012, 2013 e 2015+."
-Write-Host "3. Baixar os executáveis dos apps: Rockstar Launcher, Media Downloader, O&O ShutUp10++,"
+Write-Host "3. Baixar os executáveis dos apps: Rockstar Launcher, O&O ShutUp10++,"
 Write-Host "   Little Nav Map, FSCharter, Strawberry Music Player e x360ce."
 Write-Host "4. Habilitar o menu de contexto clássico e reiniciar o processo explorer.exe."
 Write-Host "5. (Opcional) Abrir o navegador padrão na página de download do driver da RX580."
@@ -160,6 +161,7 @@ Write-Host "ou CTRL+C para não abrir a página e encerrar a execução do scrip
 Read-Host
 Start-Process "https://www.amd.com/pt/support/downloads/drivers.html/graphics/radeon-600-500-400/radeon-rx-500-series/radeon-rx-580.html"
 Write-Host "Você chegou ao final do script." -ForegroundColor Green
+
 
 
 
