@@ -74,6 +74,7 @@ deb_downloads=(
 
 appimages_downloads=(
     "https://github.com/JediFonseca/mass_renamer/releases/download/mass_renamer-2.3.1-bugfix/mass_renamer-2.3.1-x86_64.AppImage"
+    "https://github.com/hydralauncher/hydra/releases/download/v3.7.6/hydralauncher-3.7.6.AppImage"
 )
 
 # Paleta de cores
