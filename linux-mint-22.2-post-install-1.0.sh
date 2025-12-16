@@ -106,7 +106,7 @@ echo -e "    PeaZip, Strawberry, ProtonPlus, Proton VPN, GNOME Boxes, Joplin, Gi
 echo -e "    Media Downloader, Steam, Lutris, MKVToolNix GUI e MangoHud."
 echo -e "05. Baixar, no formato .deb, os instaladores dos apps: TeraBox, Proton Authenticator,"
 echo -e "    Proton Pass e AppImageLauncher."
-echo -e "06. Baixar, em AppImage, o app: Mass Renamer."
+echo -e "06. Baixar, em AppImage, os apps: Mass Renamer e Hydra Launcher."
 echo -e "07. Instalar os pacotes .deb baixados."
 echo -e "08. Conceder ao mangohud em flatpak acesso à partição dos jogos."
 echo -e "09. Ativar o modo de energia \"performance\" para a CPU."
