@@ -59,6 +59,7 @@ flatpak_packages=(
     "org.strawberrymusicplayer.strawberry"
     "com.heroicgameslauncher.hgl"
     "net.cozic.joplin_desktop"
+    "com.brave.Browser"
 )
 
 snap_packages=(
