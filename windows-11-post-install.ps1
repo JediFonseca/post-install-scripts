@@ -5,7 +5,7 @@
 # Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
 
 # Rodar o script no terminal (como administrador) com o comando:
-# powershell -ExecutionPolicy Bypass -File "C:\Users\jedif\Downloads\windows-10-post-install.ps1"
+# powershell -ExecutionPolicy Bypass -File "C:\Users\jedif\Downloads\windows-11-post-install.ps1"
 
 #------------------------------------------
 # ---Pacotes para instalação e downloads---
@@ -161,6 +161,7 @@ Write-Host "ou CTRL+C para não abrir a página e encerrar a execução do scrip
 Read-Host
 Start-Process "https://www.amd.com/pt/support/downloads/drivers.html/graphics/radeon-600-500-400/radeon-rx-500-series/radeon-rx-580.html"
 Write-Host "Você chegou ao final do script." -ForegroundColor Green
+
 
 
 
