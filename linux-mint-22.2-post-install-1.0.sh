@@ -60,6 +60,7 @@ flatpak_packages=(
     "com.heroicgameslauncher.hgl"
     "net.cozic.joplin_desktop"
     "com.brave.Browser"
+    "com.github.Matoking.protontricks"
 )
 
 snap_packages=(
@@ -104,7 +105,7 @@ echo -e "    linux-tools-generic, xboxdrv, steam-devices, audacity, gamemode, tr
 echo -e "    pipewire-audio-client-libraries, xdotool e soundconverter."
 echo -e "04. Instalar os flatpaks: Bottles, qBittorrent, Hydrogen, Flacon, Eye Dropper, Flatseal, FreeTube, LocalSend,"
 echo -e "    PeaZip, Strawberry, ProtonPlus, Proton VPN, GNOME Boxes, Joplin, Gimp, Upscayl, Heroic Games Launcher,"
-echo -e "    Media Downloader, Steam, Lutris, MKVToolNix GUI e MangoHud."
+echo -e "    Media Downloader, Steam, Brave, Protontricks, Lutris, MKVToolNix GUI e MangoHud."
 echo -e "05. Baixar, no formato .deb, os instaladores dos apps: TeraBox, Proton Authenticator,"
 echo -e "    Proton Pass e AppImageLauncher."
 echo -e "06. Baixar, em AppImage, os apps: Mass Renamer e Hydra Launcher."
