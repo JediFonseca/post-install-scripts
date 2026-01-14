@@ -29,18 +29,24 @@ apt_packages=(
     "gpaste-2"
     "gir1.2-gpaste-2"
     "linux-tools-generic"
+    "linux-tools-6.14.0-37-generic"
+    "linux-cloud-tools-6.14.0-37-generic"
+    "linux-cloud-tools-generic"
     "soundconverter"
     "audacity"
     "xboxdrv"
     "pipewire-audio-client-libraries"
     "xboxdrv"
+    "rclone"
+    "rclone-browser"
+    "ratbagd"
+    "piper"
 )
 
 flatpak_packages=(
     "com.usebottles.bottles"
     "com.github.finefindus.eyedropper"
     "com.github.tchx84.Flatseal"
-    "io.freetubeapp.FreeTube"
     "org.localsend.localsend_app"
     "io.github.peazip.PeaZip"
     "com.vysp3r.ProtonPlus"
@@ -69,14 +75,15 @@ snap_packages=(
 
 deb_downloads=(
     "https://proton.me/download/authenticator/linux/ProtonAuthenticator_1.1.4_amd64.deb"
-    "https://proton.me/download/pass/linux/proton-pass_1.33.0_amd64.deb"
+    "https://proton.me/download/pass/linux/proton-pass_1.33.5_amd64.deb"
     "https://data.nephobox.com/issue/terabox/Linux/1.42.6/TeraBox_1.42.6_amd64.deb"
     "https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-3/appimagelauncher_3.0.0-beta-2-gha287.96cb937_amd64.deb"
+    "https://proton.me/download/mail/linux/1.12.0/ProtonMail-desktop-beta.deb"
 )
 
 appimages_downloads=(
     "https://github.com/JediFonseca/mass_renamer/releases/download/mass_renamer-2.3.1-bugfix/mass_renamer-2.3.1-x86_64.AppImage"
-    "https://github.com/hydralauncher/hydra/releases/download/v3.7.6/hydralauncher-3.7.6.AppImage"
+    "https://github.com/hydralauncher/hydra/releases/download/v3.8.1/hydralauncher-3.8.1.AppImage"
 )
 
 # Paleta de cores
@@ -94,20 +101,23 @@ echo -e "${HEADER}#####################################################${NOCOLOR
 echo -e "${HEADER}##   Script de pós instalação do Linux Mint 22.2   ##${NOCOLOR}"
 echo -e "${HEADER}#####################################################${NOCOLOR}"
 echo
-echo -e "${ERRORS}VERIFIQUE OS LINKS DE DOWNLOAD ANTES DE USAR${NOCOLOR}"
+echo -e "${ERRORS}VERIFIQUE OS LINKS DE DOWNLOAD ANTES DE USAR.${NOCOLOR}"
+echo -e "${ERRORS}VERIFIQUE SE OS PACOTES \"linux-tools...\" ESTÃO DE${NOCOLOR}"
+echo -e "${ERRORS}ACORDO COM A VERSÃO DO KERNEL INSTALADO.${NOCOLOR}"
 echo
 echo -e "${INFO}Ao ser executado, este script irá:${NOCOLOR}"
 echo -e "01. Remover o bloqueio do Linux Mint para instalação de pacotes Snap."
 echo -e "02. Instalar o pacote \"snapd\" e adicionar o repositório \"Flathub\"."
 echo -e "03. Instalar, dos repositórios do Mint, os pacotes: qemu-kvm, libvirt-daemon-system, libvirt-clients, gpaste-2,"
-echo -e "    gir1.2-gpaste-2, bridge-utils, virtinst, kdeconnect, xboxdrv, gparted, mangohud, VLC,"
-echo -e "    linux-tools-generic, xboxdrv, steam-devices, audacity, gamemode, tree,"
+echo -e "    gir1.2-gpaste-2, bridge-utils, virtinst, kdeconnect, xboxdrv, rclone, rclone-browser, gparted, mangohud, VLC,"
+echo -e "    linux-tools-generic, linux-tools-6.14.0-37-generic, linux-cloud-tools-6.14.0-37-generic,"
+echo -e "    linux-cloud-tools-generic xboxdrv, steam-devices, audacity, ratbagd, piper, gamemode, tree,"
 echo -e "    pipewire-audio-client-libraries, xdotool e soundconverter."
-echo -e "04. Instalar os flatpaks: Bottles, qBittorrent, Hydrogen, Flacon, Eye Dropper, Flatseal, FreeTube, LocalSend,"
+echo -e "04. Instalar os flatpaks: Bottles, qBittorrent, Hydrogen, Flacon, Eye Dropper, Flatseal, LocalSend,"
 echo -e "    PeaZip, Strawberry, ProtonPlus, Proton VPN, GNOME Boxes, Joplin, Gimp, Upscayl, Heroic Games Launcher,"
 echo -e "    Media Downloader, Steam, Brave, Protontricks, Lutris, MKVToolNix GUI e MangoHud."
 echo -e "05. Baixar, no formato .deb, os instaladores dos apps: TeraBox, Proton Authenticator,"
-echo -e "    Proton Pass e AppImageLauncher."
+echo -e "    Proton Calendar, Proton Pass e AppImageLauncher."
 echo -e "06. Baixar, em AppImage, os apps: Mass Renamer e Hydra Launcher."
 echo -e "07. Instalar os pacotes .deb baixados."
 echo -e "08. Conceder ao mangohud em flatpak acesso à partição dos jogos."
