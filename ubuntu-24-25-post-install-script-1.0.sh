@@ -10,23 +10,29 @@
 #-------------------------------------------------
 
 apt_packages=(
-    "gparted"
     "gnome-software"
     "gnome-software-plugin-flatpak"
-    "gnome-tweaks"
+    "gnome-tweaks"   
+    "gparted"
     "tree"
-    "vlc"
     "mangohud"
     "gamemode"
+    "vlc"
+    "qemu-kvm"
     "libvirt-daemon-system"
     "libvirt-clients"
     "bridge-utils"
     "virtinst"
     "linux-tools-generic"
+    "linux-cloud-tools-generic"
     "soundconverter"
     "audacity"
     "xboxdrv"
     "pipewire-audio-client-libraries"
+    "rclone"
+    "rclone-browser"
+    "ratbagd"
+    "piper"
 )
 
 flatpak_packages=(
@@ -34,12 +40,10 @@ flatpak_packages=(
     "page.codeberg.libre_menu_editor.LibreMenuEditor"
     "com.github.finefindus.eyedropper"
     "com.github.tchx84.Flatseal"
-    "io.freetubeapp.FreeTube"
     "org.localsend.localsend_app"
     "io.github.peazip.PeaZip"
     "com.vysp3r.ProtonPlus"
     "com.protonvpn.www"
-    "com.simplenote.Simplenote"
     "org.gimp.GIMP"
     "org.upscayl.Upscayl"
     "com.markopejic.downloader"
@@ -54,6 +58,9 @@ flatpak_packages=(
     "net.lutris.Lutris"
     "org.hydrogenmusic.Hydrogen"
     "com.heroicgameslauncher.hgl"
+    "com.github.Matoking.protontricks"
+    "com.brave.Browser"
+    "net.cozic.joplin_desktop"
 )
 
 snap_packages=(
@@ -62,14 +69,15 @@ snap_packages=(
 
 deb_downloads=(
     "https://proton.me/download/authenticator/linux/ProtonAuthenticator_1.1.4_amd64.deb"
-    "https://proton.me/download/pass/linux/proton-pass_1.32.11_amd64.deb"
-    "https://data.nephobox.com/issue/terabox/Linux/1.42.2/TeraBox_1.42.2_amd64.deb"
+    "https://proton.me/download/pass/linux/proton-pass_1.33.5_amd64.deb"
+    "https://data.nephobox.com/issue/terabox/Linux/1.42.6/TeraBox_1.42.6_amd64.deb"
     "https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-3/appimagelauncher_3.0.0-beta-2-gha287.96cb937_amd64.deb"
-    "https://repo.steampowered.com/steam/archive/stable/steam_latest.deb"
+    "https://proton.me/download/mail/linux/1.12.0/ProtonMail-desktop-beta.deb"
 )
 
 appimages_downloads=(
     "https://github.com/JediFonseca/mass_renamer/releases/download/mass_renamer-2.3.1-bugfix/mass_renamer-2.3.1-x86_64.AppImage"
+    "https://github.com/hydralauncher/hydra/releases/download/v3.8.1/hydralauncher-3.8.1.AppImage"
 )
 
 # Paleta de cores
@@ -91,16 +99,17 @@ echo -e "${ERRORS}VERIFIQUE OS LINKS DE DOWNLOAD ANTES DE USAR${NOCOLOR}"
 echo
 echo -e "${INFO}Ao ser executado, este script irá:${NOCOLOR}"
 echo -e "1. Instalar o pacote \"flatpak\" e adicionar o repositório \"Flathub\"."
-echo -e "2. Instalar, dos repositórios do Ubuntu, os pacotes: gparted, vlc, gnome-software, gnome-tweaks,"
-echo -e "   mangohud, gamemode, tree, gnome-software-plugin-flatpak, linux-tools-generic, libvirt-daemon-system,"
-echo -e "   bridge-utils, xboxdrv, soundconverter, pipewire-audio-client-libraries, audacity, virtinst e libvirt-clients."
-echo -e "3. Instalar os flatpaks: Bottles, qBittorrent, Menu Editor, Eye Dropper, Flatseal, FreeTube, LocalSend,"
-echo -e "   PeaZip, ProtonPlus, Proton VPN, GNOME Boxes, Simplenote, Gimp, Upscayl, Hydrogen, Flacon, Heroic Launcher,"
-echo -e "   Media Downloader, MKVToolNix GUI, VLC, Strawberry, Lutris, MangoHud e GNOME Extensions Manager."
-echo -e "4. Instalar o pacote Snap: copilot-desktop (Desativado)"
-echo -e "5. Baixar, no formato .deb, os instaladores dos apps: Proton Pass, TeraBox,"
-echo -e "   Steam, Proton Authenticator e AppImageLauncher."
-echo -e "6. Baixar, em AppImage, o app: Mass Renamer."
+echo -e "2. Instalar, dos repositórios do Ubuntu, os pacotes: gnome-software, gnome-software-plugin-flatpak, gnome-tweaks,"
+echo -e "   gparted, tree, mangohud, gamemode, vlc, qemu-kvm, libvirt-daemon-system, libvirt-clients, bridge-utils,"
+echo -e "   virtinst, linux-tools-generic, linux-cloud-tools-generic, soundconverter, audacity, xboxdrv,"
+echo -e "   pipewire-audio-client-libraries, rclone, rclone-browser, ratbagd, piper."
+echo -e "3. Instalar os flatpaks: Bottles, Libre Menu Editor, Eyedropper, Flatseal, LocalSend, PeaZip, ProtonPlus,"
+echo -e "   Proton VPN, GIMP, Upscayl, Video Downloader, MKVToolNix, MangoHud, Extension Manager, Flacon,"
+echo -e "   qBittorrent, GNOME Boxes, Strawberry, Steam, Lutris, Hydrogen, Heroic Games Launcher,"
+echo -e "   Protontricks, Brave, Joplin"
+echo -e "5. Baixar, no formato .deb, os instaladores dos apps: Proton Pass, TeraBox, Proton Calendar & mail,"
+echo -e "   Proton Authenticator e AppImageLauncher."
+echo -e "6. Baixar, em AppImage, os apps: Mass Renamer e Hydra Launcher."
 echo -e "7. Instalar os pacotes .deb baixados."
 echo -e "8. Ativar o modo de energia \"performance\" para a CPU."
 echo
@@ -160,16 +169,16 @@ flatpak install -y flathub "${flatpak_packages[@]}"
     fi
 
 # Instalação dos pacotes snap:
-echo -e "${INFO}Iniciando a instalação dos pacotes snap.${NOCOLOR}"
-echo
-sudo snap wait system seed.loaded
-sudo snap refresh
-sudo snap install "${snap_packages[@]}"
-    if [ $? -ne 0 ]; then
-        echo -e "${ERRORS}A instalação de um ou mais snaps falhou. Verifique os nomes dos pacotes.${NOCOLOR}"
-    else
-        echo -e "${SUCCESS}Snaps instalados com sucesso.${NOCOLOR}"
-    fi
+#echo -e "${INFO}Iniciando a instalação dos pacotes snap.${NOCOLOR}"
+#echo
+#sudo snap wait system seed.loaded
+#sudo snap refresh
+#sudo snap install "${snap_packages[@]}"
+#    if [ $? -ne 0 ]; then
+#        echo -e "${ERRORS}A instalação de um ou mais snaps falhou. Verifique os nomes dos pacotes.${NOCOLOR}"
+#    else
+#        echo -e "${SUCCESS}Snaps instalados com sucesso.${NOCOLOR}"
+#    fi
 echo
 echo -e "${INFO}Fase de instalação dos pacotes finalizada.${NOCOLOR}"
 
@@ -254,6 +263,25 @@ sudo systemctl start cpupower-performance.service
 echo -e "${INFO}Verificando o modo de energia ativo para a sua CPU...${NOCOLOR}"
 cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 cpupower frequency-info
+
+#----------------------------
+# ---FASE 5 Ajustes extras---
+#----------------------------
+
+# Instalando o "steam-devices" para complementar a instalação da Steam em flatpak.
+echo -e "${INFO}Instalando o pacote \"steam-devices\" para complementar a instalação da Steam em flatpak.${NOCOLOR}"
+sudo apt install -y steam-devices
+
+# Adicionando permissão para que o mangohud em flatpak possa acessar a partição onde os jogos estão instalados.
+echo -e "${INFO}Adicionando permissão para que o mangohud em flatpak possa acessar a partição com os jogos.${NOCOLOR}"
+echo -e "${INFO}Para que esse ajuste funcione, a partição deve estar montada em \"'/mnt/Dados (Linux)\".${NOCOLOR}"
+echo
+echo -e -n "${INFO}Pressione ENTER para prosseguir ou CTRL+C para encerrar o script.${NOCOLOR}"
+read
+echo -e "${HEADER}.${NOCOLOR}"
+echo -e "${HEADER}..${NOCOLOR}"
+echo -e "${HEADER}...${NOCOLOR}"
+flatpak override --user --filesystem='/mnt/Dados (Linux):rw' org.freedesktop.Platform.VulkanLayer.MangoHud
 
 #----------------------------------------------
 # ---Lembrete de nomes de extensões do GNOME---
