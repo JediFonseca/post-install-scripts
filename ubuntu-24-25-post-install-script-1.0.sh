@@ -10,8 +10,6 @@
 #-------------------------------------------------
 
 apt_packages=(
-    "gnome-software"
-    "gnome-software-plugin-flatpak"
     "gnome-tweaks"   
     "gparted"
     "tree"
@@ -72,12 +70,10 @@ deb_downloads=(
     "https://proton.me/download/pass/linux/proton-pass_1.33.5_amd64.deb"
     "https://data.nephobox.com/issue/terabox/Linux/1.42.6/TeraBox_1.42.6_amd64.deb"
     "https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-3/appimagelauncher_3.0.0-beta-2-gha287.96cb937_amd64.deb"
-    "https://proton.me/download/mail/linux/1.12.0/ProtonMail-desktop-beta.deb"
 )
 
 appimages_downloads=(
     "https://github.com/JediFonseca/mass_renamer/releases/download/mass_renamer-2.3.1-bugfix/mass_renamer-2.3.1-x86_64.AppImage"
-    "https://github.com/hydralauncher/hydra/releases/download/v3.8.1/hydralauncher-3.8.1.AppImage"
 )
 
 # Paleta de cores
@@ -99,17 +95,17 @@ echo -e "${ERRORS}VERIFIQUE OS LINKS DE DOWNLOAD ANTES DE USAR${NOCOLOR}"
 echo
 echo -e "${INFO}Ao ser executado, este script irá:${NOCOLOR}"
 echo -e "1. Instalar o pacote \"flatpak\" e adicionar o repositório \"Flathub\"."
-echo -e "2. Instalar, dos repositórios do Ubuntu, os pacotes: gnome-software, gnome-software-plugin-flatpak, gnome-tweaks,"
-echo -e "   gparted, tree, mangohud, gamemode, vlc, qemu-kvm, libvirt-daemon-system, libvirt-clients, bridge-utils,"
-echo -e "   virtinst, linux-tools-generic, linux-cloud-tools-generic, soundconverter, audacity, xboxdrv,"
-echo -e "   pipewire-audio-client-libraries, rclone, rclone-browser, ratbagd, piper."
+echo -e "2. Instalar, dos repositórios do Ubuntu, os pacotes: gparted, tree, mangohud, gamemode, gnome-tweaks,"
+echo -e "   linux-tools-generic, vlc, qemu-kvm, libvirt-daemon-system, libvirt-clients, bridge-utils,"
+echo -e "   virtinst, linux-cloud-tools-generic, soundconverter, audacity, xboxdrv,"
+echo -e "   pipewire-audio-client-libraries, rclone, rclone-browser, ratbagd e piper."
 echo -e "3. Instalar os flatpaks: Bottles, Libre Menu Editor, Eyedropper, Flatseal, LocalSend, PeaZip, ProtonPlus,"
 echo -e "   Proton VPN, GIMP, Upscayl, Video Downloader, MKVToolNix, MangoHud, Extension Manager, Flacon,"
 echo -e "   qBittorrent, GNOME Boxes, Strawberry, Steam, Lutris, Hydrogen, Heroic Games Launcher,"
-echo -e "   Protontricks, Brave, Joplin"
-echo -e "5. Baixar, no formato .deb, os instaladores dos apps: Proton Pass, TeraBox, Proton Calendar & mail,"
+echo -e "   Protontricks, Brave e Joplin."
+echo -e "5. Baixar, no formato .deb, os instaladores dos apps: Proton Pass, TeraBox,"
 echo -e "   Proton Authenticator e AppImageLauncher."
-echo -e "6. Baixar, em AppImage, os apps: Mass Renamer e Hydra Launcher."
+echo -e "6. Baixar, em AppImage, os apps: Mass Renamer."
 echo -e "7. Instalar os pacotes .deb baixados."
 echo -e "8. Ativar o modo de energia \"performance\" para a CPU."
 echo
