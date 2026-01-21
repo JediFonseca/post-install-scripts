@@ -53,7 +53,7 @@ snap_packages=(
 )
 
 rpm_downloads=( 
-    "https://data.nephobox.com/issue/terabox/Linux/1.42.2/TeraBox-1.42.2.x86_64.rpm"
+    "https://data.nephobox.com/issue/terabox/Linux/1.42.6/TeraBox-1.42.6.x86_64.rpm"
     "https://proton.me/download/authenticator/linux/ProtonAuthenticator-1.1.4-1.x86_64.rpm"
     "https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-3/appimagelauncher_3.0.0-beta-2-gha287.96cb937_x86_64.rpm"
 )
