@@ -47,6 +47,7 @@ flatpak_packages=(
     "com.github.Matoking.protontricks"
     "com.brave.Browser"
     "net.cozic.joplin_desktop"
+    "org.freedesktop.Platform.VulkanLayer.gamescope"
 )
 
 snap_packages=(
@@ -89,7 +90,7 @@ echo -e "   rclone, ratbagd e piper."
 echo -e "3. Instalar os flatpaks: Bottles, Eyedropper, Flatseal, LocalSend, PeaZip, ProtonUpQt,"
 echo -e "   Proton VPN, GIMP, Upscayl, Video Downloader, MKVToolNix, MangoHud, Flacon,"
 echo -e "   qBittorrent, GNOME Boxes, Strawberry, Steam, Hydrogen, Heroic Games Launcher,"
-echo -e "   Protontricks, Brave e Joplin."
+echo -e "   Protontricks, Gamescope, Brave e Joplin."
 echo -e "5. Baixar, no formato .deb, os instaladores dos apps: Proton Pass, TeraBox,"
 echo -e "   Proton Authenticator e AppImageLauncher."
 echo -e "6. Baixar, em AppImage, os apps: Mass Renamer."
@@ -258,7 +259,7 @@ echo -e "${INFO}Instalando o pacote \"steam-devices\" para complementar a instal
 sudo apt install -y steam-devices
 
 # Adicionando permissão para que o mangohud em flatpak possa acessar a partição onde os jogos estão instalados.
-echo -e "${INFO}Adicionando permissão para que o mangohud em flatpak possa acessar a partição com os jogos.${NOCOLOR}"
+echo -e "${INFO}Adicionando permissão para que o mangohud e o gamescope em flatpak possam acessar a partição com os jogos.${NOCOLOR}"
 echo -e "${INFO}Para que esse ajuste funcione, a partição deve estar montada em \"'/mnt/Dados (Linux)\".${NOCOLOR}"
 echo
 echo -e -n "${INFO}Pressione ENTER para prosseguir ou CTRL+C para encerrar o script.${NOCOLOR}"
@@ -266,6 +267,7 @@ read
 echo -e "${HEADER}33%${NOCOLOR}"
 echo -e "${HEADER}66%${NOCOLOR}"
 flatpak override --user --filesystem='/mnt/Dados (Linux):rw' org.freedesktop.Platform.VulkanLayer.MangoHud
+flatpak override --user --filesystem='/mnt/Dados (Linux):rw' org.freedesktop.Platform.VulkanLayer.gamescope
 echo -e "${HEADER}100%${NOCOLOR}"
 
 #-----------------------------------------------
