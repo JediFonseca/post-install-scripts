@@ -41,12 +41,14 @@ $apps = @(
     "ente-io.auth-desktop",
     "CPUID.CPU-Z",
     "TechPowerUp.GPU-Z",
+    "Oracle.VirtualBox",
 
     # Proton Apps
     "Proton.ProtonPass",
     "Proton.ProtonVPN",
 
-    # Visual C++ Redistributables
+    # Games and apps dependencies
+    "Microsoft.OpenSSH.Preview",
     "Microsoft.VCRedist.2005.x86",
     "Microsoft.VCRedist.2005.x64",
     "Microsoft.VCRedist.2008.x86",
@@ -85,8 +87,8 @@ Write-Host ""
 Write-Host "Ao ser executado, este script irá:" -ForegroundColor Yellow
 Write-Host ""
 Write-Host "1. Instalar, com o winget, os pacotes: Steam, Epic Games Launcher, EA App, Ubisoft Connect, Proton VPN"
-Write-Host "   GOG Galaxy, Joplin, Remote Mouse, VLC, Librewolf, Audacity, Localsend, 7zip, Gimp,"
-Write-Host "   Upscayl, qBittorrent, Hydrogen, Notepad++, Terabox, Ente Auth, Proton Authenticator,"
+Write-Host "   GOG Galaxy, Joplin, Remote Mouse, VLC, Librewolf, Audacity, Localsend, MS OpenSSH Preview, 7zip, Gimp,"
+Write-Host "   Upscayl, qBittorrent, Hydrogen, Notepad++, Terabox, Ente Auth, Proton Authenticator, VirtualBox,"
 Write-Host "   rclone, CPU-Z, GPU-Z, Media Downloader e Hydra Launcher."
 Write-Host "2. Instalar os Microsoft Virtual C++ Redistributable de 32 e 64 bits nas versões de"
 Write-Host "   2005, 2008, 2010, 2012, 2013 e 2015+."
@@ -163,3 +165,4 @@ Write-Host "ou CTRL+C para não abrir a página e encerrar a execução do scrip
 Read-Host
 Start-Process "https://www.amd.com/pt/support/downloads/drivers.html/graphics/radeon-600-500-400/radeon-rx-500-series/radeon-rx-580.html"
 Write-Host "Você chegou ao final do script." -ForegroundColor Green
+
