@@ -91,15 +91,6 @@ Write-Host "Restaurando menu de contexto clássico..." -ForegroundColor Yellow
 
 reg.exe add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
 
-# --- 4. RESTAURAR E ATIVAR PLANO DE ENERGIA MÁXIMO DESEMPENHO ---
-Write-Host "Restaurando plano de energia Máximo Desempenho..." -ForegroundColor Yellow
-
-$plano = powercfg -list | Select-String "e9a42b02-d5df-448d-aa00-03f14749eb61"
-if (-not $plano) {
-    powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
-}
-powercfg -setactive e9a42b02-d5df-448d-aa00-03f14749eb61
-
 # --- 5. REGISTROS CRÍTICOS (HKLM e HKCU) ---
 Write-Host "Forçando registros críticos..." -ForegroundColor Yellow
 
@@ -119,3 +110,4 @@ reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /
 reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v HideFileExt /t REG_DWORD /d 0 /f
 
 Write-Host "SISTEMA BLINDADO COM SUCESSO!" -ForegroundColor Green
+
