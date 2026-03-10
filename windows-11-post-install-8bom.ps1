@@ -1,11 +1,8 @@
 ﻿# Script de instalação de aplicativos via winget
 # Requer Windows 10 com App Installer (winget) já configurado.
 
-# Rodar primeiro o comando para habilitar a execução de scripts:
-# Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
-
-# Rodar o script no terminal (como administrador) com o comando:
-# powershell -ExecutionPolicy Bypass -File "C:\Users\jedifonseca\Downloads\windows-11-post-install-8bom.ps1"
+# Comando para habilitar a execução de scripts:
+# Set-ExecutionPolicy RemoteSigned
 
 #------------------------------------------
 # ---Pacotes para instalação e downloads---
@@ -22,8 +19,7 @@ $apps = @(
 
     # Utilitários
     "Joplin.Joplin",
-    "Brave.Brave",
-    "EmoteInteractive.RemoteMouse",
+    "Guru3D.Afterburner",
     "VideoLAN.VLC",
     "LibreWolf.LibreWolf",
     "Audacity.Audacity",
@@ -67,6 +63,7 @@ $downloads = @(
     "https://github.com/JediFonseca/strawberry/releases/download/1.2.18/StrawberrySetup-1.2.18.3.g7bf1bc0c-msvc-x64.exe",
     "https://www.x360ce.com/files/x360ce.zip"
     "https://www.remotemouse.net/downloads/RemoteMouse.exe"
+    "https://download.microsoft.com/download/1/7/1/1718ccc4-6315-4d8e-9543-8e28a4e18c4c/dxwebsetup.exe"
 )
 
 #-----------------------
@@ -84,12 +81,12 @@ Write-Host ""
 Write-Host "Ao ser executado, este script irá:" -ForegroundColor Yellow
 Write-Host ""
 Write-Host "1. Instalar, com o winget, os pacotes: Steam, Epic Games Launcher, EA App, Ubisoft Connect, Proton VPN"
-Write-Host "   GOG Galaxy, Joplin, Remote Mouse, VLC, Librewolf, Audacity, Localsend, 7zip, Gimp,"
+Write-Host "   GOG Galaxy, Joplin, VLC, Librewolf, MSI Afterburner, Audacity, Localsend, 7zip, Gimp,"
 Write-Host "   Upscayl, qBittorrent, Hydrogen, Notepad++, Terabox, Ente Auth, VirtualBox,"
 Write-Host "   rclone, CPU-Z, GPU-Z e Media Downloader."
 Write-Host "2. Instalar os Microsoft Virtual C++ Redistributable de 32 e 64 bits nas versões de"
 Write-Host "   2005, 2008, 2010, 2012, 2013 e 2015+."
-Write-Host "3. Baixar os executáveis dos apps: Remote Mouse, Rockstar Launcher,"
+Write-Host "3. Baixar os executáveis dos apps: Remote Mouse, Rockstar Launcher, DirectX,"
 Write-Host "   Strawberry Music Player e x360ce."
 Write-Host "4. Habilitar o menu de contexto clássico e reiniciar o processo explorer.exe."
 Write-Host "5. (Opcional) Abrir o navegador padrão na página de download do driver da RX580."
@@ -149,6 +146,7 @@ Write-Host "ou CTRL+C para não abrir a página e encerrar a execução do scrip
 Read-Host
 Start-Process "https://www.amd.com/pt/support/downloads/drivers.html/graphics/radeon-600-500-400/radeon-rx-500-series/radeon-rx-580.html"
 Write-Host "Você chegou ao final do script." -ForegroundColor Green
+
 
 
 
