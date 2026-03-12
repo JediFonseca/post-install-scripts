@@ -37,6 +37,7 @@ $apps = @(
     "CPUID.CPU-Z",
     "TechPowerUp.GPU-Z",
     "Oracle.VirtualBox",
+    "Google.Chrome",
 
     # Proton Apps
     "Proton.ProtonPass",
@@ -83,7 +84,7 @@ Write-Host ""
 Write-Host "1. Instalar, com o winget, os pacotes: Steam, Epic Games Launcher, EA App, Ubisoft Connect, Proton VPN"
 Write-Host "   GOG Galaxy, Joplin, VLC, Librewolf, MSI Afterburner, Audacity, Localsend, 7zip, Gimp,"
 Write-Host "   Upscayl, qBittorrent, Hydrogen, Notepad++, Terabox, Ente Auth, VirtualBox,"
-Write-Host "   rclone, CPU-Z, GPU-Z e Media Downloader."
+Write-Host "   rclone, CPU-Z, Google Chrome, GPU-Z e Media Downloader."
 Write-Host "2. Instalar os Microsoft Virtual C++ Redistributable de 32 e 64 bits nas versões de"
 Write-Host "   2005, 2008, 2010, 2012, 2013 e 2015+."
 Write-Host "3. Baixar os executáveis dos apps: Remote Mouse, Rockstar Launcher, DirectX,"
@@ -146,6 +147,7 @@ Write-Host "ou CTRL+C para não abrir a página e encerrar a execução do scrip
 Read-Host
 Start-Process "https://www.amd.com/pt/support/downloads/drivers.html/graphics/radeon-600-500-400/radeon-rx-500-series/radeon-rx-580.html"
 Write-Host "Você chegou ao final do script." -ForegroundColor Green
+
 
 
 
