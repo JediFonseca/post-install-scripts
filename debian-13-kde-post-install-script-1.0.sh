@@ -45,9 +45,10 @@ flatpak_packages=(
     "org.hydrogenmusic.Hydrogen"
     "com.heroicgameslauncher.hgl"
     "com.github.Matoking.protontricks"
-    "com.brave.Browser"
+    "com.google.Chrome"
     "net.cozic.joplin_desktop"
     "org.freedesktop.Platform.VulkanLayer.gamescope"
+    "io.gitlab.librewolf-community"
 )
 
 snap_packages=(
@@ -55,14 +56,27 @@ snap_packages=(
 )
 
 deb_downloads=(
-    "https://proton.me/download/authenticator/linux/ProtonAuthenticator_1.1.4_amd64.deb"
-    "https://proton.me/download/pass/linux/proton-pass_1.33.5_amd64.deb"
-    "https://data.nephobox.com/issue/terabox/Linux/1.42.6/TeraBox_1.42.6_amd64.deb"
+    "https://github.com/ente-io/ente/releases/download/auth-v4.4.17/ente-auth-v4.4.17-x86_64.deb"
+    "https://proton.me/download/pass/linux/proton-pass_1.35.0_amd64.deb"
     "https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-3/appimagelauncher_3.0.0-beta-2-gha287.96cb937_amd64.deb"
 )
 
 appimages_downloads=(
     "https://github.com/JediFonseca/mass_renamer/releases/download/mass_renamer-2.3.1-bugfix/mass_renamer-2.3.1-x86_64.AppImage"
+)
+
+remove_packages=(
+    "kmail"
+    "kaddressbook"
+    "pim-sieve-editor"
+    "korganizer"
+    "juk"
+    "kmouth"
+    "libkdsoapwsdiscoveryclient0:amd64"
+    "plasma-discover"
+    "dragonplayer"
+    "konqueror"
+    "firefox-esr"
 )
 
 # Paleta de cores
@@ -87,16 +101,16 @@ echo -e "1. Instalar o pacote \"flatpak\" e adicionar o repositório \"Flathub\"
 echo -e "2. Instalar, dos repositórios do Debian, os pacotes: tree, mangohud, gamemode,"
 echo -e "   vlc, soundconverter, audacity, xboxdrv, pipewire-audio-client-libraries,"
 echo -e "   rclone, ratbagd e piper."
-echo -e "3. Instalar os flatpaks: Bottles, Eyedropper, Flatseal, LocalSend, PeaZip, ProtonUpQt,"
-echo -e "   Proton VPN, GIMP, Upscayl, Video Downloader, MKVToolNix, MangoHud, Flacon,"
-echo -e "   qBittorrent, GNOME Boxes, Strawberry, Steam, Hydrogen, Heroic Games Launcher,"
-echo -e "   Protontricks, Gamescope, Brave e Joplin."
-echo -e "5. Baixar, no formato .deb, os instaladores dos apps: Proton Pass, TeraBox,"
-echo -e "   Proton Authenticator e AppImageLauncher."
+echo -e "3. Instalar os flatpaks: Bottles, Eyedropper, Flatseal, LocalSend, PeaZip, ProtonUpQt, Librewolf"
+echo -e "   Proton VPN, GIMP, Upscayl, Video Downloader, MKVToolNix, MangoHud, Flacon, qBittorrent,"
+echo -e "   GNOME Boxes, Strawberry, Steam, Hydrogen, Heroic Games Launcher,"
+echo -e "   Protontricks, Gamescope, Chrome e Joplin."
+echo -e "5. Baixar, no formato .deb, os instaladores dos apps: Proton Pass,"
+echo -e "   Ente Auth e AppImageLauncher."
 echo -e "6. Baixar, em AppImage, os apps: Mass Renamer."
 echo -e "7. Instalar os pacotes .deb baixados."
 echo -e "8. Ativar o modo de energia \"performance\" para a CPU."
-echo -e "9. Desinstalar os pacotes: kaddressbook, pim-sieve-editor, korganizer, juk, kmouth,"
+echo -e "9. Desinstalar os pacotes: kaddressbook, pim-sieve-editor, korganizer, juk, kmouth, firefox-esr"
 echo -e "   libkdsoapwsdiscoveryclient0:amd64, plasma-discover, dragonplayer e konqueror."
 echo
 echo -e -n "${INFO}Pressione ENTER para iniciar instalação das dependências ou CTRL+C para cancelar.${NOCOLOR}"
@@ -260,14 +274,14 @@ sudo apt install -y steam-devices
 
 # Adicionando permissão para que o mangohud em flatpak possa acessar a partição onde os jogos estão instalados.
 echo -e "${INFO}Adicionando permissão para que o mangohud e o gamescope em flatpak possam acessar a partição com os jogos.${NOCOLOR}"
-echo -e "${INFO}Para que esse ajuste funcione, a partição deve estar montada em \"'/mnt/Dados (Linux)\".${NOCOLOR}"
+echo -e "${INFO}Para que esse ajuste funcione, a partição deve estar montada em \"'/mnt/Dados\".${NOCOLOR}"
 echo
 echo -e -n "${INFO}Pressione ENTER para prosseguir ou CTRL+C para encerrar o script.${NOCOLOR}"
 read
 echo -e "${HEADER}33%${NOCOLOR}"
 echo -e "${HEADER}66%${NOCOLOR}"
-flatpak override --user --filesystem='/mnt/Dados (Linux):rw' org.freedesktop.Platform.VulkanLayer.MangoHud
-flatpak override --user --filesystem='/mnt/Dados (Linux):rw' org.freedesktop.Platform.VulkanLayer.gamescope
+flatpak override --user --filesystem='/mnt/Dados:rw' org.freedesktop.Platform.VulkanLayer.MangoHud
+flatpak override --user --filesystem='/mnt/Dados:rw' org.freedesktop.Platform.VulkanLayer.gamescope
 echo -e "${HEADER}100%${NOCOLOR}"
 
 #-----------------------------------------------
@@ -279,7 +293,7 @@ echo
 echo -e -n "${INFO}Pressione ENTER para prosseguir ou CTRL+C para encerrar o script.${NOCOLOR}"
 read
 echo
-sudo apt purge kmail kaddressbook pim-sieve-editor korganizer juk kmouth libkdsoapwsdiscoveryclient0:amd64 plasma-discover dragonplayer konqueror -y
+sudo apt purge -y "${remove_packages[@]}"
 sudo apt autoremove -y
 echo
 echo -e -n "${INFO}Script finalizado. Pressione ENTER para encerrar a execução.${NOCOLOR}"
