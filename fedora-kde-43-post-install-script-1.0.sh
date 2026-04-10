@@ -13,10 +13,9 @@ dnf_packages=(
     "tree"
     "mangohud"
     "gamemode"
+    "vlc"
     "soundkonverter"
     "audacity"
-    "rclone"
-    "rclone-browser"
     "libratbag-ratbagd"
     "piper"
 )
@@ -34,17 +33,18 @@ flatpak_packages=(
     "com.markopejic.downloader"
     "org.bunkus.mkvtoolnix-gui"
     "org.freedesktop.Platform.VulkanLayer.MangoHud"
-    "com.valvesoftware.Steam"
-    "net.lutris.Lutris"
-    "org.videolan.VLC"
     "com.github.Flacon"
     "org.qbittorrent.qBittorrent"
+    "org.gnome.Boxes"
     "org.strawberrymusicplayer.strawberry"
+    "com.valvesoftware.Steam"
     "org.hydrogenmusic.Hydrogen"
     "com.heroicgameslauncher.hgl"
-    "com.brave.Browser"
-    "net.cozic.joplin_desktop"
     "com.github.Matoking.protontricks"
+    "com.google.Chrome"
+    "net.cozic.joplin_desktop"
+    "org.freedesktop.Platform.VulkanLayer.gamescope"
+    "io.gitlab.librewolf-community"
 )
 
 snap_packages=(
@@ -52,14 +52,24 @@ snap_packages=(
 )
 
 rpm_downloads=( 
-    "https://data.nephobox.com/issue/terabox/Linux/1.42.2/TeraBox-1.42.2.x86_64.rpm"
-    "https://proton.me/download/pass/linux/proton-pass-1.33.5-1.x86_64.rpm"
-    "https://proton.me/download/authenticator/linux/ProtonAuthenticator-1.1.4-1.x86_64.rpm"
+    "https://github.com/ente-io/ente/releases/download/auth-v4.4.17/ente-auth-v4.4.17-x86_64.rpm"
+    "https://proton.me/download/pass/linux/proton-pass-1.36.0-1.x86_64.rpm"
     "https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-3/appimagelauncher_3.0.0-beta-2-gha287.96cb937_x86_64.rpm"
 )
 
 appimages_downloads=(
     "https://github.com/JediFonseca/mass_renamer/releases/download/mass_renamer-2.3.1-bugfix/mass_renamer-2.3.1-x86_64.AppImage"
+)
+
+remove_packages=(
+    "kmail"
+    "kaddressbook"
+    "pim-sieve-editor"
+    "korganizer"
+    "kmouth"
+    "plasma-discover"
+    "dragon"
+    "firefox"
 )
 
 # Paleta de cores
@@ -76,20 +86,6 @@ ERRORS='\033[0;31m' # Erros
 echo -e "${HEADER}###########################################################${NOCOLOR}"
 echo -e "${HEADER}##   Script de pós instalação do Fedora Workstation 42   ##${NOCOLOR}"
 echo -e "${HEADER}###########################################################${NOCOLOR}"
-echo
-echo -e "${INFO}Ao ser executado, este script irá:${NOCOLOR}"
-echo -e "1. Instalar o \"snapd\" e adicionar os repositórios \"Flathub\" e \"RPM Fusion\"."
-echo -e "2. Instalar, dos repositórios do Fedora, os pacotes: tree, mangohud, gamemode, soundkonverter."
-echo -e "   audacity, rclone, rclone-browser, libratbag-ratbagd e piper."
-echo -e "3. Instalar os flatpaks: Bottles, Eye Dropper, Flatseal, ProtonUp-Qt, Local Send, PeaZip, Brave,"
-echo -e "   Proton VPN, Gimp, Upscayl, Media Downloader, Heroic Launcher, Joplin, Protontricks,"
-echo -e "   MKV ToolNix GUI, Mangohud, Steam, Lutris, VLC, Flacon, qBittorrent, Strawberry e Hydrogen."
-echo -e "4. Instalar o pacote Snap: copilot-desktop. (Desativado)"
-echo -e "5. Instalar pacotes multimídia e Vulkan."
-echo -e "6. Baixar, no formato .rpm, os instaladores dos apps: TeraBox, Proton Authenticator, AppImageLauncher e"
-echo -e "   Proton Pass."
-echo -e "7. Baixar, em AppImage, os apps: Mass Renamer."
-echo -e "8. Instalar os pacotes .rpm baixados."
 echo
 echo -e -n "${INFO}Pressione ENTER para iniciar instalação das dependências ou CTRL+C para cancelar.${NOCOLOR}"
 read
@@ -208,6 +204,19 @@ sudo dnf install -y "$HOME/Downloads/RPMs/"*.rpm
         echo -e "${SUCCESS}Pacotes .rpm instalados com sucesso.${NOCOLOR}"
         echo
     fi
+
+#--------------------------------------------------
+# ---FASE 5 Desinstalação de pacotes indesejados---
+#--------------------------------------------------
+
+echo -e "${INFO}Por fim, o script irá desinstalar os pacotes desnecessários.${NOCOLOR}"
+echo
+echo -e -n "${INFO}Pressione ENTER para prosseguir ou CTRL+C para encerrar o script.${NOCOLOR}"
+read
+echo
+sudo dnf remove -y "${remove_packages[@]}"
+sudo dnf autoremove -y
+echo
 
 echo -e -n "${INFO}Script finalizado. Pressione ENTER para encerrar a execução.${NOCOLOR}"
 read
