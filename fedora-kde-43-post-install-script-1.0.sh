@@ -79,6 +79,8 @@ INFO='\033[1;33m'   # Amarelo - para avisos.
 NOCOLOR='\033[0m' # Reseta a cor para o padrão do terminal.
 ERRORS='\033[0;31m' # Erros
 
+sudo -v
+
 #--------------------------------
 # ---FASE 0 - Mensagem inicial---
 #--------------------------------
@@ -86,9 +88,11 @@ ERRORS='\033[0;31m' # Erros
 echo -e "${HEADER}###########################################################${NOCOLOR}"
 echo -e "${HEADER}##   Script de pós instalação do Fedora Workstation 42   ##${NOCOLOR}"
 echo -e "${HEADER}###########################################################${NOCOLOR}"
-echo
+echo ""
+echo "---Local reservado para a exibição de uma mensagem inicial. Ainda em desenvolvimento.---"
+echo ""
 echo -e -n "${INFO}Pressione ENTER para iniciar instalação das dependências ou CTRL+C para cancelar.${NOCOLOR}"
-read
+read -r
 echo
 
 #-------------------------------------------------
@@ -108,7 +112,7 @@ echo -e "${INFO}Fase de instalação de dependências finalizada.${NOCOLOR}"
 
 echo
 echo -e -n "${INFO}Pressione ENTER para instalar os pacotes \"dnf\", flatpaks e snaps ou CTRL+C para cancelar.${NOCOLOR}"
-read
+read -r
 echo
 
 #------------------------------------------------------------------------------
@@ -159,11 +163,14 @@ echo -e "${INFO}Instalando codecs multimídia...${NOCOLOR}"
 
 sudo dnf group install multimedia
 
+# Instalação do steam-devices para complementar a instalação da Steam em flatpak
+sudo dnf install steam-devices -y
+
 echo -e "${INFO}Fase de instalação dos pacotes finalizada.${NOCOLOR}"
 
 echo
 echo -e -n "${INFO}Pressione ENTER para baixar os arquivos .rpm ou CTRL+C para cancelar.${NOCOLOR}"
-read
+read -r
 echo
 
 #-----------------------------------------------------
@@ -186,9 +193,46 @@ echo
 echo -e "${INFO}Fase de Downloads finalizada.${NOCOLOR}"
 echo
 
-echo -e -n "${INFO}Pressione ENTER para instalar os pacotes .rpm ou CTRL+C para cancelar.${NOCOLOR}"
-read
+echo -e -n "${INFO}Pressione ENTER para ajustar permissões de flatpaks ou CTRL+C para cancelar.${NOCOLOR}"
+read -r
 echo
+
+#----------------------------
+# ---FASE 4 ajustes extras---
+#----------------------------
+
+# Definindo o caminho para a partição aonde os jogos serão/estão instalados.
+
+# Entrada de dados interativa.
+# O loop vai rodar enquanto qualquer uma das variáveis estiver vazia.
+while [[ -z "$GAMESDATA" ]]; do
+
+    echo -e "${RED}--- Entrada de Dados (Campos Obrigatórios) ---${NOCOLOR}"
+    echo ""
+    echo -e "${INFO}Definindo permissões para as versões em flatpak do mangohud e do gamescope:${NOCOLOR}"
+    read -r -p "Informe o caminho da pasta onde a partição de Jogos/Dados está montada: " GAMESDATA
+
+    if [[ -z "$GAMESDATA" ]]; then
+        echo -e "\n${RED}ERRO: Todos os campos precisam ser preenchidos!${NOCOLOR}\n"
+    fi
+done
+
+# Feedback para o usuário sobre as variáveis que foram definidas.
+echo -e "\n${GREEN}Variáveis definidas com sucesso!${NOCOLOR}\n"
+echo -e "A partição de Jogos/Dados está montada em:${YELLOW} $LOCAL${NOCOLOR}."
+
+echo ""
+echo -e -n "${YELLOW}Pressione ENTER para continuar ou CTRL+C para cancelar.${NOCOLOR}"
+read -r
+
+flatpak override --user --filesystem='/mnt/Dados:rw' org.freedesktop.Platform.VulkanLayer.MangoHud
+flatpak override --user --filesystem='/mnt/Dados:rw' org.freedesktop.Platform.VulkanLayer.gamescope
+
+echo ""
+echo -e -n "${GREEN}As permissões para que o mangohud e o gamescope em flatpak funcionem com os jogos${NOCOLOR}"
+echo -e -n "${GREEN}instalados na partição montada em $GAMESDATA foram aplicadas com sucesso!${NOCOLOR}"
+echo -e -n "${YELLOW}Pressione ENTER para instalar os apps baixados em .rpm ou CTRL+C para cancelar.${NOCOLOR}"
+read -r
 
 #------------------------------------------
 # ---FASE 4 Instalação dos arquivos .rpm---
@@ -212,12 +256,12 @@ sudo dnf install -y "$HOME/Downloads/RPMs/"*.rpm
 echo -e "${INFO}Por fim, o script irá desinstalar os pacotes desnecessários.${NOCOLOR}"
 echo
 echo -e -n "${INFO}Pressione ENTER para prosseguir ou CTRL+C para encerrar o script.${NOCOLOR}"
-read
+read -r
 echo
 sudo dnf remove -y "${remove_packages[@]}"
 sudo dnf autoremove -y
 echo
 
 echo -e -n "${INFO}Script finalizado. Pressione ENTER para encerrar a execução.${NOCOLOR}"
-read
+read -r
 echo
