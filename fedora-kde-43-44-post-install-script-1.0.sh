@@ -105,11 +105,16 @@ echo -e "${INFO}Instalando o \"snapd\"...${NOCOLOR}"
 sudo dnf install -y snapd
 echo -e "${INFO}Criando link simbólico para Snapd...${NOCOLOR}"
 sudo ln -s /var/lib/snapd/snap /snap
+echo -e "${INFO}Ativando serviço do Snapd...${NOCOLOR}"
+sudo systemctl enable --now snapd.socket
+
 echo -e "${INFO}Adicionando o repositório \"Flathub\".${NOCOLOR}"
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
 echo -e "${INFO}Adicionando os repositórios \"free\" e \"non-free\" do \"RPM Fusion\".${NOCOLOR}"
-sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
 echo -e "${INFO}Fase de instalação de dependências finalizada.${NOCOLOR}"
 
 echo
