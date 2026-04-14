@@ -81,7 +81,8 @@ ERRORS='\033[0;31m' # Erros
 
 sudo -v
 while true; do sudo -v; sleep 60; done &
-SUDO_PID=$!
+sudo_pid=$!
+trap "kill $sudo_pid" EXIT
 
 #--------------------------------
 # ---FASE 0 - Mensagem inicial---
@@ -268,8 +269,6 @@ echo
 sudo dnf remove -y "${remove_packages[@]}"
 sudo dnf autoremove -y
 echo
-
-kill $SUDO_PID
 
 echo -e -n "${INFO}Script finalizado. Pressione ENTER para encerrar a execução.${NOCOLOR}"
 read -r
