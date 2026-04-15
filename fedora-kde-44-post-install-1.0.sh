@@ -226,7 +226,7 @@ echo
 
 echo -e "${coloryellow}Por fim, o script irá instalar o grupo \"multimedia\", o pacote \"steam-devices\" e conceder${nocolor}"
 echo -e "${coloryellow}ao \"Mangohud\" e ao \"Gamescope\" em Flatpak permissões para acessar a partição dos jogos.${nocolor}"
-echo -e -n "${coloryellow}Pressione ENTER para encerrar a execução.${nocolor}"
+echo -e -n "${coloryellow}Pressione ENTER para continuar.${nocolor}"
 read -r
 echo
 
