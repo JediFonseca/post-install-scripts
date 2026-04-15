@@ -91,7 +91,7 @@ echo -e "${colorblue}###################################################${nocolo
 echo
 echo -e "${coloryellow}Ao ser executado, este script irá:${nocolor}"
 
-echo -e "${colorblue}\n01. Lidar com as dependências do script:${nocolor}"
+echo -e "${colorblue}\nLidar com as dependências do script:${nocolor}"
 echo "Instalar o \"snapd\", adicionar o repositório \"flathub\" para Flatpaks"
 echo "e adicionar os repositórios do \"RPM Fusion\" \"free\" e \"non-free\"."
 
