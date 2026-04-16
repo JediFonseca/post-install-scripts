@@ -170,13 +170,15 @@ sudo systemctl enable --now snapd.socket
 sudo snap wait system seed.loaded
 
 if command -v snap &> /dev/null; then
-  echo -e "${coloryellow}Adicionando o repositório \"Flathub\"...${nocolor}"
-  flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+  echo -e "${colorred}Snap instalado com sucesso!${nocolor}"
 else
   echo -e "${colorred}\nErro: A instalação/ativação do comando \"snap\" falhou!${nocolor}"
   echo -e "${colorred}Verifique o funcionamento do mesmo e volte a rodar o script.${nocolor}"
   exit 7
 fi
+
+echo -e "${coloryellow}Adicionando o repositório \"Flathub\"...${nocolor}"
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 echo -e "${coloryellow}Adicionando os repositórios \"free\" e \"non-free\" do \"RPM Fusion\".${nocolor}"
 sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
