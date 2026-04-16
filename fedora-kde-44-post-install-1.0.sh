@@ -5,9 +5,42 @@
 # Autor: Jedielson da Fonseca----------------------------------------
 #--------------------------------------------------------------------
 
-#-------------------------------------------------
-# ---Pacotes para instalação, downloads e cores---
-#-------------------------------------------------
+# Paleta de cores
+colorblue='\033[0;36m'  # Ciano - para títulos.
+colorgreen='\033[0;32m' # Verde - para mensagens de sucesso.
+coloryellow='\033[1;33m'   # Amarelo - para avisos.
+nocolor='\033[0m' # Reseta a cor para o padrão do terminal.
+colorred='\033[0;31m' # Erros
+
+#-----------------------------
+# ---Checagens de segurança---
+#-----------------------------
+
+# Verificar se os programas estão instalados:
+command -v dnf >/dev/null || exit 1
+command -v wget >/dev/null || exit 2
+command -v mkdir >/dev/null || exit 3
+command -v ping >/dev/null || exit 4
+command -v chmod >/dev/null || exit 5
+command -v flatpak >/dev/null || exit 6
+
+clear
+
+echo -e "${coloryellow}\nVerificando a conexão com a internet...\n${nocolor}"
+
+ping -c 10 www.google.com.br
+if [ "$?" -eq "0" ];
+then
+      echo -e "${colorgreen}\nConexão com à internet funcionando normalmente. Aguarde...${nocolor}"
+      sleep 5
+else
+     echo -e "${colorred}\nERRO: Seu sistema não está conectado à internet.${nocolor}"
+     exit
+fi
+
+#------------------------------------------
+# ---Pacotes para instalação e downloads---
+#------------------------------------------
 
 declare -A dnf_packages=(
     ["tree"]="Tree"
@@ -72,13 +105,6 @@ declare -A remove_packages=(
     ["firefox"]="Firefox"
 )
 
-# Paleta de cores
-colorblue='\033[0;36m'  # Ciano - para títulos.
-colorgreen='\033[0;32m' # Verde - para mensagens de sucesso.
-coloryellow='\033[1;33m'   # Amarelo - para avisos.
-nocolor='\033[0m' # Reseta a cor para o padrão do terminal.
-colorred='\033[0;31m' # Erros
-
 #--------------------------------
 # ---FASE 0 - Mensagem inicial---
 #--------------------------------
@@ -88,6 +114,8 @@ clear
 echo -e "${colorblue}###################################################${nocolor}"
 echo -e "${colorblue}##   Script de pós instalação do Fedora KDE 44   ##${nocolor}"
 echo -e "${colorblue}###################################################${nocolor}"
+echo
+echo -e "${colorred}ATENÇÃO: Verifique os links antes de executar o script.${nocolor}"
 echo
 echo -e "${coloryellow}Ao ser executado, este script irá:${nocolor}"
 
@@ -117,6 +145,9 @@ echo -e "${colorblue}\nRealizar instalações e ajustes extras:${nocolor}"
 echo "Instalar o grupo \"multimedia\" e o pacote \"steam-devices\", além de conceder ao \"Mangohud\""
 echo "e ao \"Gamescope\" em Flatpak permissões para acessar a partição dos jogos."
 
+echo -e "${coloryellow}\nEsse script foi pensado para ser executado apenas em instalações limpas do Fedora KDE${nocolor}"
+echo -e "${coloryellow}após o sistema já ter sido totalmente atualizado e reiniciado.${nocolor}"
+
 echo -e -n "${coloryellow}\nPressione ENTER para iniciar instalação das dependências ou CTRL+C para cancelar.${nocolor}"
 read -r
 echo
@@ -136,8 +167,16 @@ echo -e "${coloryellow}Criando link simbólico para Snapd...${nocolor}"
 sudo ln -sfn /var/lib/snapd/snap /snap
 echo -e "${coloryellow}Ativando serviço do Snapd...${nocolor}"
 sudo systemctl enable --now snapd.socket
+sudo snap wait system seed.loaded
 
-echo -e "${coloryellow}Adicionando o repositório \"Flathub\".${nocolor}"
+if command -v snap &> /dev/null; then
+  echo -e "${coloryellow}Adicionando o repositório \"Flathub\"...${nocolor}"
+else
+  echo -e "${colorred}\nErro: A instalação/ativação do comando \"snap\" falhou!${nocolor}"
+  echo -e "${colorred}Verifique o funcionamento do mesmo e volte a rodar o script.${nocolor}"
+  exit 7
+fi
+
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 echo -e "${coloryellow}Adicionando os repositórios \"free\" e \"non-free\" do \"RPM Fusion\".${nocolor}"
@@ -168,7 +207,6 @@ flatpak install -y flathub "${!flatpak_packages[@]}"
 # Instalação dos pacotes snap:
 #echo -e "${coloryellow}Iniciando a instalação dos pacotes snap.${nocolor}"
 #echo
-#sudo snap wait system seed.loaded
 #sudo snap refresh
 #sudo snap install "${!snap_packages[@]}"
 
@@ -251,7 +289,7 @@ while [[ -z "$gamesdata" || ! -d "$gamesdata" ]]; do
     echo ""
     echo -e "${coloryellow}Definindo permissões para as versões em flatpak do mangohud e do gamescope:${nocolor}"
     echo -e "${coloryellow}Informe o caminho da pasta onde a partição de Jogos/Dados está montada.${nocolor}"
-    echo -e "${coloryellow}Não podem haver espaços no caminho do diretório.${nocolor}"
+    echo -e "${coloryellow}Se possível, evite o uso de espaços no caminho do diretório.${nocolor}"
     read -r -p "Caminho do diretório: " gamesdata
     # Corrige "~/" para "/home/nomedousuario" para evitar erros na execução
     gamesdata="${gamesdata/#\~/$HOME}"
@@ -274,4 +312,4 @@ flatpak override --user --filesystem="$gamesdata:rw" org.freedesktop.Platform.Vu
 
 echo ""
 echo -e "${colorblue}As permissões foram aplicadas!${nocolor}"
-echo -e "${colorgreen}Script finalizado!${nocolor}"
+echo -e "${colorgreen}Script finalizado! Recomenda-se reiniciar o sistema.${nocolor}"
