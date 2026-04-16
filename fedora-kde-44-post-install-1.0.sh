@@ -230,7 +230,9 @@ done
 echo -e "${coloryellow}Iniciando o download dos pacotes AppImage...${nocolor}"
 echo
 mkdir -p "$HOME/Downloads/AppImages"
-wget --show-progress -P "$HOME/Downloads/AppImages" "${!appimages_downloads[@]}"
+for url in "${!appimages_downloads[@]}"; do
+    wget --show-progress -P "$HOME/Downloads/AppImages" "$url"
+done
 echo -e "${coloryellow}Tornando os AppImages executáveis...${nocolor}"
 chmod +x "$HOME/Downloads/AppImages/"*.AppImage 2>/dev/null
 
