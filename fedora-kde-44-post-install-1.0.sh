@@ -170,7 +170,7 @@ sudo systemctl enable --now snapd.socket
 sudo snap wait system seed.loaded
 
 if command -v snap &> /dev/null; then
-  echo -e "${colorred}Snap instalado com sucesso!${nocolor}"
+  echo -e "${colorgreen}Snap instalado com sucesso!${nocolor}"
 else
   echo -e "${colorred}\nErro: A instalação/ativação do comando \"snap\" falhou!${nocolor}"
   echo -e "${colorred}Verifique o funcionamento do mesmo e volte a rodar o script.${nocolor}"
