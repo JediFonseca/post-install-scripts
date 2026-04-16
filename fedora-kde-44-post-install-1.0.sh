@@ -171,13 +171,12 @@ sudo snap wait system seed.loaded
 
 if command -v snap &> /dev/null; then
   echo -e "${coloryellow}Adicionando o repositório \"Flathub\"...${nocolor}"
+  flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 else
   echo -e "${colorred}\nErro: A instalação/ativação do comando \"snap\" falhou!${nocolor}"
   echo -e "${colorred}Verifique o funcionamento do mesmo e volte a rodar o script.${nocolor}"
   exit 7
 fi
-
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 echo -e "${coloryellow}Adicionando os repositórios \"free\" e \"non-free\" do \"RPM Fusion\".${nocolor}"
 sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
@@ -202,7 +201,7 @@ sudo dnf install -y "${!dnf_packages[@]}"
 # Instalação dos pacotes flatpak:
 echo -e "${coloryellow}Iniciando a instalação dos pacotes flatpak${nocolor}"
 echo
-flatpak install -y flathub "${!flatpak_packages[@]}"
+flatpak install -y --noninteractive flathub "${!flatpak_packages[@]}"
 
 # Instalação dos pacotes snap:
 #echo -e "${coloryellow}Iniciando a instalação dos pacotes snap.${nocolor}"
@@ -224,7 +223,9 @@ echo
 echo -e "${coloryellow}Iniciando o download dos pacotes .rpm...${nocolor}"
 echo
 mkdir -p "$HOME/Downloads/RPMs"
-wget --show-progress -P "$HOME/Downloads/RPMs" "${!rpm_downloads[@]}"
+for url in "${!rpm_downloads[@]}"; do
+    wget --show-progress -P "$HOME/Downloads/RPMs" "$url"
+done
 
 echo -e "${coloryellow}Iniciando o download dos pacotes AppImage...${nocolor}"
 echo
