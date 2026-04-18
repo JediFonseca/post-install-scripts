@@ -331,6 +331,8 @@ echo "Para executar o script por completo, basta rodar \"./fedora-kde-44-post-in
 echo "Você também pode rodar etapas específicas de forma isolada."
 echo "Para isso, basta rodar o script com um (ou mais) dos parâmetros abaixo:"
 echo
+echo "--safety"
+echo "--net"
 echo "--dependencies"
 echo "--dnf"
 echo "--flatpak"
