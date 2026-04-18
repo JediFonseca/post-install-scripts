@@ -5,42 +5,9 @@
 # Autor: Jedielson da Fonseca----------------------------------------
 #--------------------------------------------------------------------
 
-# Paleta de cores
-colorblue='\033[0;36m'  # Ciano - para títulos.
-colorgreen='\033[0;32m' # Verde - para mensagens de sucesso.
-coloryellow='\033[1;33m'   # Amarelo - para avisos.
-nocolor='\033[0m' # Reseta a cor para o padrão do terminal.
-colorred='\033[0;31m' # Erros
-
-#-----------------------------
-# ---Checagens de segurança---
-#-----------------------------
-
-# Verificar se os programas estão instalados:
-command -v dnf >/dev/null || exit 1
-command -v wget >/dev/null || exit 2
-command -v mkdir >/dev/null || exit 3
-command -v ping >/dev/null || exit 4
-command -v chmod >/dev/null || exit 5
-command -v flatpak >/dev/null || exit 6
-
-clear
-
-echo -e "${coloryellow}\nVerificando a conexão com a internet...\n${nocolor}"
-
-ping -c 10 www.google.com.br
-if [ "$?" -eq "0" ];
-then
-      echo -e "${colorgreen}\nConexão com à internet funcionando normalmente. Aguarde...${nocolor}"
-      sleep 5
-else
-     echo -e "${colorred}\nERRO: Seu sistema não está conectado à internet.${nocolor}"
-     exit
-fi
-
-#------------------------------------------
-# ---Pacotes para instalação e downloads---
-#------------------------------------------
+#----------------------
+# --- LISTAS/ARRAYS ---
+#----------------------
 
 declare -A dnf_packages=(
     ["tree"]="Tree"
@@ -105,10 +72,43 @@ declare -A remove_packages=(
     ["firefox"]="Firefox"
 )
 
-#--------------------------------
-# ---FASE 0 - Mensagem inicial---
-#--------------------------------
+#----------------
+# --- FUNÇÕES ---
+#----------------
 
+# Função com as checagens de segurança
+safety_checks () {
+command -v dnf >/dev/null || exit 1
+command -v wget >/dev/null || exit 2
+command -v mkdir >/dev/null || exit 3
+command -v ping >/dev/null || exit 4
+command -v chmod >/dev/null || exit 5
+command -v flatpak >/dev/null || exit 6
+}
+
+
+
+# Função com a checagem de conexão com a internet
+internet_connection () {
+clear
+
+echo -e "${coloryellow}\nVerificando a conexão com a internet...\n${nocolor}"
+
+ping -c 10 www.google.com.br
+if [ "$?" -eq "0" ];
+then
+      echo -e "${colorgreen}\nConexão com à internet funcionando normalmente. Aguarde...${nocolor}"
+      sleep 5
+else
+     echo -e "${colorred}\nERRO: Seu sistema não está conectado à internet.${nocolor}"
+     exit
+fi
+}
+
+
+
+# Função com a mensagem inicial
+starting_message () {
 clear
 
 echo -e "${colorblue}###################################################${nocolor}"
@@ -129,8 +129,8 @@ printf '%s, ' "${dnf_packages[@]}" | sed 's/, $/./' | fold -s -w 80
 echo -e "${colorblue}\nInstalar via Flatpak:${nocolor}"
 printf '%s, ' "${flatpak_packages[@]}" | sed 's/, $/./' | fold -s -w 80
 
-#echo -e "${colorblue}\nInstalar via Snap:${nocolor}"
-#printf '%s, ' "${snap_packages[@]}" | sed 's/, $/./' | fold -s -w 80
+echo -e "${colorblue}\nInstalar via Snap:${nocolor}"
+printf '%s, ' "${snap_packages[@]}" | sed 's/, $/./' | fold -s -w 80
 
 echo -e "${colorblue}\nBaixar e instalar via .rpm:${nocolor}"
 printf '%s, ' "${rpm_downloads[@]}" | sed 's/, $/./' | fold -s -w 80
@@ -148,14 +148,17 @@ echo "e ao \"Gamescope\" em Flatpak permissões para acessar a partição dos jo
 echo -e "${coloryellow}\nEsse script foi pensado para ser executado apenas em instalações limpas do Fedora KDE${nocolor}"
 echo -e "${coloryellow}após o sistema já ter sido totalmente atualizado e reiniciado.${nocolor}"
 
-echo -e -n "${coloryellow}\nPressione ENTER para iniciar instalação das dependências ou CTRL+C para cancelar.${nocolor}"
+echo -e "\nPara ajuda e mais informações rode: ${colorblue}\"./fedora-kde-44-post-install-2.0.sh --help\"${nocolor}."
+
+echo -e -n "${coloryellow}\nPressione ENTER para iniciar a execução do script ou CTRL+C para cancelar.${nocolor}"
 read -r
 echo
+}
 
-#-------------------------------------------------
-# ---FASE 1 - Resolvendo dependências do script---
-#-------------------------------------------------
 
+
+# Função de instalação de dependências para o script
+dependencies_installation () {
 sudo -v
 while true; do sudo -v; sleep 60; done &
 sudo_pid=$!
@@ -185,50 +188,52 @@ sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-r
 sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 echo -e "${coloryellow}Fase de instalação de dependências finalizada.${nocolor}"
+}
 
-echo
-echo -e -n "${coloryellow}Pressione ENTER para instalar os pacotes \"dnf\", flatpaks e snaps ou CTRL+C para cancelar.${nocolor}"
-read -r
-echo
 
-#------------------------------------------------------------------------------
-# ---FASE 2 - Instalando pacotes dos repositórios oficiais, flatpaks e snaps---
-#------------------------------------------------------------------------------
 
-# Instalação dos pacotes DNF:
+# Função de instalação dos pacotes via dnf
+dnf_installation () {
 echo -e "${coloryellow}Iniciando instalação dos pacotes \"dnf\".${nocolor}"
 echo
 sudo dnf install -y "${!dnf_packages[@]}"
+}
 
-# Instalação dos pacotes flatpak:
+
+
+# Função de instalação dos pacotes flatpak
+flatpak_installation () {
 echo -e "${coloryellow}Iniciando a instalação dos pacotes flatpak${nocolor}"
 echo
 flatpak install -y --noninteractive flathub "${!flatpak_packages[@]}"
+}
 
-# Instalação dos pacotes snap:
-#echo -e "${coloryellow}Iniciando a instalação dos pacotes snap.${nocolor}"
-#echo
-#sudo snap refresh
-#sudo snap install "${!snap_packages[@]}"
 
-echo -e "${coloryellow}Fase de instalação dos pacotes finalizada.${nocolor}"
 
+# Função de instalação dos pacotes snap
+snap_installation () {
+echo -e "${coloryellow}Iniciando a instalação dos pacotes snap.${nocolor}"
 echo
-echo -e -n "${coloryellow}Pressione ENTER para baixar os arquivos .rpm  e .AppImage ou CTRL+C para cancelar.${nocolor}"
-read -r
-echo
+sudo snap refresh
+sudo snap install "${!snap_packages[@]}"
+}
 
-#-----------------------------------------------------
-# ---FASE 3 Downloads dos arquivos .rpm e .appimage---
-#-----------------------------------------------------
 
+
+# Função de download dos arquivos rpm
+rpm_downloads () {
 echo -e "${coloryellow}Iniciando o download dos pacotes .rpm...${nocolor}"
 echo
 mkdir -p "$HOME/Downloads/RPMs"
 for url in "${!rpm_downloads[@]}"; do
     wget --show-progress -P "$HOME/Downloads/RPMs" "$url"
 done
+}
 
+
+
+# Função com download e permissões de execução dos arquivos AppImage
+appimage_downloads () {
 echo -e "${coloryellow}Iniciando o download dos pacotes AppImage...${nocolor}"
 echo
 mkdir -p "$HOME/Downloads/AppImages"
@@ -237,55 +242,39 @@ for url in "${!appimages_downloads[@]}"; do
 done
 echo -e "${coloryellow}Tornando os AppImages executáveis...${nocolor}"
 chmod +x "$HOME/Downloads/AppImages/"*.AppImage 2>/dev/null
+}
 
-echo
-echo -e "${coloryellow}Fase de Downloads finalizada.${nocolor}"
-echo
 
-echo -e -n "${coloryellow}Pressione ENTER para instalar os pacotes \".rpm\" ou CTRL+C para cancelar.${nocolor}"
-read -r
-echo
 
-#------------------------------------------
-# ---FASE 4 Instalação dos arquivos .rpm---
-#------------------------------------------
-
+# Função de instalação dos pacotes .rpm
+rpm_installation () {
 echo -e "${coloryellow}Iniciando a instalação dos pacotes .rpm.${nocolor}"
 echo
 sudo dnf install -y "$HOME/Downloads/RPMs/"*.rpm
+}
 
-#--------------------------------------------------
-# ---FASE 5 Desinstalação de pacotes indesejados---
-#--------------------------------------------------
 
-echo -e "${coloryellow}Agora, o script irá desinstalar os pacotes desnecessários.${nocolor}"
-echo
-echo -e -n "${coloryellow}Pressione ENTER para prosseguir ou CTRL+C para encerrar o script.${nocolor}"
-read -r
+
+# Função com a instalação de pacotes complementares
+additional_packages () {
+sudo dnf group install multimedia -y
+sudo dnf install steam-devices -y
+}
+
+
+
+# Função com a remoção de pacotes indesejados
+remove_packages_list () {
+echo -e "${coloryellow}Desinstalando os pacotes indesejados.${nocolor}"
 echo
 sudo dnf remove -y "${!remove_packages[@]}"
 sudo dnf autoremove -y
-echo
+}
 
-echo -e "${coloryellow}Por fim, o script irá instalar o grupo \"multimedia\", o pacote \"steam-devices\" e conceder${nocolor}"
-echo -e "${coloryellow}ao \"Mangohud\" e ao \"Gamescope\" em Flatpak permissões para acessar a partição dos jogos.${nocolor}"
-echo -e -n "${coloryellow}Pressione ENTER para continuar.${nocolor}"
-read -r
-echo
 
-#----------------------------
-# ---FASE 6 ajustes extras---
-#----------------------------
 
-#Instalação de Codecs multimídia.
-echo -e "${coloryellow}Instalando codecs multimídia...${nocolor}"
-sudo dnf group install multimedia -y
-
-# Instalação do steam-devices para complementar a instalação da Steam em flatpak
-sudo dnf install steam-devices -y
-
-# Definindo o caminho para a partição aonde os jogos serão/estão instalados.
-
+# Função que concede permissões para que o Mangohud e o Gamescope em flatpak possam acessar a partição de jogos
+flatpak_permissions () {
 # Entrada de dados interativa.
 # O loop vai rodar enquanto qualquer uma das variáveis estiver vazia.
 while [[ -z "$gamesdata" || ! -d "$gamesdata" ]]; do
@@ -315,6 +304,94 @@ read -r
 flatpak override --user --filesystem="$gamesdata:rw" org.freedesktop.Platform.VulkanLayer.MangoHud
 flatpak override --user --filesystem="$gamesdata:rw" org.freedesktop.Platform.VulkanLayer.gamescope
 
-echo ""
-echo -e "${colorblue}As permissões foram aplicadas!${nocolor}"
-echo -e "${colorgreen}Script finalizado! Recomenda-se reiniciar o sistema.${nocolor}"
+echo -e "${coloryellow}As permissões foram aplicadas!${nocolor}"
+}
+
+
+
+# Função de ajuda
+help_section () {
+
+clear
+
+echo -e "${colorblue}###################################################${nocolor}"
+echo -e "${colorblue}##   Script de pós instalação do Fedora KDE 44   ##${nocolor}"
+echo -e "${colorblue}###################################################${nocolor}"
+echo
+echo -e "${coloryellow}Como usar esse script:${nocolor}"
+echo
+echo "Para executar o script por completo, basta rodar \"./fedora-kde-44-post-install-2.0.sh\"."
+echo "Você também pode rodar etapas específicas de forma isolada."
+echo "Para isso, basta rodar o script com um (ou mais) dos parâmetros abaixo:"
+echo
+echo "--dependencies"
+echo "--dnf"
+echo "--flatpak"
+echo "--snap"
+echo "--rpmd"
+echo "--appimage"
+echo "--rpmi"
+echo "--add"
+echo "--remove"
+echo "--flatpak-per"
+echo "--help"
+echo
+echo -e "${coloryellow}Exemplo de execução com parâmertro:${nocolor}"
+echo
+echo "\"./fedora-kde-44-post-install-2.0.sh --dependencies\"."
+}
+
+#-------------------------------------
+# --- Início da execução do script ---
+#-------------------------------------
+
+# Paleta de cores
+colorblue='\033[0;36m'  # Ciano - para títulos.
+colorgreen='\033[0;32m' # Verde - para mensagens de sucesso.
+coloryellow='\033[1;33m'   # Amarelo - para avisos.
+nocolor='\033[0m' # Reseta a cor para o padrão do terminal.
+colorred='\033[0;31m' # Erros
+
+if [[ $# -eq 0 ]]; then
+
+    safety_checks
+    internet_connection
+    starting_message
+    dependencies_installation
+    dnf_installation
+    flatpak_installation
+    snap_installation
+    rpm_downloads
+    appimage_downloads
+    rpm_installation
+    additional_packages
+    remove_packages_list
+    flatpak_permissions
+    echo ""
+    echo -e "${colorgreen}Script finalizado! Recomenda-se reiniciar o sistema.${nocolor}"
+
+else
+
+    for arg in "$@"; do
+        case "$arg" in
+            --safety)       safety-checks ;;
+            --net)          internet-connection ;;
+            --dependencies) dependencies_installation ;;
+            --dnf)          dnf_installation ;;
+            --flatpak)      flatpak_installation ;;
+            --snap)         snap_installation ;;
+            --rpmd)         rpm_downloads ;;
+            --appimage)     appimage_downloads ;;
+            --rpmi)         rpm_installation ;;
+            --add)          additional_packages ;;
+            --remove)       remove_packages_list ;;
+            --flatpak-per)  flatpak_permissions ;;
+            --help)         help_section ;;
+            *)
+                echo -e "${colorred}Opção inválida: $arg${nocolor}"
+                exit 8
+                ;;
+        esac
+    done
+
+fi
