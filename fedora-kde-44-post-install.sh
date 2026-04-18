@@ -148,7 +148,7 @@ echo "e ao \"Gamescope\" em Flatpak permissões para acessar a partição dos jo
 echo -e "${coloryellow}\nEsse script foi pensado para ser executado apenas em instalações limpas do Fedora KDE${nocolor}"
 echo -e "${coloryellow}após o sistema já ter sido totalmente atualizado e reiniciado.${nocolor}"
 
-echo -e "\nPara ajuda e mais informações rode: ${colorblue}\"./fedora-kde-44-post-install-2.0.sh --help\"${nocolor}."
+echo -e "\nPara ajuda e mais informações rode: ${colorblue}\"./fedora-kde-44-post-install.sh --help\"${nocolor}."
 
 echo -e -n "${coloryellow}\nPressione ENTER para iniciar a execução do script ou CTRL+C para cancelar.${nocolor}"
 read -r
@@ -338,7 +338,7 @@ echo "--help"
 echo
 echo -e "${coloryellow}Exemplo de execução com parâmertro:${nocolor}"
 echo
-echo "\"./fedora-kde-44-post-install-2.0.sh --dependencies\"."
+echo "\"./fedora-kde-44-post-install.sh --dependencies\"."
 }
 
 #-------------------------------------
