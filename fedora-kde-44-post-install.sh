@@ -228,7 +228,7 @@ sudo snap install "${!snap_packages[@]}"
 
 
 # Função de download dos arquivos rpm
-rpm_downloads () {
+rpm_downloads_list () {
 echo -e "${coloryellow}Iniciando o download dos pacotes .rpm...${nocolor}"
 echo
 mkdir -p "$HOME/Downloads/RPMs"
@@ -240,7 +240,7 @@ done
 
 
 # Função com download e permissões de execução dos arquivos AppImage
-appimage_downloads () {
+appimage_downloads_list () {
 echo -e "${coloryellow}Iniciando o download dos pacotes AppImage...${nocolor}"
 echo
 mkdir -p "$HOME/Downloads/AppImages"
@@ -361,13 +361,13 @@ if [[ $# -eq 0 ]]; then
     dnf_installation
     flatpak_installation
     snap_installation
-    rpm_downloads
-    appimage_downloads
+    rpm_downloads_list
+    appimage_downloads_list
     rpm_installation
     additional_packages
     remove_packages_list
     flatpak_permissions
-    echo ""
+    echo
     echo -e "${colorgreen}Script finalizado! Recomenda-se reiniciar o sistema.${nocolor}"
 
 else
@@ -380,8 +380,8 @@ else
             --dnf)          dnf_installation ;;
             --flatpak)      flatpak_installation ;;
             --snap)         snap_installation ;;
-            --rpmd)         rpm_downloads ;;
-            --appimage)     appimage_downloads ;;
+            --rpmd)         rpm_downloads_list ;;
+            --appimage)     appimage_downloads_list ;;
             --rpmi)         rpm_installation ;;
             --add)          additional_packages ;;
             --remove)       remove_packages_list ;;
