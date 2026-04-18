@@ -5,6 +5,13 @@
 # Autor: Jedielson da Fonseca----------------------------------------
 #--------------------------------------------------------------------
 
+# Paleta de cores
+colorblue='\033[0;36m'  # Ciano - para títulos.
+colorgreen='\033[0;32m' # Verde - para mensagens de sucesso.
+coloryellow='\033[1;33m'   # Amarelo - para avisos.
+nocolor='\033[0m' # Reseta a cor para o padrão do terminal.
+colorred='\033[0;31m' # Erros
+
 #----------------------
 # --- LISTAS/ARRAYS ---
 #----------------------
@@ -344,13 +351,6 @@ echo "\"./fedora-kde-44-post-install.sh --dependencies\"."
 #-------------------------------------
 # --- Início da execução do script ---
 #-------------------------------------
-
-# Paleta de cores
-colorblue='\033[0;36m'  # Ciano - para títulos.
-colorgreen='\033[0;32m' # Verde - para mensagens de sucesso.
-coloryellow='\033[1;33m'   # Amarelo - para avisos.
-nocolor='\033[0m' # Reseta a cor para o padrão do terminal.
-colorred='\033[0;31m' # Erros
 
 if [[ $# -eq 0 ]]; then
 
