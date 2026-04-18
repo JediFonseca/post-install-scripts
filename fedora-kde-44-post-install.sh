@@ -374,8 +374,8 @@ else
 
     for arg in "$@"; do
         case "$arg" in
-            --safety)       safety-checks ;;
-            --net)          internet-connection ;;
+            --safety)       safety_checks ;;
+            --net)          internet_connection ;;
             --dependencies) dependencies_installation ;;
             --dnf)          dnf_installation ;;
             --flatpak)      flatpak_installation ;;
