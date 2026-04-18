@@ -83,8 +83,18 @@ declare -A remove_packages=(
 # --- FUNÇÕES ---
 #----------------
 
+#Função para manter o sudo autenticado
+sudo_alive () {
+sudo -v
+while true; do sudo -v; sleep 60; done &
+sudo_pid=$!
+trap "kill $sudo_pid" EXIT
+}
+
+
+
 # Função com as checagens de segurança
-safety_checks () {
+basic_dependencies () {
 command -v dnf >/dev/null || exit 1
 command -v wget >/dev/null || exit 2
 command -v mkdir >/dev/null || exit 3
@@ -101,14 +111,14 @@ clear
 
 echo -e "${coloryellow}\nVerificando a conexão com a internet...\n${nocolor}"
 
-ping -c 10 www.google.com.br
+ping -c 5 www.google.com.br
 if [ "$?" -eq "0" ];
 then
       echo -e "${colorgreen}\nConexão com à internet funcionando normalmente. Aguarde...${nocolor}"
       sleep 5
 else
      echo -e "${colorred}\nERRO: Seu sistema não está conectado à internet.${nocolor}"
-     exit
+     exit 7
 fi
 }
 
@@ -166,11 +176,6 @@ echo
 
 # Função de instalação de dependências para o script
 dependencies_installation () {
-sudo -v
-while true; do sudo -v; sleep 60; done &
-sudo_pid=$!
-trap "kill $sudo_pid" EXIT
-
 echo -e "${coloryellow}Instalando o \"snapd\"...${nocolor}"
 sudo dnf install -y snapd
 echo -e "${coloryellow}Criando link simbólico para Snapd...${nocolor}"
@@ -184,7 +189,7 @@ if command -v snap &> /dev/null; then
 else
   echo -e "${colorred}\nErro: A instalação/ativação do comando \"snap\" falhou!${nocolor}"
   echo -e "${colorred}Verifique o funcionamento do mesmo e volte a rodar o script.${nocolor}"
-  exit 7
+  exit 8
 fi
 
 echo -e "${coloryellow}Adicionando o repositório \"Flathub\"...${nocolor}"
@@ -331,23 +336,31 @@ echo "Para executar o script por completo, basta rodar \"./fedora-kde-44-post-in
 echo "Você também pode rodar etapas específicas de forma isolada."
 echo "Para isso, basta rodar o script com um (ou mais) dos parâmetros abaixo:"
 echo
-echo "--safety"
-echo "--net"
-echo "--dependencies"
-echo "--dnf"
-echo "--flatpak"
-echo "--snap"
-echo "--rpmd"
-echo "--appimage"
-echo "--rpmi"
-echo "--add"
-echo "--remove"
-echo "--flatpak-per"
-echo "--help"
+echo "--sudo-alive    #Autentica o \"sudo\" e o mantém assim até o encerramento do script."
+echo "--basics        #Verifica se dependências básicas do script (como o dnf) estão instalados."
+echo "--net           #Checa a conexão com a internet."
+echo "--dependencies  #Instala todas as dependências necessárias para o funcionamento do script."
+echo "--dnf           #Instala os pacotes listados via dnf."
+echo "--flatpak       #Instala os pacotes listados via flatpak."
+echo "--snap          #Instala os pacotes listados via snap."
+echo "--rpmd          #Baixa os arquivos .rpm à partir dos links fornecidos."
+echo "--appimage      #Baixa os arquivos .AppImage à partir dos links fornecidos."
+echo "--rpmi          #Instala os pacotes .rpm baixados."
+echo "--add           #Instala pacotes adicionais complementares, como o \"steam-devices\"."
+echo "--remove        #Desinstala os pacotes indicados na lista correspondente."
+echo "--flatpak-per   #Ajusta as permissões do Mangohud e do Gamescope em flatpak."
+echo "--help          #Exibe esse texto de ajuda (bloco atual)."
 echo
-echo -e "${coloryellow}Exemplo de execução com parâmetro:${nocolor}"
+echo "As funções irão rodar na mesma ordem que os parâmetros forem inseridos no comando."
 echo
-echo "\"./fedora-kde-44-post-install.sh --dependencies\"."
+echo "Para informações mais detalhadas, leia o script."
+echo
+echo -e "${coloryellow}Exemplo de execução com parâmetros:${nocolor}"
+echo "./fedora-kde-44-post-install.sh --basics --dependencies --dnf"
+echo
+echo -e "${coloryellow}Repositório oficial do projeto:${nocolor}"
+echo "https://github.com/JediFonseca/post-install-scripts"
+echo
 }
 
 #-------------------------------------
@@ -356,9 +369,10 @@ echo "\"./fedora-kde-44-post-install.sh --dependencies\"."
 
 if [[ $# -eq 0 ]]; then
 
-    safety_checks
+    basic_dependencies
     internet_connection
     starting_message
+    sudo_alive
     dependencies_installation
     dnf_installation
     flatpak_installation
@@ -376,7 +390,8 @@ else
 
     for arg in "$@"; do
         case "$arg" in
-            --safety)       safety_checks ;;
+            --sudo-alive)   sudo_alive ;;
+            --basics)       basic_dependencies ;;
             --net)          internet_connection ;;
             --dependencies) dependencies_installation ;;
             --dnf)          dnf_installation ;;
