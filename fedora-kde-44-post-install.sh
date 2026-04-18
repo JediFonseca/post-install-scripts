@@ -327,7 +327,7 @@ echo -e "${colorblue}###################################################${nocolo
 echo
 echo -e "${coloryellow}Como usar esse script:${nocolor}"
 echo
-echo "Para executar o script por completo, basta rodar \"./fedora-kde-44-post-install-2.0.sh\"."
+echo "Para executar o script por completo, basta rodar \"./fedora-kde-44-post-install.sh\"."
 echo "Você também pode rodar etapas específicas de forma isolada."
 echo "Para isso, basta rodar o script com um (ou mais) dos parâmetros abaixo:"
 echo
@@ -343,7 +343,7 @@ echo "--remove"
 echo "--flatpak-per"
 echo "--help"
 echo
-echo -e "${coloryellow}Exemplo de execução com parâmertro:${nocolor}"
+echo -e "${coloryellow}Exemplo de execução com parâmetro:${nocolor}"
 echo
 echo "\"./fedora-kde-44-post-install.sh --dependencies\"."
 }
