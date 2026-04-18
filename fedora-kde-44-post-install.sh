@@ -114,7 +114,7 @@ echo -e "${coloryellow}\nVerificando a conexão com a internet...\n${nocolor}"
 ping -c 5 www.google.com.br
 if [ "$?" -eq "0" ];
 then
-      echo -e "${colorgreen}\nConexão com à internet funcionando normalmente. Aguarde...${nocolor}"
+      echo -e "${colorgreen}\nConexão com a internet funcionando normalmente. Aguarde...${nocolor}"
       sleep 5
 else
      echo -e "${colorred}\nERRO: Seu sistema não está conectado à internet.${nocolor}"
@@ -227,7 +227,9 @@ snap_installation () {
 echo -e "${coloryellow}Iniciando a instalação dos pacotes snap.${nocolor}"
 echo
 sudo snap refresh
-sudo snap install "${!snap_packages[@]}"
+for sname in "${!snap_packages[@]}"; do
+    sudo snap install "$sname"
+done
 }
 
 
