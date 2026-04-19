@@ -77,6 +77,21 @@ declare -A remove_packages=(
     ["plasma-discover"]="Plasma Discover"
     ["dragon"]="Dragon Player"
     ["firefox"]="Firefox"
+    ["libreoffice-*"]="LibreOffice"
+    ["elisa-player"]="Elisa Player"
+    ["akregator"]="Akregator"
+    ["kamoso"]="Kamoso"
+    ["kleopatra"]="Kleopatra"
+    ["kmahjongg"]="Kmahjongg"
+    ["kmines"]="Kmines"
+    ["kolourpaint"]="KolourPaint"
+    ["krdc"]="KRDC"
+    ["krfb"]="Krfb"
+    ["kpat"]="KPatience"
+    ["kjournald"]="Kjournald"
+    ["neochat"]="NeoChat"
+    ["qrca"]="Qrca"
+    ["skanpage"]="Skanpage"
 )
 
 #----------------
