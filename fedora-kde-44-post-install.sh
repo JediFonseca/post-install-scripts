@@ -9,8 +9,8 @@
 colorblue='\033[0;36m'  # Ciano - para títulos.
 colorgreen='\033[0;32m' # Verde - para mensagens de sucesso.
 coloryellow='\033[1;33m'   # Amarelo - para avisos.
-nocolor='\033[0m' # Reseta a cor para o padrão do terminal.
 colorred='\033[0;31m' # Erros
+nocolor='\033[0m' # Reseta a cor para o padrão do terminal.
 
 #----------------------
 # --- LISTAS/ARRAYS ---
@@ -68,6 +68,13 @@ declare -A appimages_downloads=(
     ["https://github.com/JediFonseca/mass_renamer/releases/download/mass_renamer-2.3.1-bugfix/mass_renamer-2.3.1-x86_64.AppImage"]="Mass Renamer"
 )
 
+declare -A scripts_downloads=(
+    ["https://raw.githubusercontent.com/JediFonseca/personal-scripts/main/myscripts"]="My Scripts"
+    ["https://raw.githubusercontent.com/JediFonseca/personal-scripts/main/request-vm-ip"]="Request VM IP"
+    ["https://raw.githubusercontent.com/JediFonseca/personal-scripts/main/rsync-go"]="Rsync Go"
+    ["https://raw.githubusercontent.com/JediFonseca/personal-scripts/main/fedoraup"]="Fedora Up"
+)
+
 declare -A remove_packages=(
     ["kmail"]="KMail"
     ["kaddressbook"]="KAddressBook"
@@ -97,6 +104,19 @@ declare -A remove_packages=(
 #----------------
 # --- FUNÇÕES ---
 #----------------
+
+# Função para baixar scripts e copiá-los para o diretório correto
+my_scripts () {
+echo -e "${coloryellow}Iniciando o download dos scripts pessoais...${nocolor}"
+echo
+mkdir -p "$HOME/.local/bin"
+for url in "${!scripts_downloads[@]}"; do
+    wget --show-progress -P "$HOME/.local/bin" "$url"
+done
+chmod +x "$HOME/.local/bin/"* &>/dev/null
+}
+
+
 
 #Função para manter o sudo autenticado
 sudo_alive () {
@@ -172,6 +192,9 @@ printf '%s, ' "${appimages_downloads[@]}" | sed 's/, $/./' | fold -s -w 80
 
 echo -e "${colorblue}\nDesinstalar os pacotes:${nocolor}"
 printf '%s, ' "${remove_packages[@]}" | sed 's/, $/./' | fold -s -w 80
+
+echo -e "${colorblue}\nBaixar e permitir a execução dos scripts pessoais:${nocolor}"
+printf '%s, ' "${scripts_downloads[@]}" | sed 's/, $/./' | fold -s -w 80
 
 echo -e "${colorblue}\nRealizar instalações e ajustes extras:${nocolor}"
 echo "Instalar o grupo \"multimedia\" e o pacote \"steam-devices\", além de conceder ao \"Mangohud\""
@@ -270,7 +293,7 @@ for url in "${!appimages_downloads[@]}"; do
     wget --show-progress -P "$HOME/Downloads/AppImages" "$url"
 done
 echo -e "${coloryellow}Tornando os AppImages executáveis...${nocolor}"
-chmod +x "$HOME/Downloads/AppImages/"*.AppImage 2>/dev/null
+chmod +x "$HOME/Downloads/AppImages/"*.AppImage &>/dev/null
 }
 
 
@@ -366,6 +389,7 @@ echo "--rpmi          #Instala os pacotes .rpm baixados."
 echo "--add           #Instala pacotes adicionais complementares, como o \"steam-devices\"."
 echo "--remove        #Desinstala os pacotes indicados na lista correspondente."
 echo "--flatpak-per   #Ajusta as permissões do Mangohud e do Gamescope em flatpak."
+echo "--myscripts     #Baixa e dá permissões de execução aos scripts pessoais."
 echo "--help          #Exibe esse texto de ajuda (bloco atual)."
 echo
 echo "As funções irão rodar na mesma ordem que os parâmetros forem inseridos no comando."
@@ -399,6 +423,7 @@ if [[ $# -eq 0 ]]; then
     rpm_installation
     additional_packages
     remove_packages_list
+    my_scripts
     flatpak_permissions
     echo
     echo -e "${colorgreen}Script finalizado! Recomenda-se reiniciar o sistema.${nocolor}"
@@ -420,6 +445,7 @@ else
             --add)          additional_packages ;;
             --remove)       remove_packages_list ;;
             --flatpak-per)  flatpak_permissions ;;
+            --myscripts)    my_scripts ;;
             --help)         help_section ;;
             *)
                 echo -e "${colorred}Opção inválida: $arg${nocolor}"
