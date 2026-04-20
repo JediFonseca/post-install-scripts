@@ -28,6 +28,10 @@ dest_music="$HOME/Músicas/Minhas Músicas"
 dest_images="$HOME/Imagens/Imagens (Arquivo)"
 dest_videos="$HOME/Vídeos/Vídeos (Arquivo)"
 
+# Arquivo de configuração do Strawberry
+strawlink="https://github.com/JediFonseca/strawberry/releases/download/1.2.18/strawberry.conf"
+strawpath="$HOME/.var/app/org.strawberrymusicplayer.strawberry/config/strawberry/"
+
 #----------------------
 # --- LISTAS/ARRAYS ---
 #----------------------
@@ -121,7 +125,8 @@ declare -A remove_packages=(
 # --- FUNÇÕES ---
 #----------------
 
-# Função para criar links simbólicos para as pastas do usuário
+# Função para criar links simbólicos para as pastas do usuário,
+# além de baixar o .conf do Strawberry para a pasta correta.
 my_folders () {
 echo -e "${coloryellow}Criando os links para as pastas do usuário...${nocolor}"
 echo
@@ -130,6 +135,10 @@ ln -sfn "$source_downloads" "$dest_downloads"
 ln -sfn "$source_music" "$dest_music"
 ln -sfn "$source_images" "$dest_images"
 ln -sfn "$source_videos" "$dest_videos"
+
+mkdir -p "$strawpath"
+wget -nc -P "$strawpath" "$strawlink"
+
 }
 
 
