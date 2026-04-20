@@ -5,6 +5,10 @@
 # Autor: Jedielson da Fonseca----------------------------------------
 #--------------------------------------------------------------------
 
+#------------------
+# --- VARIÁVEIS ---
+#------------------
+
 # Paleta de cores
 colorblue='\033[0;36m'  # Ciano - para títulos.
 colorgreen='\033[0;32m' # Verde - para mensagens de sucesso.
@@ -12,10 +16,7 @@ coloryellow='\033[1;33m'   # Amarelo - para avisos.
 colorred='\033[0;31m' # Erros
 nocolor='\033[0m' # Reseta a cor para o padrão do terminal.
 
-#------------------
-# --- VARIÁVEIS ---
-#------------------
-
+# Pastas do usuário para a criação de links simbólicos
 source_documents="/mnt/Dados/User/Documentos (Arquivo)"
 source_downloads="/mnt/Dados/User/Downloads (Arquivo)"
 source_music="/mnt/Músicas/Minhas Músicas"
