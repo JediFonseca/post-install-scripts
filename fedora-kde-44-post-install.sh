@@ -430,7 +430,7 @@ echo "--add           #Instala pacotes adicionais complementares, como o \"steam
 echo "--remove        #Desinstala os pacotes indicados na lista correspondente."
 echo "--flatpak-per   #Ajusta as permissões do Mangohud e do Gamescope em flatpak."
 echo "--myscripts     #Baixa e dá permissões de execução aos scripts pessoais."
-echo "--myfolders     #Cria os links simbólicos para as pastas do usuário."
+echo "--myfolders     #Cria links para pastas de biblioteca e baixa o .conf do Strawberry."
 echo
 echo "As funções irão rodar na mesma ordem que os parâmetros forem inseridos no comando."
 echo
