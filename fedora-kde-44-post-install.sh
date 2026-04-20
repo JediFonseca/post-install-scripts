@@ -72,6 +72,7 @@ declare -A flatpak_packages=(
     ["net.cozic.joplin_desktop"]="Joplin"
     ["org.freedesktop.Platform.VulkanLayer.gamescope"]="Gamescope"
     ["io.gitlab.librewolf-community"]="LibreWolf"
+    ["io.ente.auth"]="Ente Auth"
 )
 
 declare -A snap_packages=(
@@ -79,7 +80,6 @@ declare -A snap_packages=(
 )
 
 declare -A rpm_downloads=(
-    ["https://github.com/ente-io/ente/releases/download/auth-v4.4.17/ente-auth-v4.4.17-x86_64.rpm"]="Ente Auth"
     ["https://proton.me/download/pass/linux/proton-pass-1.36.0-1.x86_64.rpm"]="Proton Pass"
     ["https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-3/appimagelauncher_3.0.0-beta-2-gha287.96cb937_x86_64.rpm"]="AppImageLauncher"
 )
