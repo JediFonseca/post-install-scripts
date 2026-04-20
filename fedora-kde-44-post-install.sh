@@ -12,6 +12,21 @@ coloryellow='\033[1;33m'   # Amarelo - para avisos.
 colorred='\033[0;31m' # Erros
 nocolor='\033[0m' # Reseta a cor para o padrão do terminal.
 
+#------------------
+# --- VARIÁVEIS ---
+#------------------
+
+source_documents="/mnt/Dados/User/Documentos (Arquivo)"
+source_downloads="/mnt/Dados/User/Downloads (Arquivo)"
+source_music="/mnt/Músicas/Minhas Músicas"
+source_images="/mnt/Dados/User/Imagens (Arquivo)"
+source_videos="/mnt/Dados/User/Vídeos (Arquivo)"
+dest_documents="$HOME/Documentos/Documentos (Arquivo)"
+dest_downloads="$HOME/Downloads/Downloads (Arquivo)"
+dest_music="$HOME/Músicas/Minhas Músicas"
+dest_images="$HOME/Imagens/Imagens (Arquivo)"
+dest_videos="$HOME/Vídeos/Vídeos (Arquivo)"
+
 #----------------------
 # --- LISTAS/ARRAYS ---
 #----------------------
@@ -105,13 +120,26 @@ declare -A remove_packages=(
 # --- FUNÇÕES ---
 #----------------
 
+# Função para criar links simbólicos para as pastas do usuário
+my_folders () {
+echo -e "${coloryellow}Criando os links para as pastas do usuário...${nocolor}"
+echo
+ln -sfn "$source_documents" "$dest_documents"
+ln -sfn "$source_downloads" "$dest_downloads"
+ln -sfn "$source_music" "$dest_music"
+ln -sfn "$source_images" "$dest_images"
+ln -sfn "$source_videos" "$dest_videos"
+}
+
+
+
 # Função para baixar scripts e copiá-los para o diretório correto
 my_scripts () {
 echo -e "${coloryellow}Iniciando o download dos scripts pessoais...${nocolor}"
 echo
 mkdir -p "$HOME/.local/bin"
-for url in "${!scripts_downloads[@]}"; do
-    wget -N -P "$HOME/.local/bin" "$url"
+for url1 in "${!scripts_downloads[@]}"; do
+    wget -N -P "$HOME/.local/bin" "$url1"
 done
 chmod +x "$HOME/.local/bin/"* &>/dev/null
 }
@@ -196,6 +224,9 @@ printf '%s, ' "${remove_packages[@]}" | sed 's/, $/./' | fold -s -w 80
 echo -e "${colorblue}\nBaixar e permitir a execução dos scripts pessoais:${nocolor}"
 printf '%s, ' "${scripts_downloads[@]}" | sed 's/, $/./' | fold -s -w 80
 
+echo -e "${colorblue}\nCriar os links simbólicos para as pastas:${nocolor}"
+echo "Documentos (Arquivo), Downloads (Arquivo), Minhas Músicas, Imagens (Arquivo) e Vídeos (Arquivo)."
+
 echo -e "${colorblue}\nRealizar instalações e ajustes extras:${nocolor}"
 echo "Instalar o grupo \"multimedia\" e o pacote \"steam-devices\", além de conceder ao \"Mangohud\""
 echo "e ao \"Gamescope\" em Flatpak permissões para acessar a partição dos jogos."
@@ -277,8 +308,8 @@ rpm_downloads_list () {
 echo -e "${coloryellow}Iniciando o download dos pacotes .rpm...${nocolor}"
 echo
 mkdir -p "$HOME/Downloads/RPMs"
-for url in "${!rpm_downloads[@]}"; do
-    wget --show-progress -P "$HOME/Downloads/RPMs" "$url"
+for url2 in "${!rpm_downloads[@]}"; do
+    wget --show-progress -P "$HOME/Downloads/RPMs" "$url2"
 done
 }
 
@@ -289,8 +320,8 @@ appimage_downloads_list () {
 echo -e "${coloryellow}Iniciando o download dos pacotes AppImage...${nocolor}"
 echo
 mkdir -p "$HOME/Downloads/AppImages"
-for url in "${!appimages_downloads[@]}"; do
-    wget --show-progress -P "$HOME/Downloads/AppImages" "$url"
+for url3 in "${!appimages_downloads[@]}"; do
+    wget --show-progress -P "$HOME/Downloads/AppImages" "$url3"
 done
 echo -e "${coloryellow}Tornando os AppImages executáveis...${nocolor}"
 chmod +x "$HOME/Downloads/AppImages/"*.AppImage &>/dev/null
@@ -390,7 +421,7 @@ echo "--add           #Instala pacotes adicionais complementares, como o \"steam
 echo "--remove        #Desinstala os pacotes indicados na lista correspondente."
 echo "--flatpak-per   #Ajusta as permissões do Mangohud e do Gamescope em flatpak."
 echo "--myscripts     #Baixa e dá permissões de execução aos scripts pessoais."
-echo "--help          #Exibe esse texto de ajuda (bloco atual)."
+echo "--myfolders     #Cria os links simbólicos para as pastas do usuário."
 echo
 echo "As funções irão rodar na mesma ordem que os parâmetros forem inseridos no comando."
 echo
@@ -424,6 +455,7 @@ if [[ $# -eq 0 ]]; then
     additional_packages
     remove_packages_list
     my_scripts
+    my_folders
     flatpak_permissions
     echo
     echo -e "${colorgreen}Script finalizado! Recomenda-se reiniciar o sistema.${nocolor}"
@@ -446,6 +478,7 @@ else
             --remove)       remove_packages_list ;;
             --flatpak-per)  flatpak_permissions ;;
             --myscripts)    my_scripts ;;
+            --myfolders)    my_folders ;;
             --help)         help_section ;;
             *)
                 echo -e "${colorred}Opção inválida: $arg${nocolor}"
