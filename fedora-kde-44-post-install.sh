@@ -138,7 +138,6 @@ ln -sfn "$source_videos" "$dest_videos"
 
 mkdir -p "$strawpath"
 wget -nc -P "$strawpath" "$strawlink"
-
 }
 
 
