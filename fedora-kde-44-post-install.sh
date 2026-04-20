@@ -111,7 +111,7 @@ echo -e "${coloryellow}Iniciando o download dos scripts pessoais...${nocolor}"
 echo
 mkdir -p "$HOME/.local/bin"
 for url in "${!scripts_downloads[@]}"; do
-    wget --show-progress -P "$HOME/.local/bin" "$url"
+    wget -N -P "$HOME/.local/bin" "$url"
 done
 chmod +x "$HOME/.local/bin/"* &>/dev/null
 }
