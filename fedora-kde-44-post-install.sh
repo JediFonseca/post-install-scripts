@@ -137,7 +137,7 @@ ln -sfn "$source_images" "$dest_images"
 ln -sfn "$source_videos" "$dest_videos"
 
 mkdir -p "$strawpath"
-wget -nc -P "$strawpath" "$strawlink"
+wget -nc -P "$strawpath" "$strawlink" &>/dev/null
 }
 
 
