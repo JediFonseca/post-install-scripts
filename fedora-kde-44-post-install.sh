@@ -142,6 +142,7 @@ declare -A remove_packages=(
 # --- FUNÇÕES ---
 #----------------
 
+# Função para baixar e copiar arquivos de configuração personalizados para as pastas apropriadas
 config_files () {
 echo -e "${coloryellow}Aplicando configurações personalizadas (Dolphin, Kate e Strawberry)...${nocolor}"
 
@@ -158,7 +159,7 @@ wget -nc -P "$strawdir" "$strawlink" &>/dev/null # Utiliza "-nc -P": só baixa o
 
 
 
-# Função para criar links simbólicos para as pastas do usuário,
+# Função para criar links simbólicos para as pastas do usuário
 my_folders () {
 echo -e "${coloryellow}Criando os links para as pastas do usuário...${nocolor}"
 echo
@@ -196,12 +197,12 @@ trap "kill $sudo_pid" EXIT
 
 # Função com as checagens de segurança
 basic_dependencies () {
-command -v dnf >/dev/null || exit 1
-command -v wget >/dev/null || exit 2
-command -v mkdir >/dev/null || exit 3
-command -v ping >/dev/null || exit 4
-command -v chmod >/dev/null || exit 5
-command -v flatpak >/dev/null || exit 6
+command -v dnf &>/dev/null || exit 1
+command -v wget &>/dev/null || exit 2
+command -v mkdir &>/dev/null || exit 3
+command -v ping &>/dev/null || exit 4
+command -v chmod &>/dev/null || exit 5
+command -v flatpak &>/dev/null || exit 6
 }
 
 
@@ -291,7 +292,7 @@ echo -e "${coloryellow}Ativando serviço do Snapd...${nocolor}"
 sudo systemctl enable --now snapd.socket
 sudo snap wait system seed.loaded
 
-if command -v snap &> /dev/null; then
+if command -v snap &>/dev/null; then
   echo -e "${colorgreen}Snap instalado com sucesso!${nocolor}"
 else
   echo -e "${colorred}\nErro: A instalação/ativação do comando \"snap\" falhou!${nocolor}"
