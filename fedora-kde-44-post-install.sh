@@ -300,7 +300,7 @@ else
 fi
 
 echo -e "${coloryellow}Adicionando o repositório \"Flathub\"...${nocolor}"
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 echo -e "${coloryellow}Adicionando os repositórios \"free\" e \"non-free\" do \"RPM Fusion\".${nocolor}"
 sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
@@ -324,7 +324,7 @@ sudo dnf install -y "${!dnf_packages[@]}"
 flatpak_installation () {
 echo -e "${coloryellow}Iniciando a instalação dos pacotes flatpak${nocolor}"
 echo
-flatpak install -y --noninteractive flathub "${!flatpak_packages[@]}"
+flatpak install --user -y --noninteractive flathub "${!flatpak_packages[@]}"
 }
 
 
