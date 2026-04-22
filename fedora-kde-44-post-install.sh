@@ -233,7 +233,7 @@ echo -e "${colorblue}###################################################${nocolo
 echo -e "${colorblue}##   Script de pós instalação do Fedora KDE 44   ##${nocolor}"
 echo -e "${colorblue}###################################################${nocolor}"
 echo
-echo -e "${colorred}ATENÇÃO: Verifique os links antes de executar o script.${nocolor}"
+echo -e "${colorred}ATENÇÃO: Verifique os links e as variáveis de diretórios/arquivos antes de executar o script.${nocolor}"
 echo
 echo -e "${coloryellow}Ao ser executado, este script irá:${nocolor}"
 
