@@ -16,6 +16,10 @@ coloryellow='\033[1;33m'   # Amarelo - para avisos.
 colorred='\033[0;31m' # Erros
 nocolor='\033[0m' # Reseta a cor para o padrão do terminal.
 
+# Ponto de montagem das partições extras
+gamesdata="/mnt/Dados/"
+mymusic="/mnt/Músicas/"
+
 # Pastas do usuário para a criação de links simbólicos
 source_documents="/mnt/Dados/User/Documentos (Arquivo)"
 source_downloads="/mnt/Dados/User/Downloads (Arquivo)"
@@ -28,9 +32,22 @@ dest_music="$HOME/Músicas/Minhas Músicas"
 dest_images="$HOME/Imagens/Imagens (Arquivo)"
 dest_videos="$HOME/Vídeos/Vídeos (Arquivo)"
 
-# Arquivo de configuração do Strawberry
+# Links para os arquivos de configuração
 strawlink="https://raw.githubusercontent.com/JediFonseca/config-files/main/strawberry.conf"
-strawpath="$HOME/.var/app/org.strawberrymusicplayer.strawberry/config/strawberry/"
+katerclink="https://raw.githubusercontent.com/JediFonseca/config-files/refs/heads/main/katerc"
+dolphinrclink="https://raw.githubusercontent.com/JediFonseca/config-files/refs/heads/main/dolphinrc"
+dolphinuilink="https://raw.githubusercontent.com/JediFonseca/config-files/refs/heads/main/dolphinui.rc"
+
+# Caminhos para os arquivos de configuração
+katercpath="$HOME/.config/katerc"
+dolphinrcpath="$HOME/.config/dolphinrc"
+dolphinuipath="$HOME/.local/share/kxmlgui5/dolphin/dolphinui.rc"
+
+# Caminhos para os diretórios/pastas onde os arquivos de configuração se encontram
+katercdir="$HOME/.config/"
+dolphinrcdir="$HOME/.config/"
+dolphinuidir="$HOME/.local/share/kxmlgui5/dolphin/"
+strawdir="$HOME/.var/app/org.strawberrymusicplayer.strawberry/config/strawberry/"
 
 #----------------------
 # --- LISTAS/ARRAYS ---
@@ -125,8 +142,23 @@ declare -A remove_packages=(
 # --- FUNÇÕES ---
 #----------------
 
+config_files () {
+echo -e "${coloryellow}Aplicando configurações personalizadas (Dolphin, Kate e Strawberry)...${nocolor}"
+
+mkdir -p "$katercdir"
+mkdir -p "$dolphinrcdir"
+mkdir -p "$dolphinuidir"
+mkdir -p "$strawdir"
+
+wget -q -O "$katercpath" "$katerclink" &>/dev/null  # Utiliza "-O": sobrescreve o arquivo local com o remoto
+wget -q -O "$dolphinrcpath" "$dolphinrclink" &>/dev/null
+wget -q -O "$dolphinuipath" "$dolphinuilink" &>/dev/null
+wget -nc -P "$strawdir" "$strawlink" &>/dev/null # Utiliza "-nc -P": só baixa o arquivo remoto se o local não existir
+}
+
+
+
 # Função para criar links simbólicos para as pastas do usuário,
-# além de baixar o .conf do Strawberry para a pasta correta.
 my_folders () {
 echo -e "${coloryellow}Criando os links para as pastas do usuário...${nocolor}"
 echo
@@ -135,9 +167,6 @@ ln -sfn "$source_downloads" "$dest_downloads"
 ln -sfn "$source_music" "$dest_music"
 ln -sfn "$source_images" "$dest_images"
 ln -sfn "$source_videos" "$dest_videos"
-
-mkdir -p "$strawpath"
-wget -nc -P "$strawpath" "$strawlink" &>/dev/null
 }
 
 
@@ -367,32 +396,21 @@ sudo dnf autoremove -y
 
 # Função que concede permissões para que o Mangohud e o Gamescope em flatpak possam acessar a partição de jogos
 flatpak_permissions () {
-# Entrada de dados interativa.
-# O loop vai rodar enquanto qualquer uma das variáveis estiver vazia.
-while [[ -z "$gamesdata" || ! -d "$gamesdata" ]]; do
-
-    echo -e "${colorred}--- Entrada de Dados (Campos Obrigatórios) ---${nocolor}"
-    echo ""
-    echo -e "${coloryellow}Definindo permissões para as versões em flatpak do mangohud e do gamescope:${nocolor}"
-    echo -e "${coloryellow}Informe o caminho da pasta onde a partição de Jogos/Dados está montada.${nocolor}"
-    echo -e "${coloryellow}Se possível, evite o uso de espaços no caminho do diretório.${nocolor}"
-    read -r -p "Caminho do diretório: " gamesdata
-    # Corrige "~/" para "/home/nomedousuario" para evitar erros na execução
-    gamesdata="${gamesdata/#\~/$HOME}"
-
-    if [[ -z "$gamesdata" || ! -d "$gamesdata" ]]; then
-        echo -e "\n${colorred}ERRO: informe um diretório válido!${nocolor}\n"
-    fi
-done
-
 # Feedback para o usuário sobre as variáveis que foram definidas.
-echo -e "\n${colorgreen}Variáveis definidas com sucesso!${nocolor}\n"
+echo -e "\n${coloryellow}Verifique os caminhos para as partições de dados/jogos e músicas.${nocolor}\n"
 echo -e "A partição de Jogos/Dados está montada em:${coloryellow} $gamesdata${nocolor}."
-
-echo ""
+echo -e "A partição de Músicas está montada em:${coloryellow} $mymusic${nocolor}."
+echo
+echo "Se os caminhos estiverem incorretos, ajuste os valores das suas respectivas variáveis no início do script."
+echo
 echo -e -n "${coloryellow}Pressione ENTER para aplicar as permissões ou CTRL+C para cancelar.${nocolor}"
 read -r
 
+# Concede permissões para que todos os apps em flatpak possam acessar as partições de jogos/dados e de músicas
+flatpak override --user --filesystem="$gamesdata:rw" --filesystem="$mymusic:rw"
+
+# Concede permissões de acesso para as partições de jogos/dados e de músicas ao Mangohud e ao Gamescope,
+# pois esses softwares são extenções e o comando acima nem sempre funciona para eles.
 flatpak override --user --filesystem="$gamesdata:rw" org.freedesktop.Platform.VulkanLayer.MangoHud
 flatpak override --user --filesystem="$gamesdata:rw" org.freedesktop.Platform.VulkanLayer.gamescope
 
@@ -430,7 +448,8 @@ echo "--add           #Instala pacotes adicionais complementares, como o \"steam
 echo "--remove        #Desinstala os pacotes indicados na lista correspondente."
 echo "--flatpak-per   #Ajusta as permissões do Mangohud e do Gamescope em flatpak."
 echo "--myscripts     #Baixa e dá permissões de execução aos scripts pessoais."
-echo "--myfolders     #Cria links para pastas de biblioteca e baixa o .conf do Strawberry."
+echo "--myfolders     #Cria links para pastas de biblioteca."
+echo "--config-files  #Instala arquivos de configuração pessoais para o Kate, Dolphin e o Strawberry."
 echo
 echo "As funções irão rodar na mesma ordem que os parâmetros forem inseridos no comando."
 echo
@@ -465,6 +484,7 @@ if [[ $# -eq 0 ]]; then
     remove_packages_list
     my_scripts
     my_folders
+    config_files
     flatpak_permissions
     echo
     echo -e "${colorgreen}Script finalizado! Recomenda-se reiniciar o sistema.${nocolor}"
@@ -489,6 +509,7 @@ else
             --myscripts)    my_scripts ;;
             --myfolders)    my_folders ;;
             --help)         help_section ;;
+            --config-files) config_files ;;
             *)
                 echo -e "${colorred}Opção inválida: $arg${nocolor}"
                 exit 8
