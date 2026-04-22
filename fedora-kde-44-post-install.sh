@@ -110,6 +110,7 @@ declare -A scripts_downloads=(
     ["https://raw.githubusercontent.com/JediFonseca/personal-scripts/main/request-vm-ip"]="Request VM IP"
     ["https://raw.githubusercontent.com/JediFonseca/personal-scripts/main/rsync-go"]="Rsync Go"
     ["https://raw.githubusercontent.com/JediFonseca/personal-scripts/main/fedoraup"]="Fedora Up"
+    ["https://raw.githubusercontent.com/JediFonseca/pc-data/refs/heads/main/pcdata.sh"]="PC Data"
 )
 
 declare -A remove_packages=(
@@ -257,6 +258,10 @@ printf '%s, ' "${rpm_downloads[@]}" | sed 's/, $/./' | fold -s -w 80
 echo -e "${colorblue}\nBaixar e permitir a execução dos AppImages:${nocolor}"
 printf '%s, ' "${appimages_downloads[@]}" | sed 's/, $/./' | fold -s -w 80
 
+echo -e "${colorblue}\nInstalar os seguintes pacotes complementares:${nocolor}"
+echo "- \"steam-devices\": para complementar a instalação da Steam."
+echo "- Grupo \"multimedia\": para auxiliar na reprodução de conteúdos multimídia."
+
 echo -e "${colorblue}\nDesinstalar os pacotes:${nocolor}"
 printf '%s, ' "${remove_packages[@]}" | sed 's/, $/./' | fold -s -w 80
 
@@ -266,9 +271,11 @@ printf '%s, ' "${scripts_downloads[@]}" | sed 's/, $/./' | fold -s -w 80
 echo -e "${colorblue}\nCriar os links simbólicos para as pastas:${nocolor}"
 echo "Documentos (Arquivo), Downloads (Arquivo), Minhas Músicas, Imagens (Arquivo) e Vídeos (Arquivo)."
 
-echo -e "${colorblue}\nRealizar instalações e ajustes extras:${nocolor}"
-echo "Instalar o grupo \"multimedia\" e o pacote \"steam-devices\", além de conceder ao \"Mangohud\""
-echo "e ao \"Gamescope\" em Flatpak permissões para acessar a partição dos jogos."
+echo -e "${colorblue}\nBaixar e copiar arquivos de configuração para os apps:${nocolor}"
+echo "Kate, Dolphin e Strawberry."
+
+echo -e "${colorblue}\nPermissões para flatpaks:${nocolor}"
+echo "Conceder permissões necessárias para que os flatpaks possam acessar as partições extras."
 
 echo -e "${coloryellow}\nEsse script foi pensado para ser executado apenas em instalações limpas do Fedora KDE${nocolor}"
 echo -e "${coloryellow}após o sistema já ter sido totalmente atualizado e reiniciado.${nocolor}"
