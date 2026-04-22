@@ -29,7 +29,7 @@ dest_images="$HOME/Imagens/Imagens (Arquivo)"
 dest_videos="$HOME/Vídeos/Vídeos (Arquivo)"
 
 # Arquivo de configuração do Strawberry
-strawlink="https://github.com/JediFonseca/strawberry/releases/download/1.2.18/strawberry.conf"
+strawlink="https://raw.githubusercontent.com/JediFonseca/config-files/main/strawberry.conf"
 strawpath="$HOME/.var/app/org.strawberrymusicplayer.strawberry/config/strawberry/"
 
 #----------------------
