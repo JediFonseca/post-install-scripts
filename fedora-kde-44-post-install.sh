@@ -231,9 +231,7 @@ fi
 starting_message () {
 clear
 
-echo -e "${colorblue}###################################################${nocolor}"
-echo -e "${colorblue}##   Script de pós instalação do Fedora KDE 44   ##${nocolor}"
-echo -e "${colorblue}###################################################${nocolor}"
+echo -e "${colorblue}---------- Script de pós instalação do Fedora KDE 44 ----------${nocolor}"
 echo
 echo -e "${colorred}ATENÇÃO: Verifique os links e as variáveis de diretórios/arquivos antes de executar o script.${nocolor}"
 echo
@@ -262,7 +260,7 @@ echo -e "${colorblue}\nInstalar os seguintes pacotes complementares:${nocolor}"
 echo "- \"steam-devices\": para complementar a instalação da Steam."
 echo "- Grupo \"multimedia\": para auxiliar na reprodução de conteúdos multimídia."
 
-echo -e "${colorblue}\nDesinstalar os pacotes:${nocolor}"
+echo -e "${colorblue}Desinstalar os pacotes:${nocolor}"
 printf '%s, ' "${remove_packages[@]}" | sed 's/, $/./' | fold -s -w 80
 
 echo -e "${colorblue}\nBaixar e permitir a execução dos scripts pessoais:${nocolor}"
@@ -271,16 +269,15 @@ printf '%s, ' "${scripts_downloads[@]}" | sed 's/, $/./' | fold -s -w 80
 echo -e "${colorblue}\nCriar os links simbólicos para as pastas:${nocolor}"
 echo "Documentos (Arquivo), Downloads (Arquivo), Minhas Músicas, Imagens (Arquivo) e Vídeos (Arquivo)."
 
-echo -e "${colorblue}\nBaixar e copiar arquivos de configuração para os apps:${nocolor}"
+echo -e "${colorblue}Baixar e copiar arquivos de configuração para os apps:${nocolor}"
 echo "Kate, Dolphin e Strawberry."
 
-echo -e "${colorblue}\nPermissões para flatpaks:${nocolor}"
+echo -e "${colorblue}Permissões para flatpaks:${nocolor}"
 echo "Conceder permissões necessárias para que os flatpaks possam acessar as partições extras."
 
 echo -e "${coloryellow}\nEsse script foi pensado para ser executado apenas em instalações limpas do Fedora KDE${nocolor}"
 echo -e "${coloryellow}após o sistema já ter sido totalmente atualizado e reiniciado.${nocolor}"
-
-echo -e "\nPara ajuda e mais informações rode: ${colorblue}\"./fedora-kde-44-post-install.sh --help\"${nocolor}."
+echo -e "Para ajuda e mais informações rode: ${colorblue}\"./fedora-kde-44-post-install.sh --help\"${nocolor}."
 
 echo -e -n "${coloryellow}\nPressione ENTER para iniciar a execução do script ou CTRL+C para cancelar.${nocolor}"
 read -r
@@ -432,9 +429,7 @@ help_section () {
 
 clear
 
-echo -e "${colorblue}###################################################${nocolor}"
-echo -e "${colorblue}##   Script de pós instalação do Fedora KDE 44   ##${nocolor}"
-echo -e "${colorblue}###################################################${nocolor}"
+echo -e "${colorblue}---------- Script de pós instalação do Fedora KDE 44 ----------${nocolor}"
 echo
 echo -e "${coloryellow}Como usar esse script:${nocolor}"
 echo
