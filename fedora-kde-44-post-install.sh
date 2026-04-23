@@ -62,6 +62,7 @@ declare -A dnf_packages=(
     ["audacity"]="Audacity"
     ["libratbag-ratbagd"]="Ratbagd"
     ["piper"]="Piper"
+    ["gnome-boxes"]="GNOME Boxes"
 )
 
 declare -A flatpak_packages=(
@@ -79,7 +80,6 @@ declare -A flatpak_packages=(
     ["org.freedesktop.Platform.VulkanLayer.MangoHud"]="MangoHud"
     ["com.github.Flacon"]="Flacon"
     ["org.qbittorrent.qBittorrent"]="qBittorrent"
-    ["org.gnome.Boxes"]="GNOME Boxes"
     ["org.strawberrymusicplayer.strawberry"]="Strawberry"
     ["com.valvesoftware.Steam"]="Steam"
     ["org.hydrogenmusic.Hydrogen"]="Hydrogen"
@@ -275,7 +275,7 @@ echo "Kate, Dolphin e Strawberry."
 echo -e "${colorblue}Permissões para flatpaks:${nocolor}"
 echo "Conceder permissões necessárias para que os flatpaks possam acessar as partições extras."
 
-echo -e "${coloryellow}\nEsse script foi pensado para ser executado apenas em instalações limpas do Fedora KDE${nocolor}"
+echo -e "${coloryellow}\nEsse script foi pensado para ser executado apenas em instalações limpas do Fedora 44 KDE${nocolor}"
 echo -e "${coloryellow}após o sistema já ter sido totalmente atualizado e reiniciado.${nocolor}"
 echo -e "Para ajuda e mais informações rode: ${colorblue}\"./fedora-kde-44-post-install.sh --help\"${nocolor}."
 
