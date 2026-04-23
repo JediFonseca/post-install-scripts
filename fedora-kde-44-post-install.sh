@@ -63,6 +63,8 @@ declare -A dnf_packages=(
     ["libratbag-ratbagd"]="Ratbagd"
     ["piper"]="Piper"
     ["gnome-boxes"]="GNOME Boxes"
+    ["kate"]="Kate"
+    ["gamescope"]="GameScope"
 )
 
 declare -A flatpak_packages=(
@@ -97,7 +99,7 @@ declare -A snap_packages=(
 )
 
 declare -A rpm_downloads=(
-    ["https://proton.me/download/pass/linux/proton-pass-1.36.0-1.x86_64.rpm"]="Proton Pass"
+    ["https://proton.me/download/pass/linux/proton-pass-1.36.1-1.x86_64.rpm"]="Proton Pass"
     ["https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-3/appimagelauncher_3.0.0-beta-2-gha287.96cb937_x86_64.rpm"]="AppImageLauncher"
 )
 
@@ -247,8 +249,8 @@ printf '%s, ' "${dnf_packages[@]}" | sed 's/, $/./' | fold -s -w 80
 echo -e "${colorblue}\nInstalar via Flatpak:${nocolor}"
 printf '%s, ' "${flatpak_packages[@]}" | sed 's/, $/./' | fold -s -w 80
 
-echo -e "${colorblue}\nInstalar via Snap:${nocolor}"
-printf '%s, ' "${snap_packages[@]}" | sed 's/, $/./' | fold -s -w 80
+#echo -e "${colorblue}\nInstalar via Snap:${nocolor}"
+#printf '%s, ' "${snap_packages[@]}" | sed 's/, $/./' | fold -s -w 80
 
 echo -e "${colorblue}\nBaixar e instalar via .rpm:${nocolor}"
 printf '%s, ' "${rpm_downloads[@]}" | sed 's/, $/./' | fold -s -w 80
@@ -329,7 +331,7 @@ sudo dnf install -y "${!dnf_packages[@]}"
 flatpak_installation () {
 echo -e "${coloryellow}Iniciando a instalação dos pacotes flatpak${nocolor}"
 echo
-flatpak install --user -y --noninteractive flathub "${!flatpak_packages[@]}"
+flatpak install --user -y flathub "${!flatpak_packages[@]}"
 }
 
 
@@ -479,7 +481,7 @@ if [[ $# -eq 0 ]]; then
     dependencies_installation
     dnf_installation
     flatpak_installation
-    snap_installation
+#   snap_installation
     rpm_downloads_list
     appimage_downloads_list
     rpm_installation
