@@ -176,6 +176,7 @@ if ($args.Count -eq 0) {
     # Roda o script completo
     initial_message
     install_apps
+	vcr_install
     download_exes
 	context_menu
 	final_message
@@ -186,6 +187,7 @@ else {
     switch ($args) {
         "--init"  { initial_message }
         "--apps"  { install_apps }
+		"--vcr"   { vcr_install }
         "--exes"  { download_exes }
         "--menu"  { context_menu }
         "--final" { final_message }
