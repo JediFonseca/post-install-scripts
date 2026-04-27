@@ -4,50 +4,46 @@
 # Comando para habilitar a execução de scripts:
 # Set-ExecutionPolicy RemoteSigned
 
-#------------------------------------------
-# ---Pacotes para instalação e downloads---
-#------------------------------------------
+#----------------------
+# --- ARRAYS/LISTAS ---
+#----------------------
 
 # Pacotes para serem instalados com o winget:
-$apps = @(
+$apps = @{
     # Launchers
-    "Valve.Steam",
-    "EpicGames.EpicGamesLauncher",
-    "ElectronicArts.EADesktop",
-    "Ubisoft.Connect",
-    "GOG.Galaxy",
+    "Valve.Steam" = "Steam"
+    "ElectronicArts.EADesktop" = "EA App"
+    "GOG.Galaxy" = "GOG Galaxy"
 
     # Utilitários
-    "Joplin.Joplin",
-    "Guru3D.Afterburner",
-    "VideoLAN.VLC",
-    "LibreWolf.LibreWolf",
-    "Audacity.Audacity",
-    "LocalSend.LocalSend",
-    "7zip.7zip",
-    "GIMP.GIMP.3",
-    "Upscayl.Upscayl",
-    "qBittorrent.qBittorrent",
-    "Hydrogen-Music.Hydrogen",
-    "Baidu.TeraBox",
-    "Notepad++.Notepad++",
-    "9PGDP7TDQVX7", # Media Downloader
-    "Rclone.Rclone",
-    "ente-io.auth-desktop",
-    "CPUID.CPU-Z",
-    "TechPowerUp.GPU-Z",
-    "Oracle.VirtualBox",
-    "Google.Chrome",
+    "Joplin.Joplin" = "Joplin"
+    "Guru3D.Afterburner" = "MSI Afterburner"
+    "VideoLAN.VLC" = "VLC Media Player"
+    "LibreWolf.LibreWolf" = "Librewolf"
+    "Audacity.Audacity" = "Audacity"
+    "LocalSend.LocalSend" = "LocalSend"
+    "7zip.7zip" = "7zip"
+    "GIMP.GIMP.3" = "Gimp"
+    "Upscayl.Upscayl" = "Upscayl"
+    "qBittorrent.qBittorrent" = "qBittorrent"
+    "Hydrogen-Music.Hydrogen" = "Hydrogen Drum Machine"
+    "Notepad++.Notepad++" = "Notepad++"
+    "9PGDP7TDQVX7" = "Media Downloader"
+    "ente-io.auth-desktop" = "Ente Auth"
+    "CPUID.CPU-Z" = "CPU-Z"
+    "TechPowerUp.GPU-Z" = "GPU-Z"
+    "Oracle.VirtualBox" = "VirtualBox"
+    "Google.Chrome" = "Google Chrome"
 
     # Proton Apps
-    "Proton.ProtonPass",
-    "Proton.ProtonVPN",
+    "Proton.ProtonPass" = "Proton Pass"
+    "Proton.ProtonVPN" = "Proton VPN"
+}
 
-    # Games and apps dependencies
+$vcredists = @(
     "Microsoft.VCRedist.2005.x86",
     "Microsoft.VCRedist.2005.x64",
     "Microsoft.VCRedist.2008.x86",
-    "Microsoft.VCRedist.2008.x64",
     "Microsoft.VCRedist.2010.x86",
     "Microsoft.VCRedist.2010.x64",
     "Microsoft.VCRedist.2012.x86",
@@ -59,97 +55,143 @@ $apps = @(
 )
 
 # Links de download:
-$downloads = @(
-    "https://gamedownloads.rockstargames.com/public/installer/Rockstar-Games-Launcher.exe",
-    "https://github.com/JediFonseca/strawberry/releases/download/1.2.18/StrawberrySetup-1.2.18.3.g7bf1bc0c-msvc-x64.exe",
-    "https://www.x360ce.com/files/x360ce.zip"
-    "https://www.remotemouse.net/downloads/RemoteMouse.exe"
-    "https://download.microsoft.com/download/1/7/1/1718ccc4-6315-4d8e-9543-8e28a4e18c4c/dxwebsetup.exe"
-)
-
-#-----------------------
-# ---Mensagem inicial---
-#-----------------------
-
-Write-Host "################################################" -ForegroundColor Cyan
-Write-Host "##   Script de pós instalação do Windows 11   ##" -ForegroundColor Cyan
-Write-Host "################################################" -ForegroundColor Cyan
-Write-Host ""
-Write-Host "IMPORTANTE:" -ForegroundColor Red
-Write-Host "Antes de executar, leia as instruções no cabeçalho do script e verifique"
-Write-Host "os links de download. SEMPRE execute este script como administrador."
-Write-Host ""
-Write-Host "Ao ser executado, este script irá:" -ForegroundColor Yellow
-Write-Host ""
-Write-Host "1. Instalar, com o winget, os pacotes: Steam, Epic Games Launcher, EA App, Ubisoft Connect, Proton VPN"
-Write-Host "   GOG Galaxy, Joplin, VLC, Librewolf, MSI Afterburner, Audacity, Localsend, 7zip, Gimp,"
-Write-Host "   Upscayl, qBittorrent, Hydrogen, Notepad++, Terabox, Ente Auth, VirtualBox,"
-Write-Host "   rclone, CPU-Z, Google Chrome, GPU-Z e Media Downloader."
-Write-Host "2. Instalar os Microsoft Virtual C++ Redistributable de 32 e 64 bits nas versões de"
-Write-Host "   2005, 2008, 2010, 2012, 2013 e 2015+."
-Write-Host "3. Baixar os executáveis dos apps: Remote Mouse, Rockstar Launcher, DirectX,"
-Write-Host "   Strawberry Music Player e x360ce."
-Write-Host "4. Habilitar o menu de contexto clássico e reiniciar o processo explorer.exe."
-Write-Host "5. (Opcional) Abrir o navegador padrão na página de download do driver da RX580."
-Write-Host ""
-Write-Host "Pressione ENTER para iniciar a execução do script ou CTRL+C para cancelar." -ForegroundColor Yellow
-Read-Host
-
-#------------------------------------------
-# ---Instalação dos pacotes com o winget---
-#------------------------------------------
-
-Write-Host "Instalando os apps com o winget..." -ForegroundColor Yellow
-
-foreach ($app in $apps) {
-    winget install --id $app --accept-package-agreements --accept-source-agreements --silent
+$downloads = @{
+    "https://github.com/JediFonseca/strawberry/releases/download/1.2.19/StrawberrySetup-1.2.19.18.g91ad44c1-msvc-x64.exe" = "Strawberry Music Player"
+    "https://www.remotemouse.net/downloads/RemoteMouse.exe" = "Remote Mouse"
 }
 
-#----------------------------------
-# ---Fazendo o download dos EXEs---
-#----------------------------------
+#----------------
+# --- FUNÇÕES ---
+#----------------
 
-Write-Host "Criando a pasta EXEs..." -ForegroundColor Yellow
+# Função com a mensagem inicial.
+function initial_message {
+	
+	clear
+	
+	Write-Host "################################################" -ForegroundColor Cyan
+	Write-Host "##   Script de pós instalação do Windows 11   ##" -ForegroundColor Cyan
+	Write-Host "################################################" -ForegroundColor Cyan
+	Write-Host ""
+	Write-Host "IMPORTANTE:" -ForegroundColor Red
+	Write-Host "Antes de executar, leia as instruções no cabeçalho do script e verifique"
+	Write-Host "os links de download. SEMPRE execute este script como administrador."
+	Write-Host ""
+	Write-Host "Ao ser executado, esse script irá:" -ForegroundColor Yellow
+	Write-Host ""
+	
+	Write-Host "01. Instalar, com o winget, os apps:" -ForegroundColor Cyan
+	$ListaApps = ((($apps.Values -join ', ') + '.') -replace "(.{1,80})(?:\s|$)", "`$1`n").Trim()
+	Write-Host $ListaApps
 
-# Cria pasta "EXEs" dentro de Downloads
-New-Item -Path "$env:USERPROFILE\Downloads\EXEs" -ItemType Directory | Out-Null
+	Write-Host '02. Instalar todos os "Microsoft VCRedists" de 2005 à 2015+;' -ForegroundColor Cyan
+	Write-Host '03. Criar a pasta "C:\Users\Jedi Fonseca\Downloads\EXEs";' -ForegroundColor Cyan
 
-Write-Host "Fazendo o download dos EXEs..." -ForegroundColor Yellow
-
-# Pasta de destino
-$destino = "$env:USERPROFILE\Downloads\EXEs"
-
-# Downloads com status em MB
-foreach ($url in $downloads) {
-    $saida = Join-Path $destino (Split-Path $url -Leaf)
-    curl.exe -L -C - $url -o $saida -#
+	Write-Host "04. Baixar os executáveis para os apps:" -ForegroundColor Cyan
+	$ListaDownloads = ((($downloads.Values -join ', ') + '.') -replace "(.{1,80})(?:\s|$)", "`$1`n").Trim()
+	Write-Host $ListaDownloads
+	
+	Write-Host "05. Habilitar o menu de contexto clássico;" -ForegroundColor Cyan
+	Write-Host "06. Abrir páginas de downloads de drivers no site da AMD." -ForegroundColor Cyan
+	Write-Host ""
+	Write-Host "Pressione ENTER para iniciar a execução do script ou CTRL+C para cancelar." -ForegroundColor Yellow
+	Read-Host
 }
 
-#----------------------------------------------
-# ---Habilitando o menu de contexto clássico---
-#----------------------------------------------
 
-Write-Host "Habilitando o menu de contexto clássico..." -ForegroundColor Yellow
+# Função de instalação dos apps com o "winget".
+function install_apps {
+	Write-Host "Instalando os apps com o winget..." -ForegroundColor Yellow
 
-reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
-
-Write-Host "Pressione ENTER para reiniciar o explorer e aplicar a alteração." -ForegroundColor Yellow
-Read-Host
-
-Stop-Process -Name explorer -Force
-Start-Process explorer.exe
-
-# Mensagem final
-
-Write-Host "Script finalizado!" -ForegroundColor Yellow
-Write-Host "Pressione ENTER se você deseja abrir a página de download do driver da RX580 no site da AMD" -ForegroundColor Yellow
-Write-Host "ou CTRL+C para não abrir a página e encerrar a execução do script agora." -ForegroundColor Yellow
-Read-Host
-Start-Process "https://www.amd.com/pt/support/downloads/drivers.html/graphics/radeon-600-500-400/radeon-rx-500-series/radeon-rx-580.html"
-Write-Host "Você chegou ao final do script." -ForegroundColor Green
+	foreach ($ident in $apps.Keys) {
+		winget install --id $ident --accept-package-agreements --accept-source-agreements --silent
+}
+}
 
 
 
+# Função de instalação dos VCRedists
+function vcr_install {
+	Write-Host 'Instalando os "Microsoft VCRedists" de 2005 à 2015+...' -ForegroundColor Yellow
+
+	foreach ($ident2 in $vcredists) {
+		winget install --id $ident2 --accept-package-agreements --accept-source-agreements --silent
+}	
+}
 
 
 
+# Função com o download dos EXEs
+function download_exes {
+	
+	Write-Host "Criando a pasta EXEs..." -ForegroundColor Yellow
+	New-Item -Path "$env:USERPROFILE\Downloads\EXEs" -ItemType Directory | Out-Null
+
+	Write-Host "Fazendo o download dos EXEs..." -ForegroundColor Yellow
+	
+	$destino = "$env:USERPROFILE\Downloads\EXEs"
+	
+	foreach ($url in $downloads.Keys) {
+		$saida = Join-Path $destino (Split-Path $url -Leaf)
+		curl.exe -L -C - $url -o $saida -#
+}
+}
+
+
+
+# Função que habilita o menu de contexto clássico.
+function context_menu {
+	Write-Host "Habilitando o menu de contexto clássico..." -ForegroundColor Yellow
+	reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
+
+	Write-Host "Pressione ENTER para reiniciar o explorer e aplicar a alteração." -ForegroundColor Yellow
+	Read-Host
+
+	Stop-Process -Name explorer -Force
+	Start-Process explorer.exe
+	Write-Host "Menu de contexto clássico habilitado!" -ForegroundColor Green
+}
+
+
+
+# Função com a mensagem final e a abertura de páginas no navegador
+function final_message {
+	Write-Host "Script finalizado!" -ForegroundColor Yellow
+	Write-Host "Pressione ENTER se você deseja abrir a páginas de downloads de drivers no site da AMD" -ForegroundColor Yellow
+	Write-Host "ou CTRL+C para não abrir a página e encerrar a execução do script agora." -ForegroundColor Yellow
+	Read-Host
+	
+	Start-Process "https://www.amd.com/pt/support/downloads/drivers.html/graphics/radeon-600-500-400/radeon-rx-500-series/radeon-rx-580.html"
+	Start-Process "https://www.amd.com/pt/support/downloads/drivers.html/chipsets/am4/b450.html"
+	Write-Host "Você chegou ao final do script." -ForegroundColor Green
+}
+
+
+
+#---------------------------
+# --- EXECUÇÃO DO SCRIPT ---
+#---------------------------
+
+if ($args.Count -eq 0) {
+    # Roda o script completo
+    initial_message
+    install_apps
+    download_exes
+	context_menu
+	final_message
+    Write-Host "`nScript finalizado! Recomenda-se reiniciar o sistema." -ForegroundColor Green
+}
+else {
+	# Roda o script de acordo com os argumentos selecionados.
+    switch ($args) {
+        "--init"  { initial_message }
+        "--apps"  { install_apps }
+        "--exes"  { download_exes }
+        "--menu"  { context_menu }
+        "--final" { final_message }
+        Default { 
+            Write-Host "Opção inválida: $_" -ForegroundColor Red
+            exit 1
+        }
+    }
+}
