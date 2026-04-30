@@ -100,7 +100,6 @@ declare -A snap_packages=(
 
 declare -A deb_downloads=(
     ["https://proton.me/download/pass/linux/proton-pass_1.36.1_amd64.deb"]="Proton Pass"
-    ["https://www.unifiedremote.com/download/linux-x64-deb"]="Unified Remote"
     ["https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-3/appimagelauncher_3.0.0-beta-2-gha287.96cb937_amd64.deb"]="AppImageLauncher"
 )
 
