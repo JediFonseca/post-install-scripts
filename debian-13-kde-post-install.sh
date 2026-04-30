@@ -397,13 +397,18 @@ cpu_governor () {
 
     sudo cpupower frequency-set -g performance
 
-    echo -e "[Unit]\nDescription=Set CPU governor to performance mode\n"\
-    "After=cpupower.service\n\n"\
-    "[Service]\n"\
-    "ExecStart=/usr/bin/cpupower frequency-set -g performance\n"\
-    "RemainAfterExit=true\n\n"\
-    "[Install]\n"\
-    "WantedBy=multi-user.target" | sudo tee /etc/systemd/system/cpupower-performance.service > /dev/null
+    cat <<EOF | sudo tee /etc/systemd/system/cpupower-performance.service > /dev/null
+    [Unit]
+    Description=CPU Performance Governor
+    After=cpupower.service
+
+    [Service]
+    Type=oneshot
+    ExecStart=/usr/bin/cpupower frequency-set -g performance
+
+    [Install]
+    WantedBy=multi-user.target
+    EOF
 
     sudo systemctl enable cpupower-performance.service
     sudo systemctl start cpupower-performance.service
