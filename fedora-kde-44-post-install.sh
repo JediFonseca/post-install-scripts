@@ -101,6 +101,7 @@ declare -A snap_packages=(
 declare -A rpm_downloads=(
     ["https://proton.me/download/pass/linux/proton-pass-1.36.1-1.x86_64.rpm"]="Proton Pass"
     ["https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-3/appimagelauncher_3.0.0-beta-2-gha287.96cb937_x86_64.rpm"]="AppImageLauncher"
+    ["https://data.nephobox.com/issue/terabox/Linux/1.44.3/TeraBox-1.44.3.x86_64.rpm"]="TeraBox"
 )
 
 declare -A appimages_downloads=(
