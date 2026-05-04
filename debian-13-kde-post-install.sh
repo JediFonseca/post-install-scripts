@@ -102,6 +102,7 @@ declare -A deb_downloads=(
     ["https://proton.me/download/pass/linux/proton-pass_1.36.1_amd64.deb"]="Proton Pass"
     ["https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-3/appimagelauncher_3.0.0-beta-2-gha287.96cb937_amd64.deb"]="AppImageLauncher"
     ["https://data.nephobox.com/issue/terabox/Linux/1.44.3/TeraBox_1.44.3_amd64.deb"]="TeraBox"
+    ["https://download.virtualbox.org/virtualbox/7.2.8/virtualbox-7.2_7.2.8-173730~Debian~trixie_amd64.deb"]="VirtualBox"
 )
 
 declare -A appimages_downloads=(
