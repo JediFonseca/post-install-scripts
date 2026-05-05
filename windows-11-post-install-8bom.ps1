@@ -50,6 +50,7 @@ $apps = @{
     "TechPowerUp.GPU-Z" = "GPU-Z"
     "Oracle.VirtualBox" = "VirtualBox"
     "Google.Chrome" = "Google Chrome"
+	"Baidu.TeraBox" = "TeraBox"
 
     # Proton Apps
     "Proton.ProtonPass" = "Proton Pass"
