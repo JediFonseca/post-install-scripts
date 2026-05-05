@@ -4,6 +4,22 @@
 # Comando para habilitar a execução de scripts:
 # Set-ExecutionPolicy RemoteSigned
 
+#------------------
+# --- VARIÁVEIS ---
+#------------------
+
+$documents_source = "D:\Usuários\Documentos (Arquivo)"
+$images_source = "D:\Usuários\Imagens (Arquivo)"
+$downloads_source = "D:\Usuários\Downloads (Arquivo)"
+$videos_source = "D:\Usuários\Vídeos (Arquivo)"
+$music_source = "E:\Minhas Músicas"
+
+$documents_dest = "$env:USERPROFILE\Documents\Documentos (Arquivo)"
+$images_dest = "$env:USERPROFILE\Pictures\Imagens (Arquivo)"
+$downloads_dest = "$env:USERPROFILE\Downloads\Downloads (Arquivo)"
+$videos_dest = "$env:USERPROFILE\Videos\Vídeos (Arquivo)"
+$music_dest = "$env:USERPROFILE\Music\Minhas Músicas"
+
 #----------------------
 # --- ARRAYS/LISTAS ---
 #----------------------
@@ -64,7 +80,6 @@ $downloads = @{
 # --- FUNÇÕES ---
 #----------------
 
-# Função com a mensagem inicial.
 function initial_message {
 	
 	clear
@@ -85,21 +100,22 @@ function initial_message {
 	Write-Host $ListaApps
 
 	Write-Host '02. Instalar todos os "Microsoft VCRedists" de 2005 à 2015+;' -ForegroundColor Cyan
-	Write-Host '03. Criar a pasta "C:\Users\Jedi Fonseca\Downloads\EXEs";' -ForegroundColor Cyan
+	Write-Host "03. Criar a pasta ""$env:USERPROFILE\Downloads\EXEs"";" -ForegroundColor Cyan
 
 	Write-Host "04. Baixar os executáveis para os apps:" -ForegroundColor Cyan
 	$ListaDownloads = ((($downloads.Values -join ', ') + '.') -replace "(.{1,80})(?:\s|$)", "`$1`n").Trim()
 	Write-Host $ListaDownloads
 	
 	Write-Host "05. Habilitar o menu de contexto clássico;" -ForegroundColor Cyan
-	Write-Host "06. Abrir páginas de downloads de drivers no site da AMD." -ForegroundColor Cyan
+	Write-Host "06. Criar links simbólicos para as pastas do usuário;" -ForegroundColor Cyan
+	Write-Host "07. Abrir páginas de downloads de drivers no site da AMD." -ForegroundColor Cyan
 	Write-Host ""
 	Write-Host "Pressione ENTER para iniciar a execução do script ou CTRL+C para cancelar." -ForegroundColor Yellow
 	Read-Host
 }
 
+#-------------------------------------------------------------------------------------------
 
-# Função de instalação dos apps com o "winget".
 function install_apps {
 	Write-Host "Instalando os apps com o winget..." -ForegroundColor Yellow
 
@@ -108,9 +124,8 @@ function install_apps {
 }
 }
 
+#-------------------------------------------------------------------------------------------
 
-
-# Função de instalação dos VCRedists
 function vcr_install {
 	Write-Host 'Instalando os "Microsoft VCRedists" de 2005 à 2015+...' -ForegroundColor Yellow
 
@@ -119,27 +134,24 @@ function vcr_install {
 }	
 }
 
+#-------------------------------------------------------------------------------------------
 
-
-# Função com o download dos EXEs
 function download_exes {
 	
 	Write-Host "Criando a pasta EXEs..." -ForegroundColor Yellow
-	New-Item -Path "$env:USERPROFILE\Downloads\EXEs" -ItemType Directory | Out-Null
+	New-Item -Path "$env:USERPROFILE\Downloads\EXEs" -ItemType Directory -Force | Out-Null
+	$destino = "$env:USERPROFILE\Downloads\EXEs"
 
 	Write-Host "Fazendo o download dos EXEs..." -ForegroundColor Yellow
 	
-	$destino = "$env:USERPROFILE\Downloads\EXEs"
-	
 	foreach ($url in $downloads.Keys) {
 		$saida = Join-Path $destino (Split-Path $url -Leaf)
-		curl.exe -L -C - $url -o $saida -#
+		curl.exe -L -C - "$url" -o "$saida" -#
 }
 }
 
+#-------------------------------------------------------------------------------------------
 
-
-# Função que habilita o menu de contexto clássico.
 function context_menu {
 	Write-Host "Habilitando o menu de contexto clássico..." -ForegroundColor Yellow
 	reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
@@ -149,24 +161,41 @@ function context_menu {
 
 	Stop-Process -Name explorer -Force
 	Start-Process explorer.exe
+	Write-Host 'Iniciando o processo "explorer.exe". Aguarde...' -ForegroundColor Yellow
+	Start-Sleep -Seconds 5
 	Write-Host "Menu de contexto clássico habilitado!" -ForegroundColor Green
 }
 
+#-------------------------------------------------------------------------------------------
 
+function user_folders {
+	Write-Host 'Criando as pastas do usuário na partição "Dados" (Se não existirem)...' -ForegroundColor Yellow
+	New-Item -Path "$documents_source" -ItemType Directory -Force | Out-Null
+	New-Item -Path "$downloads_source" -ItemType Directory -Force | Out-Null
+	New-Item -Path "$images_source" -ItemType Directory -Force | Out-Null
+	New-Item -Path "$videos_source" -ItemType Directory -Force | Out-Null
+	New-Item -Path "$music_source" -ItemType Directory -Force | Out-Null
+	
+	New-Item -Path "$documents_dest" -Target "$documents_source" -ItemType SymbolicLink -Force | Out-Null
+	New-Item -Path "$downloads_dest" -Target "$downloads_source" -ItemType SymbolicLink -Force | Out-Null
+	New-Item -Path "$images_dest" -Target "$images_source" -ItemType SymbolicLink -Force | Out-Null
+	New-Item -Path "$videos_dest" -Target "$videos_source" -ItemType SymbolicLink -Force | Out-Null
+	New-Item -Path "$music_dest" -Target "$music_source" -ItemType SymbolicLink -Force | Out-Null
+}
 
-# Função com a mensagem final e a abertura de páginas no navegador
+#-------------------------------------------------------------------------------------------
+
 function final_message {
 	Write-Host "Script finalizado!" -ForegroundColor Yellow
-	Write-Host "Pressione ENTER se você deseja abrir a páginas de downloads de drivers no site da AMD" -ForegroundColor Yellow
+	Write-Host "Pressione ENTER se você deseja abrir as páginas de downloads de drivers no site da AMD" -ForegroundColor Yellow
 	Write-Host "ou CTRL+C para não abrir a página e encerrar a execução do script agora." -ForegroundColor Yellow
 	Read-Host
 	
-	Start-Process "https://www.amd.com/pt/support/downloads/drivers.html/graphics/radeon-600-500-400/radeon-rx-500-series/radeon-rx-580.html"
-	Start-Process "https://www.amd.com/pt/support/downloads/drivers.html/chipsets/am4/b450.html"
+	Start-Process "msedge.exe" "https://www.amd.com/pt/support/downloads/drivers.html/graphics/radeon-600-500-400/radeon-rx-500-series/radeon-rx-580.html"
+	Start-Sleep -Seconds 1
+	Start-Process "msedge.exe" "https://www.amd.com/pt/support/downloads/drivers.html/chipsets/am4/b450.html"
 	Write-Host "Você chegou ao final do script." -ForegroundColor Green
 }
-
-
 
 #---------------------------
 # --- EXECUÇÃO DO SCRIPT ---
@@ -179,21 +208,24 @@ if ($args.Count -eq 0) {
 	vcr_install
     download_exes
 	context_menu
+	user_folders
 	final_message
     Write-Host "`nScript finalizado! Recomenda-se reiniciar o sistema." -ForegroundColor Green
 }
 else {
-	# Roda o script de acordo com os argumentos selecionados.
-    switch ($args) {
-        "--init"  { initial_message }
-        "--apps"  { install_apps }
-		"--vcr"   { vcr_install }
-        "--exes"  { download_exes }
-        "--menu"  { context_menu }
-        "--final" { final_message }
-        Default { 
-            Write-Host "Opção inválida: $_" -ForegroundColor Red
-            exit 1
+    # Itera sobre cada argumento passado no comando
+    foreach ($argumento in $args) {
+        switch ($argumento) {
+            "--init"    { initial_message }
+            "--apps"    { install_apps }
+            "--vcr"     { vcr_install }
+            "--exes"    { download_exes }
+            "--menu"    { context_menu }
+            "--final"   { final_message }
+            "--folders" { user_folders }
+            Default { 
+                Write-Host "Opção inválida: $argumento" -ForegroundColor Red
+            }
         }
     }
 }
