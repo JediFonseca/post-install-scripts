@@ -51,6 +51,7 @@ $apps = @{
     "Oracle.VirtualBox" = "VirtualBox"
     "Google.Chrome" = "Google Chrome"
 	"Baidu.TeraBox" = "TeraBox"
+	"SoftDeluxe.FreeDownloadManager" = "Free Download Manager"
 
     # Proton Apps
     "Proton.ProtonPass" = "Proton Pass"
