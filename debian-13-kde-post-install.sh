@@ -275,7 +275,7 @@ sudo apt install -y "${!apt_packages[@]}"
 flatpak_installation () {
 echo -e "${coloryellow}Iniciando a instalação dos pacotes flatpak${nocolor}"
 echo
-flatpak install --user -y flathub "${!flatpak_packages[@]}"
+flatpak install -y flathub "${!flatpak_packages[@]}"
 }
 
 #---------------------------------------------------------------------------------------
