@@ -23,12 +23,12 @@ mymusic="/mnt/Músicas/"
 # Pastas do usuário para a criação de links simbólicos
 source_documents="/mnt/Dados/User/Documentos (Arquivo)"
 source_downloads="/mnt/Dados/User/Downloads (Arquivo)"
-source_music="/mnt/Músicas/Minhas Músicas"
+source_music="/mnt/Arquivo/Músicas"
 source_images="/mnt/Dados/User/Imagens (Arquivo)"
 source_videos="/mnt/Dados/User/Vídeos (Arquivo)"
 dest_documents="$HOME/Documentos/Documentos (Arquivo)"
 dest_downloads="$HOME/Downloads/Downloads (Arquivo)"
-dest_music="$HOME/Músicas/Minhas Músicas"
+dest_music="$HOME/Músicas/Músicas"
 dest_images="$HOME/Imagens/Imagens (Arquivo)"
 dest_videos="$HOME/Vídeos/Vídeos (Arquivo)"
 
@@ -399,18 +399,18 @@ cpu_governor () {
 
     sudo cpupower frequency-set -g performance
 
-    cat <<EOF | sudo tee /etc/systemd/system/cpupower-performance.service > /dev/null
-    [Unit]
-    Description=CPU Performance Governor
-    After=cpupower.service
+cat <<EOF | sudo tee /etc/systemd/system/cpupower-performance.service > /dev/null
+[Unit]
+Description=CPU Performance Governor
+After=cpupower.service
 
-    [Service]
-    Type=oneshot
-    ExecStart=/usr/bin/cpupower frequency-set -g performance
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/cpupower frequency-set -g performance
 
-    [Install]
-    WantedBy=multi-user.target
-    EOF
+[Install]
+WantedBy=multi-user.target
+EOF
 
     sudo systemctl enable cpupower-performance.service
     sudo systemctl start cpupower-performance.service
