@@ -12,13 +12,13 @@ $documents_source = "D:\Usuários\Documentos (Arquivo)"
 $images_source = "D:\Usuários\Imagens (Arquivo)"
 $downloads_source = "D:\Usuários\Downloads (Arquivo)"
 $videos_source = "D:\Usuários\Vídeos (Arquivo)"
-$music_source = "E:\Minhas Músicas"
+$music_source = "E:\Músicas"
 
 $documents_dest = "$env:USERPROFILE\Documents\Documentos (Arquivo)"
 $images_dest = "$env:USERPROFILE\Pictures\Imagens (Arquivo)"
 $downloads_dest = "$env:USERPROFILE\Downloads\Downloads (Arquivo)"
 $videos_dest = "$env:USERPROFILE\Videos\Vídeos (Arquivo)"
-$music_dest = "$env:USERPROFILE\Music\Minhas Músicas"
+$music_dest = "$env:USERPROFILE\Music\Músicas"
 
 #----------------------
 # --- ARRAYS/LISTAS ---
@@ -49,7 +49,7 @@ $apps = @{
     "CPUID.CPU-Z" = "CPU-Z"
     "TechPowerUp.GPU-Z" = "GPU-Z"
     "Oracle.VirtualBox" = "VirtualBox"
-    "Google.Chrome" = "Google Chrome"
+    "Brave.Brave" = "Brave Browser"
 	"Baidu.TeraBox" = "TeraBox"
 	"SoftDeluxe.FreeDownloadManager" = "Free Download Manager"
 
