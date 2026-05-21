@@ -18,17 +18,18 @@ nocolor='\033[0m' # Reseta a cor para o padrão do terminal.
 
 # Ponto de montagem das partições extras
 gamesdata="/mnt/Dados/"
+arquivo="/mnt/Arquivo"
 mymusic="/mnt/Músicas/"
 
 # Pastas do usuário para a criação de links simbólicos
 source_documents="/mnt/Dados/User/Documentos (Arquivo)"
 source_downloads="/mnt/Dados/User/Downloads (Arquivo)"
-source_music="/mnt/Arquivo/Músicas"
+source_music="/mnt/Arquivo/Músicas (Arquivo)"
 source_images="/mnt/Dados/User/Imagens (Arquivo)"
 source_videos="/mnt/Dados/User/Vídeos (Arquivo)"
 dest_documents="$HOME/Documentos/Documentos (Arquivo)"
 dest_downloads="$HOME/Downloads/Downloads (Arquivo)"
-dest_music="$HOME/Músicas/Músicas"
+dest_music="$HOME/Músicas/Arquivo"
 dest_images="$HOME/Imagens/Imagens (Arquivo)"
 dest_videos="$HOME/Vídeos/Vídeos (Arquivo)"
 
@@ -67,6 +68,7 @@ declare -A apt_packages=(
     ["gnome-boxes"]="GNOME Boxes"
     ["lutris"]="Lutris"
     ["kde-config-flatpak"]="KDE Flatpak Config"
+    ["curl"]="Curl"
 )
 
 declare -A flatpak_packages=(
@@ -88,7 +90,6 @@ declare -A flatpak_packages=(
     ["org.hydrogenmusic.Hydrogen"]="Hydrogen Drum Machine"
     ["com.heroicgameslauncher.hgl"]="Heroic Games Launcher"
     ["com.github.Matoking.protontricks"]="Protontricks"
-    ["com.google.Chrome"]="Google Chrome"
     ["net.cozic.joplin_desktop"]="Joplin"
     ["io.gitlab.librewolf-community"]="LibreWolf"
     ["io.ente.auth"]="Ente Auth"
@@ -101,7 +102,7 @@ declare -A snap_packages=(
 declare -A deb_downloads=(
     ["https://proton.me/download/pass/linux/proton-pass_1.36.1_amd64.deb"]="Proton Pass"
     ["https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-3/appimagelauncher_3.0.0-beta-2-gha287.96cb937_amd64.deb"]="AppImageLauncher"
-    ["https://data.nephobox.com/issue/terabox/Linux/1.44.3/TeraBox_1.44.3_amd64.deb"]="TeraBox"
+    ["https://data.nephobox.com/issue/terabox/Linux/1.44.4.168/TeraBox_1.44.4_amd64.deb"]="TeraBox"
     ["https://download.virtualbox.org/virtualbox/7.2.8/virtualbox-7.2_7.2.8-173730~Debian~trixie_amd64.deb"]="VirtualBox"
 )
 
@@ -195,7 +196,7 @@ echo "Instalar o \"snapd\" e o \"flatpak\", adicionar o repositório \"flathub\"
 echo "e adicionar os repositórios do \"Lutris\" para o \"Debian\"."
 
 echo -e "${colorblue}Instalar via APT:${nocolor}"
-printf '%s, ' "${apt_packages[@]}" | sed 's/, $/./' | fold -s -w 80
+printf '%s, ' "Brave Origin, ${apt_packages[@]}" | sed 's/, $/./' | fold -s -w 80
 
 echo -e "${colorblue}\nInstalar via Flatpak:${nocolor}"
 printf '%s, ' "${flatpak_packages[@]}" | sed 's/, $/./' | fold -s -w 80
@@ -248,7 +249,7 @@ sudo snap install snapd
 echo -e "${coloryellow}Instalando o \"flatpak\" e adicionando o repositório \"Flathub\"...${nocolor}"
 sudo apt update
 sudo apt install flatpak -y
-flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak remote-add --system --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 echo -e "${coloryellow}Adicionando os repositórios do \"Lutris\" para o \"Debian\".${nocolor}"
 echo -e "Types: deb\nURIs: https://download.opensuse.org/repositories/home:/stryco\
@@ -268,6 +269,14 @@ echo -e "${coloryellow}Iniciando instalação dos pacotes \"apt\".${nocolor}"
 echo
 sudo apt update
 sudo apt install -y "${!apt_packages[@]}"
+echo
+echo -e "${coloryellow}Instalando o \"Brave Origin\"...${nocolor}"
+curl -fsS https://dl.brave.com/install.sh | FLAVOR=origin CHANNEL=nightly sh
+echo
+echo -e "${coloryellow}Executando a limpeza pós instalação...${nocolor}"
+echo
+sudo apt autoremove -y
+sudo apt autoclean -y
 }
 
 #---------------------------------------------------------------------------------------
@@ -275,7 +284,7 @@ sudo apt install -y "${!apt_packages[@]}"
 flatpak_installation () {
 echo -e "${coloryellow}Iniciando a instalação dos pacotes flatpak${nocolor}"
 echo
-flatpak install -y flathub "${!flatpak_packages[@]}"
+flatpak install --system -y flathub "${!flatpak_packages[@]}"
 }
 
 #---------------------------------------------------------------------------------------
@@ -388,16 +397,16 @@ chmod +x "$HOME/.local/bin/"* &>/dev/null
 #---------------------------------------------------------------------------------------
 
 cpu_governor () {
-    clear
+clear
 
-    echo -e "${coloryellow}Verificando o modo de energia atual da sua CPU...${nocolor}"
-    cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
-    cpupower frequency-info
-    echo -e "${coloryellow}Verifique, acima, o modo de energia atual da sua CPU.${nocolor}"
-    echo -e -n "${coloryellow}Pressione ENTER para ativar o modo \"performance\" ou CTRL+C para cancelar.${nocolor}"
-    read
+echo -e "${coloryellow}Verificando o modo de energia atual da sua CPU...${nocolor}"
+cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+cpupower frequency-info
+echo -e "${coloryellow}Verifique, acima, o modo de energia atual da sua CPU.${nocolor}"
+echo -e -n "${coloryellow}Pressione ENTER para ativar o modo \"performance\" ou CTRL+C para cancelar.${nocolor}"
+read
 
-    sudo cpupower frequency-set -g performance
+sudo cpupower frequency-set -g performance
 
 cat <<EOF | sudo tee /etc/systemd/system/cpupower-performance.service > /dev/null
 [Unit]
@@ -412,12 +421,12 @@ ExecStart=/usr/bin/cpupower frequency-set -g performance
 WantedBy=multi-user.target
 EOF
 
-    sudo systemctl enable cpupower-performance.service
-    sudo systemctl start cpupower-performance.service
+sudo systemctl enable cpupower-performance.service
+sudo systemctl start cpupower-performance.service
 
-    echo -e "${coloryellow}Verificando o modo de energia ativo para a sua CPU...${nocolor}"
-    cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
-    cpupower frequency-info
+echo -e "${coloryellow}Verificando o modo de energia ativo para a sua CPU...${nocolor}"
+cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+cpupower frequency-info
 }
 
 #---------------------------------------------------------------------------------------
@@ -433,14 +442,14 @@ echo -e -n "${coloryellow}Pressione ENTER para aplicar as permissões ou CTRL+C 
 read -r
 
 # Concede as permissões de filesystem necessárias aos flatpaks.
-flatpak override --user --filesystem="$gamesdata:rw" --filesystem="$mymusic:rw"
-flatpak override --user --filesystem="$gamesdata:rw" org.freedesktop.Platform.VulkanLayer.MangoHud
-flatpak override --user --filesystem="$gamesdata:rw" org.freedesktop.Platform.VulkanLayer.gamescope
-flatpak override --user --filesystem="$dest_documents:rw" io.gitlab.librewolf-community
-flatpak override --user --filesystem="$dest_downloads:rw" io.gitlab.librewolf-community
-flatpak override --user --filesystem="$dest_images:rw" io.gitlab.librewolf-community
-flatpak override --user --filesystem="$dest_music:rw" io.gitlab.librewolf-community
-flatpak override --user --filesystem="$dest_videos:rw" io.gitlab.librewolf-community
+flatpak override --filesystem="$gamesdata:rw" --filesystem="$mymusic:rw" --filesystem="$arquivo:rw"
+flatpak override --filesystem="$gamesdata:rw" org.freedesktop.Platform.VulkanLayer.MangoHud
+flatpak override --filesystem="$gamesdata:rw" org.freedesktop.Platform.VulkanLayer.gamescope
+flatpak override --filesystem="$dest_documents:rw" io.gitlab.librewolf-community
+flatpak override --filesystem="$dest_downloads:rw" io.gitlab.librewolf-community
+flatpak override --filesystem="$dest_images:rw" io.gitlab.librewolf-community
+flatpak override --filesystem="$dest_music:rw" io.gitlab.librewolf-community
+flatpak override --filesystem="$dest_videos:rw" io.gitlab.librewolf-community
 
 # Exibe as permissões concedidas aos flatpaks
 echo -e "${coloryellow}Permissões de filesystem do Librewolf:${nocolor}"
