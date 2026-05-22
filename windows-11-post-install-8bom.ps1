@@ -52,6 +52,7 @@ $apps = @{
     "Brave.Brave" = "Brave Browser"
 	"Baidu.TeraBox" = "TeraBox"
 	"SoftDeluxe.FreeDownloadManager" = "Free Download Manager"
+	"TheDocumentFoundation.LibreOffice" = "LibreOffice"
 
     # Proton Apps
     "Proton.ProtonPass" = "Proton Pass"
