@@ -19,7 +19,6 @@ nocolor='\033[0m' # Reseta a cor para o padrão do terminal.
 # Ponto de montagem das partições extras
 gamesdata="/mnt/Dados/"
 arquivo="/mnt/Arquivo"
-mymusic="/mnt/Músicas/"
 
 # Pastas do usuário para a criação de links simbólicos
 source_documents="/mnt/Dados/User/Documentos (Arquivo)"
@@ -138,12 +137,14 @@ declare -A remove_packages=(
 # --- FUNÇÕES ---
 #----------------
 
+# Função 01/20 ---------------------------------------------------------------------------------------
+
 script_log () {
     log_file="$HOME/debian-13-post-install.log"
     exec 2> >(tee -a "$log_file")
 }
 
-#---------------------------------------------------------------------------------------
+# Função 02/20 ---------------------------------------------------------------------------------------
 
 sudo_alive () {
 sudo -v
@@ -152,7 +153,7 @@ sudo_pid=$!
 trap "kill $sudo_pid" EXIT
 }
 
-#---------------------------------------------------------------------------------------
+# Função 03/20 ---------------------------------------------------------------------------------------
 
 basic_dependencies () {
 command -v apt &>/dev/null || exit 1
@@ -162,7 +163,7 @@ command -v ping &>/dev/null || exit 4
 command -v chmod &>/dev/null || exit 5
 }
 
-#---------------------------------------------------------------------------------------
+# Função 04/20 ---------------------------------------------------------------------------------------
 
 internet_connection () {
 clear
@@ -180,7 +181,7 @@ else
 fi
 }
 
-#---------------------------------------------------------------------------------------
+# Função 05/20 ---------------------------------------------------------------------------------------
 
 starting_message () {
 clear
@@ -239,7 +240,7 @@ read -r
 echo
 }
 
-#---------------------------------------------------------------------------------------
+# Função 06/20 ---------------------------------------------------------------------------------------
 
 dependencies_installation () {
 echo -e "${coloryellow}Instalando o \"snapd\"...${nocolor}"
@@ -262,7 +263,7 @@ an_13/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/lutris.gpg
 echo -e "${coloryellow}Fase de instalação de dependências finalizada.${nocolor}"
 }
 
-#---------------------------------------------------------------------------------------
+# Função 07/20 ---------------------------------------------------------------------------------------
 
 apt_installation () {
 echo -e "${coloryellow}Iniciando instalação dos pacotes \"apt\".${nocolor}"
@@ -279,7 +280,7 @@ sudo apt autoremove -y
 sudo apt autoclean -y
 }
 
-#---------------------------------------------------------------------------------------
+# Função 08/20 ---------------------------------------------------------------------------------------
 
 flatpak_installation () {
 echo -e "${coloryellow}Iniciando a instalação dos pacotes flatpak${nocolor}"
@@ -287,7 +288,7 @@ echo
 flatpak install --system -y flathub "${!flatpak_packages[@]}"
 }
 
-#---------------------------------------------------------------------------------------
+# Função 09/20 ---------------------------------------------------------------------------------------
 
 snap_installation () {
 echo -e "${coloryellow}Iniciando a instalação dos pacotes snap.${nocolor}"
@@ -298,7 +299,7 @@ for sname in "${!snap_packages[@]}"; do
 done
 }
 
-#---------------------------------------------------------------------------------------
+# Função 10/20 ---------------------------------------------------------------------------------------
 
 deb_downloads_list () {
 echo -e "${coloryellow}Iniciando o download dos pacotes .deb...${nocolor}"
@@ -309,7 +310,7 @@ for url2 in "${!deb_downloads[@]}"; do
 done
 }
 
-#---------------------------------------------------------------------------------------
+# Função 11/20 ---------------------------------------------------------------------------------------
 
 appimage_downloads_list () {
 echo -e "${coloryellow}Iniciando o download dos pacotes AppImage...${nocolor}"
@@ -322,7 +323,7 @@ echo -e "${coloryellow}Tornando os AppImages executáveis...${nocolor}"
 chmod +x "$HOME/Downloads/AppImages/"*.AppImage &>/dev/null
 }
 
-#---------------------------------------------------------------------------------------
+# Função 12/20 ---------------------------------------------------------------------------------------
 
 deb_installation () {
 echo -e "${coloryellow}Iniciando a instalação dos pacotes .deb.${nocolor}"
@@ -330,14 +331,14 @@ echo
 sudo apt install -y "$HOME/Downloads/DEBs/"*.deb
 }
 
-#---------------------------------------------------------------------------------------
+# Função 13/20 ---------------------------------------------------------------------------------------
 
 additional_packages () {
 sudo apt update
 sudo apt install steam-devices -y
 }
 
-#---------------------------------------------------------------------------------------
+# Função 14/20 ---------------------------------------------------------------------------------------
 
 remove_packages_list () {
 echo -e "${coloryellow}Desinstalando os pacotes indesejados.${nocolor}"
@@ -347,7 +348,7 @@ sudo apt autoremove -y
 sudo apt autoclean -y
 }
 
-#---------------------------------------------------------------------------------------
+# Função 15/20 ---------------------------------------------------------------------------------------
 
 config_files () {
 echo -e "${coloryellow}Aplicando configurações personalizadas (Dolphin, Kate e Strawberry)...${nocolor}"
@@ -363,7 +364,7 @@ wget -q -O "$dolphinuipath" "$dolphinuilink" &>/dev/null
 wget -nc -P "$strawdir" "$strawlink" &>/dev/null # Utiliza "-nc -P": só baixa o arquivo remoto se o local não existir
 }
 
-#---------------------------------------------------------------------------------------
+# Função 16/20 ---------------------------------------------------------------------------------------
 
 my_folders () {
 echo -e "${coloryellow}Criando os links para as pastas do usuário...${nocolor}"
@@ -382,7 +383,7 @@ ln -sfn "$source_images" "$dest_images"
 ln -sfn "$source_videos" "$dest_videos"
 }
 
-#---------------------------------------------------------------------------------------
+# Função 17/20 ---------------------------------------------------------------------------------------
 
 my_scripts () {
 echo -e "${coloryellow}Iniciando o download dos scripts pessoais...${nocolor}"
@@ -394,7 +395,7 @@ done
 chmod +x "$HOME/.local/bin/"* &>/dev/null
 }
 
-#---------------------------------------------------------------------------------------
+# Função 18/20 ---------------------------------------------------------------------------------------
 
 cpu_governor () {
 clear
@@ -429,12 +430,11 @@ cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 cpupower frequency-info
 }
 
-#---------------------------------------------------------------------------------------
+# Função 19/20 ---------------------------------------------------------------------------------------
 
 flatpak_permissions () {
 echo -e "\n${coloryellow}Verifique os caminhos para as partições de dados/jogos e músicas.${nocolor}\n"
 echo -e "A partição de Jogos/Dados está montada em:${coloryellow} $gamesdata${nocolor}."
-echo -e "A partição de Músicas está montada em:${coloryellow} $mymusic${nocolor}."
 echo
 echo "Se os caminhos estiverem incorretos, ajuste os valores das suas respectivas variáveis no início do script."
 echo
@@ -442,14 +442,14 @@ echo -e -n "${coloryellow}Pressione ENTER para aplicar as permissões ou CTRL+C 
 read -r
 
 # Concede as permissões de filesystem necessárias aos flatpaks.
-flatpak override --filesystem="$gamesdata:rw" --filesystem="$mymusic:rw" --filesystem="$arquivo:rw"
-flatpak override --filesystem="$gamesdata:rw" org.freedesktop.Platform.VulkanLayer.MangoHud
-flatpak override --filesystem="$gamesdata:rw" org.freedesktop.Platform.VulkanLayer.gamescope
-flatpak override --filesystem="$dest_documents:rw" io.gitlab.librewolf-community
-flatpak override --filesystem="$dest_downloads:rw" io.gitlab.librewolf-community
-flatpak override --filesystem="$dest_images:rw" io.gitlab.librewolf-community
-flatpak override --filesystem="$dest_music:rw" io.gitlab.librewolf-community
-flatpak override --filesystem="$dest_videos:rw" io.gitlab.librewolf-community
+sudo flatpak override --filesystem="$gamesdata:rw" --filesystem="$arquivo:rw"
+sudo flatpak override --filesystem="$gamesdata:rw" org.freedesktop.Platform.VulkanLayer.MangoHud
+sudo flatpak override --filesystem="$gamesdata:rw" org.freedesktop.Platform.VulkanLayer.gamescope
+sudo flatpak override --filesystem="$dest_documents:rw" io.gitlab.librewolf-community
+sudo flatpak override --filesystem="$dest_downloads:rw" io.gitlab.librewolf-community
+sudo flatpak override --filesystem="$dest_images:rw" io.gitlab.librewolf-community
+sudo flatpak override --filesystem="$dest_music:rw" io.gitlab.librewolf-community
+sudo flatpak override --filesystem="$dest_videos:rw" io.gitlab.librewolf-community
 
 # Exibe as permissões concedidas aos flatpaks
 echo -e "${coloryellow}Permissões de filesystem do Librewolf:${nocolor}"
@@ -462,7 +462,7 @@ echo
 echo -e "${coloryellow}As permissões foram aplicadas! Verifique as informações acima.${nocolor}"
 }
 
-#---------------------------------------------------------------------------------------
+# Função 20/20 ---------------------------------------------------------------------------------------
 
 help_section () {
 
