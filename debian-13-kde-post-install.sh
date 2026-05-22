@@ -129,7 +129,6 @@ declare -A remove_packages=(
     ["dragonplayer"]="Dragon Player"
     ["konqueror"]="Konqueror"
     ["firefox-esr"]="Firefox"
-    ["libreoffice-*"]="LibreOffice"
     ["akregator"]="Akregator"
 )
 
