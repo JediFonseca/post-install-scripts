@@ -271,7 +271,7 @@ sudo apt update
 sudo apt install -y "${!apt_packages[@]}"
 echo
 echo -e "${coloryellow}Instalando o \"Brave Origin\"...${nocolor}"
-curl -fsS https://dl.brave.com/install.sh | FLAVOR=origin CHANNEL=nightly sh
+curl -fsS https://dl.brave.com/install.sh | FLAVOR=origin CHANNEL=beta sh
 echo
 echo -e "${coloryellow}Executando a limpeza pós instalação...${nocolor}"
 echo
