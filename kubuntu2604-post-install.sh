@@ -67,6 +67,11 @@ declare -A apt_packages=(
     ["gnome-boxes"]="GNOME Boxes"
     ["kde-config-flatpak"]="KDE Flatpak Config"
     ["curl"]="Curl"
+    ["kio-extras"]="Kio Extras"
+    ["dolphin"]="Dolphin"
+    ["baloo-kf5"]="Baloo KF5"
+    ["kfind"]="Kfind"
+    ["plasma-workspace"]="Plasma Workspace"
 )
 
 declare -A flatpak_packages=(
@@ -251,7 +256,7 @@ apt_installation () {
 echo -e "${coloryellow}Iniciando instalação dos pacotes \"apt\".${nocolor}"
 echo
 sudo apt update
-sudo apt install -y "${!apt_packages[@]}"
+sudo apt install --reinstall -y "${!apt_packages[@]}"
 echo
 echo -e "${coloryellow}Instalando o \"Brave Origin\"...${nocolor}"
 curl -fsS https://dl.brave.com/install.sh | FLAVOR=origin CHANNEL=beta sh
