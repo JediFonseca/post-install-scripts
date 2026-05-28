@@ -67,11 +67,6 @@ declare -A apt_packages=(
     ["gnome-boxes"]="GNOME Boxes"
     ["kde-config-flatpak"]="KDE Flatpak Config"
     ["curl"]="Curl"
-    ["kio-extras"]="Kio Extras"
-    ["dolphin"]="Dolphin"
-    ["baloo-kf5"]="Baloo KF5"
-    ["kfind"]="Kfind"
-    ["plasma-workspace"]="Plasma Workspace"
 )
 
 declare -A flatpak_packages=(
@@ -123,7 +118,6 @@ declare -A scripts_downloads=(
 )
 
 declare -A remove_packages=(
-    ["libkdsoapwsdiscoveryclient0:amd64"]="Discover Libraries"
     ["plasma-discover*"]="Plasma Discover"
     ["remmina*"]="Remmina"
     ["qrca"]="Qrca"
@@ -349,8 +343,6 @@ wget -q -O "$katercpath" "$katerclink" &>/dev/null  # Utiliza "-O": sobrescreve 
 wget -q -O "$dolphinrcpath" "$dolphinrclink" &>/dev/null
 wget -q -O "$dolphinuipath" "$dolphinuilink" &>/dev/null
 wget -nc -P "$strawdir" "$strawlink" &>/dev/null # Utiliza "-nc -P": só baixa o arquivo remoto se o local não existir
-
-kbuildsycoca5 --noincremental
 }
 
 # Função 16/20 ---------------------------------------------------------------------------------------
