@@ -257,6 +257,7 @@ echo -e "${coloryellow}Iniciando instalação dos pacotes \"apt\".${nocolor}"
 echo
 sudo apt update
 sudo apt install --reinstall -y "${!apt_packages[@]}"
+kbuildsycoca5 --noincremental
 echo
 echo -e "${coloryellow}Instalando o \"Brave Origin\"...${nocolor}"
 curl -fsS https://dl.brave.com/install.sh | FLAVOR=origin CHANNEL=beta sh
