@@ -257,7 +257,6 @@ echo -e "${coloryellow}Iniciando instalação dos pacotes \"apt\".${nocolor}"
 echo
 sudo apt update
 sudo apt install --reinstall -y "${!apt_packages[@]}"
-kbuildsycoca5 --noincremental
 echo
 echo -e "${coloryellow}Instalando o \"Brave Origin\"...${nocolor}"
 curl -fsS https://dl.brave.com/install.sh | FLAVOR=origin CHANNEL=beta sh
@@ -350,6 +349,8 @@ wget -q -O "$katercpath" "$katerclink" &>/dev/null  # Utiliza "-O": sobrescreve 
 wget -q -O "$dolphinrcpath" "$dolphinrclink" &>/dev/null
 wget -q -O "$dolphinuipath" "$dolphinuilink" &>/dev/null
 wget -nc -P "$strawdir" "$strawlink" &>/dev/null # Utiliza "-nc -P": só baixa o arquivo remoto se o local não existir
+
+kbuildsycoca5 --noincremental
 }
 
 # Função 16/20 ---------------------------------------------------------------------------------------
