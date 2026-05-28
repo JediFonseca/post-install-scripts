@@ -124,7 +124,6 @@ declare -A remove_packages=(
     ["korganizer"]="KOrganizer"
     ["juk"]="Juk Music Player"
     ["kmouth"]="KMouth"
-    ["libkdsoapwsdiscoveryclient0:amd64"]="Discover Libraries"
     ["plasma-discover"]="Plasma Discover"
     ["dragonplayer"]="Dragon Player"
     ["konqueror"]="Konqueror"
