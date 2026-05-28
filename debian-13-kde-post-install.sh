@@ -114,7 +114,7 @@ declare -A scripts_downloads=(
     ["https://raw.githubusercontent.com/JediFonseca/personal-scripts/main/request-vm-ip"]="Request VM IP"
     ["https://raw.githubusercontent.com/JediFonseca/personal-scripts/main/rsync-go"]="Rsync Go"
     ["https://raw.githubusercontent.com/JediFonseca/pc-data/refs/heads/main/pcdata.sh"]="PC Data"
-    ["https://raw.githubusercontent.com/JediFonseca/personal-scripts/refs/heads/main/debianup"]="Debian Uploader"
+    ["https://raw.githubusercontent.com/JediFonseca/personal-scripts/refs/heads/main/dup"]="Debian Uploader"
 )
 
 declare -A remove_packages=(
