@@ -53,6 +53,7 @@ $apps = @{
 	"Baidu.TeraBox" = "TeraBox"
 	"SoftDeluxe.FreeDownloadManager" = "Free Download Manager"
 	"TheDocumentFoundation.LibreOffice" = "LibreOffice"
+	"Gyan.FFmpeg" = "FFmpeg"
 
     # Proton Apps
     "Proton.ProtonPass" = "Proton Pass"
