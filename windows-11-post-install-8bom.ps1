@@ -53,7 +53,10 @@ $apps = @{
 	"Baidu.TeraBox" = "TeraBox"
 	"SoftDeluxe.FreeDownloadManager" = "Free Download Manager"
 	"TheDocumentFoundation.LibreOffice" = "LibreOffice"
+
+	# Dependências para outros apps e mídias
 	"Gyan.FFmpeg" = "FFmpeg"
+	"EclipseAdoptium.Temurin.8.JRE" = "Java Runtime" # Para rodar Blu Rays com menus no VLC
 
     # Proton Apps
     "Proton.ProtonPass" = "Proton Pass"
