@@ -26,7 +26,7 @@ $music_dest = "$env:USERPROFILE\Music\Músicas"
 
 # Pacotes para serem instalados com o winget:
 $apps = @{
-    # Launchers
+    # Launchers de jogos
     "Valve.Steam" = "Steam"
     "ElectronicArts.EADesktop" = "EA App"
     "GOG.Galaxy" = "GOG Galaxy"
@@ -53,6 +53,8 @@ $apps = @{
 	"Baidu.TeraBox" = "TeraBox"
 	"SoftDeluxe.FreeDownloadManager" = "Free Download Manager"
 	"TheDocumentFoundation.LibreOffice" = "LibreOffice"
+	"MoritzBunkus.MKVToolNix" = "MKVToolNix"
+	"KDE.Kdenlive" = "Kdenlive"
 
 	# Dependências para outros apps e mídias
 	"Gyan.FFmpeg" = "FFmpeg"
