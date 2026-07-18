@@ -64,7 +64,6 @@ declare -A apt_packages=(
     ["pipewire-audio-client-libraries"]="Pipewire Libraries"
     ["ratbagd"]="Ratbagd"
     ["piper"]="Piper"
-    ["gnome-boxes"]="GNOME Boxes"
     ["kde-config-flatpak"]="KDE Flatpak Config"
     ["curl"]="Curl"
 )
@@ -81,7 +80,6 @@ declare -A flatpak_packages=(
     ["com.markopejic.downloader"]="Video Downloader"
     ["org.freedesktop.Platform.VulkanLayer.MangoHud"]="MangoHud"
     ["org.freedesktop.Platform.VulkanLayer.gamescope"]="Gamescope"
-    ["com.github.Flacon"]="Flacon"
     ["org.qbittorrent.qBittorrent"]="qBittorrent"
     ["org.strawberrymusicplayer.strawberry"]="Strawberry"
     ["com.valvesoftware.Steam"]="Steam"
@@ -92,6 +90,7 @@ declare -A flatpak_packages=(
     ["io.gitlab.librewolf-community"]="LibreWolf"
     ["io.ente.auth"]="Ente Auth"
     ["org.libreoffice.LibreOffice"]="LibreOffice"
+    ["org.bunkus.mkvtoolnix-gui"]="MKVToolNix GUI"
 )
 
 declare -A snap_packages=(
