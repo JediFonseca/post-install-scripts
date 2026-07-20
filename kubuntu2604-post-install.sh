@@ -58,7 +58,6 @@ declare -A apt_packages=(
     ["mangohud"]="MangoHud"
     ["gamemode"]="GameMode"
     ["vlc"]="VLC"
-    ["linux-cpupower"]="CPU Power"
     ["soundconverter"]="Sound Converter"
     ["audacity"]="Audacity"
     ["pipewire-audio-client-libraries"]="Pipewire Libraries"
@@ -81,7 +80,6 @@ declare -A flatpak_packages=(
     ["org.freedesktop.Platform.VulkanLayer.MangoHud"]="MangoHud"
     ["org.freedesktop.Platform.VulkanLayer.gamescope"]="Gamescope"
     ["org.qbittorrent.qBittorrent"]="qBittorrent"
-    ["org.strawberrymusicplayer.strawberry"]="Strawberry"
     ["com.valvesoftware.Steam"]="Steam"
     ["org.hydrogenmusic.Hydrogen"]="Hydrogen Drum Machine"
     ["com.heroicgameslauncher.hgl"]="Heroic Games Launcher"
@@ -98,10 +96,11 @@ declare -A snap_packages=(
 )
 
 declare -A deb_downloads=(
-    ["https://proton.me/download/pass/linux/proton-pass_1.36.1_amd64.deb"]="Proton Pass"
+    ["https://github.com/strawberrymusicplayer/strawberry/releases/download/1.2.24/strawberry_1.2.24-resolute_amd64.deb"]="Strawberry Music Player"
+    ["https://proton.me/download/pass/linux/proton-pass_1.38.1_amd64.deb"]="Proton Pass"
     ["https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-3/appimagelauncher_3.0.0-beta-2-gha287.96cb937_amd64.deb"]="AppImageLauncher"
-    ["https://data.nephobox.com/issue/terabox/Linux/1.44.4.168/TeraBox_1.44.4_amd64.deb"]="TeraBox"
-    ["https://download.virtualbox.org/virtualbox/7.2.8/virtualbox-7.2_7.2.8-173730~Ubuntu~resolute_amd64.deb"]="VirtualBox"
+    ["https://data.nephobox.com/issue/terabox/Linux/1.46.0/TeraBox_1.46.0_amd64.deb"]="TeraBox"
+    ["https://download.virtualbox.org/virtualbox/7.2.12/virtualbox-7.2_7.2.12-174389~Ubuntu~resolute_amd64.deb"]="VirtualBox"
     ["https://github.com/lutris/lutris/releases/download/v0.5.22/lutris_0.5.22_all.deb"]="Lutris"
 )
 
