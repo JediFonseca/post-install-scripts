@@ -110,11 +110,11 @@ declare -A appimages_downloads=(
 )
 
 declare -A scripts_downloads=(
-    ["https://raw.githubusercontent.com/JediFonseca/personal-scripts/main/myscripts"]="My Scripts"
-    ["https://raw.githubusercontent.com/JediFonseca/personal-scripts/main/request-vm-ip"]="Request VM IP"
-    ["https://raw.githubusercontent.com/JediFonseca/personal-scripts/main/rsync-go"]="Rsync Go"
+    ["https://raw.githubusercontent.com/JediFonseca/personal-scripts/refs/heads/main/myscripts"]="My Scripts"
+    ["https://raw.githubusercontent.com/JediFonseca/personal-scripts/refs/heads/main/System/request-vm-ip"]="Request VM IP"
+    ["https://raw.githubusercontent.com/JediFonseca/personal-scripts/refs/heads/main/Music%20Sync/rsync-go"]="Rsync Go"
     ["https://raw.githubusercontent.com/JediFonseca/pc-data/refs/heads/main/pcdata"]="PC Data"
-    ["https://raw.githubusercontent.com/JediFonseca/personal-scripts/refs/heads/main/kup"]="Kubuntu Uploader"
+    ["https://raw.githubusercontent.com/JediFonseca/personal-scripts/refs/heads/main/System%20Update/kup"]="Kubuntu Uploader"
 )
 
 declare -A remove_packages=(
