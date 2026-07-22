@@ -139,7 +139,7 @@ sudo_alive () {
 sudo -v
 while true; do sudo -v; sleep 60; done &
 sudo_pid=$!
-trap 'kill "$sudo_pid"' EXIT
+trap 'kill "$sudo_pid"; sudo -k' EXIT
 }
 
 # Função 03/20 ---------------------------------------------------------------------------------------
