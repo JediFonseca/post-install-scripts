@@ -208,7 +208,7 @@ dependencies_installation () {
 
 echo -e "${coloryellow}Habilitando o 'Flathub'...${nocolor}"
 
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 echo -e "${coloryellow}Instalando e configurando o 'RPM Fusion'...${nocolor}"
 
