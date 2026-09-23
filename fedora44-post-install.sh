@@ -191,7 +191,6 @@ ${colorblue}Flags disponíveis:${nocolor}
 --flatpak-per  - Ajusta as permissões dos flatpaks.
 --mylinks	   - Cria os meus links simbólicos/atalhos.
 --tailscale	   - Instala o Tailscale.
---lembretes    - Exibe os lembretes.
 "
 
 echo -e -n "${coloryellow}\nPressione ENTER para iniciar a execução do script ou CTRL+C para cancelar.${nocolor}"
@@ -369,7 +368,6 @@ else
             --remove)       remove_packages_list ;;
             --flatpak-per)  flatpak_permissions ;;
             --mylinks)      mylinks ;;
-            --lembretes)    lembretes ;;
 			--tailscale)	eval "$install_tailscale" ;;
             *)
                 echo -e "${colorred}Opção inválida: $arg${nocolor}"
