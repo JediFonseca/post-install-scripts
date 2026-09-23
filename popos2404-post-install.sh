@@ -16,16 +16,20 @@ coloryellow='\033[1;33m'   # Amarelo - para avisos.
 colorred='\033[0;31m' # Erros
 nocolor='\033[0m' # Reseta a cor para o padrão do terminal.
 
-# VARIÁVEIS DE DIRETÓRIOS --------------------------------------------------------------------------------
+install_tailscale="curl -fsSL https://tailscale.com/install.sh | sh"
+
+# --------------------------------------------------------------------------------------------------------
 
 gamesdata="/mnt/Instalações/"
 arquivo="/mnt/Arquivo/"
 
 documents_source="$HOME/.mnt/NAS/mnt/dados/Documentos"
+downloads_source="/mnt/Backup/Downloads"
 images_source="$HOME/.mnt/NAS/mnt/dados/Imagens"
 music_source="$HOME/.mnt/NAS/mnt/dados/Músicas"
 videos_source="$HOME/.mnt/NAS/mnt/dados/Vídeos"
 documents_link="$HOME/Documentos/Documentos NAS"
+downloads_link="$HOME/Downloads/Arquivo"
 images_link="$HOME/Imagens/Imagens NAS"
 music_link="$HOME/Músicas/Músicas NAS"
 videos_link="$HOME/Vídeos/Vídeos NAS"
@@ -119,7 +123,7 @@ flatpak_filesystems=(
 # --- FUNÇÕES ---
 #----------------
 
-# Função 01 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 sudo_alive () {
 sudo -v
@@ -128,7 +132,7 @@ sudo_pid=$!
 trap 'kill "$sudo_pid"; sudo -k' EXIT
 }
 
-# Função 02 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 basic_dependencies () {
 command -v apt &>/dev/null || exit 1
@@ -137,7 +141,7 @@ command -v ping &>/dev/null || exit 4
 command -v chmod &>/dev/null || exit 5
 }
 
-# Função 03 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 internet_connection () {
 clear
@@ -155,7 +159,7 @@ else
 fi
 }
 
-# Função 04 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 starting_message () {
 
@@ -178,6 +182,7 @@ ${colorblue}Flags disponíveis:${nocolor}
 --remove	   - Remove os pacotes indesejados.
 --flatpak-per  - Ajusta as permissões dos flatpaks.
 --mylinks	   - Cria os meus links simbólicos/atalhos.
+--tailscale	   - Instala o Tailscale.
 --lembretes    - Exibe os lembretes.
 "
 
@@ -187,7 +192,7 @@ echo
 
 }
 
-# Função 05 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 dependencies_installation () {
 
@@ -199,7 +204,7 @@ flatpak remote-add --system --if-not-exists flathub https://dl.flathub.org/repo/
 echo -e "${coloryellow}Fase de instalação de dependências finalizada.${nocolor}"
 }
 
-# Função 06 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 apt_installation () {
 echo -e "${coloryellow}Iniciando instalação dos pacotes \"apt\".${nocolor}"
@@ -225,7 +230,7 @@ sudo apt autoremove -y
 sudo apt autoclean -y
 }
 
-# Função 07 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 flatpak_installation () {
 echo -e "${coloryellow}Iniciando a instalação dos pacotes flatpak${nocolor}"
@@ -233,7 +238,7 @@ echo
 flatpak install --system -y flathub "${!flatpak_packages[@]}"
 }
 
-# Função 09 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 install_tailscale () {
 echo -e "${coloryellow}Iniciando a instalação do Tailscale.${nocolor}"
@@ -249,7 +254,7 @@ read -r
 echo
 }
 
-# Função 11 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 deb_downloads_list () {
 echo -e "${coloryellow}Iniciando o download dos pacotes .deb...${nocolor}"
@@ -260,7 +265,7 @@ for url in "${!deb_downloads[@]}"; do
 done
 }
 
-# Função 12 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 remove_packages_list () {
 echo -e "${coloryellow}Desinstalando os pacotes indesejados.${nocolor}"
@@ -270,7 +275,7 @@ sudo apt autoremove -y
 sudo apt autoclean -y
 }
 
-# Função 13 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 deb_installation () {
 echo -e "${coloryellow}Iniciando a instalação dos pacotes .deb.${nocolor}"
@@ -278,7 +283,7 @@ echo
 sudo apt install -y "$HOME/Downloads/DEBs/"*.deb
 }
 
-# -------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 appimages_downloads_list () {
 echo -e "${coloryellow}Iniciando o download dos pacotes .appimage...${nocolor}"
@@ -289,7 +294,7 @@ for url2 in "${!appimage_downloads[@]}"; do
 done
 }
 
-# Função 19 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 cpu_governor () {
 clear
@@ -324,7 +329,7 @@ cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 cpupower frequency-info
 }
 
-# Função 14 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 mylinks () {
 echo
@@ -334,10 +339,11 @@ ln -sfn "$documents_source" "$documents_link"
 ln -sfn "$images_source" "$images_link"
 ln -sfn "$music_source" "$music_link"
 ln -sfn "$videos_source" "$videos_link"
+ln -sfn "$downloads_source" "$downloads_link"
 
 }
 
-# Função 15 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 flatpak_permissions () {
 
@@ -351,7 +357,7 @@ echo
 
 }
 
-# Função 22 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 lembretes () {
 echo -e "${colorblue}Lembretes:${nocolor}"
@@ -377,6 +383,7 @@ if [[ $# -eq 0 ]]; then
     flatpak_installation
     deb_downloads_list
     deb_installation
+	eval "$install_tailscale"
 	appimages_downloads_list
     remove_packages_list
     mylinks
@@ -401,6 +408,7 @@ else
             --mylinks)      mylinks ;;
             --gov)          cpu_governor ;;
             --lembretes)    lembretes ;;
+			--tailscale)	eval "$install_tailscale" ;;
             *)
                 echo -e "${colorred}Opção inválida: $arg${nocolor}"
                 exit 7
