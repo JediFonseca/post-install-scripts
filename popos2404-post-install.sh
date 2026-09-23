@@ -181,7 +181,6 @@ ${colorblue}Flags disponíveis:${nocolor}
 --mylinks	   - Cria os meus links simbólicos/atalhos.
 --tailscale	   - Instala o Tailscale.
 --gov		   - Define o CPU Governor para Performance.
---lembretes    - Exibe os lembretes.
 "
 
 echo -e -n "${coloryellow}\nPressione ENTER para iniciar a execução do script ou CTRL+C para cancelar.${nocolor}"
@@ -407,7 +406,6 @@ else
             --flatpak-per)  flatpak_permissions ;;
             --mylinks)      mylinks ;;
             --gov)          cpu_governor ;;
-            --lembretes)    lembretes ;;
 			--tailscale)	eval "$install_tailscale" ;;
             *)
                 echo -e "${colorred}Opção inválida: $arg${nocolor}"
