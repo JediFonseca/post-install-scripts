@@ -82,15 +82,14 @@ declare -A flatpak_packages=(
     ["com.bitwarden.desktop"]="Bitwarden"
     ["org.videolan.VLC"]="VLC"
     ["org.soundconverter.SoundConverter"]="Sound Converter"
+	["io.ente.auth"]="Ente Auth"
 )
 
 declare -A deb_downloads=(
-    ["https://github.com/strawberrymusicplayer/strawberry/releases/download/1.2.28/strawberry_1.2.28-noble_amd64.deb"]="Strawberry Music Player"
-    ["https://data.nephobox.com/issue/terabox/Linux/1.47.0/TeraBox_1.47.0_amd64.deb"]="TeraBox"
-    ["https://github.com/ente/ente/releases/download/auth-v4.4.25/ente-auth-v4.4.25-x86_64.deb"]="Ente Auth"
-    ["https://download.virtualbox.org/virtualbox/7.2.16/virtualbox-7.2_7.2.16-174877~Ubuntu~noble_amd64.deb"]="VirtualBox"
+    ["https://data.nephobox.com/issue/terabox/Linux/1.49.5/TeraBox_1.49.5_amd64.deb"]="TeraBox"
+    ["https://download.virtualbox.org/virtualbox/7.2.20/virtualbox-7.2_7.2.20-175154~Ubuntu~noble_amd64.deb"]="VirtualBox"
     ["https://cdn.fastly.steamstatic.com/client/installer/steam.deb"]="Steam"
-    ["https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/download/v2.22.1/Heroic-2.22.1-linux-amd64.deb"]="Heroic Games Launcher"
+    ["https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/download/v2.22.3/Heroic-2.22.3-linux-amd64.deb"]="Heroic Games Launcher"
 )
 
 declare -A appimage_downloads=(
@@ -199,7 +198,7 @@ dependencies_installation () {
 echo -e "${coloryellow}Instalando o \"flatpak\" e adicionando o repositório \"Flathub\"...${nocolor}"
 sudo apt update
 sudo apt install flatpak -y
-flatpak remote-add --system --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+sudo flatpak remote-add --system --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 echo -e "${coloryellow}Fase de instalação de dependências finalizada.${nocolor}"
 }
