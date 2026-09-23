@@ -18,16 +18,18 @@ nocolor='\033[0m' # Reseta a cor para o padrão do terminal.
 
 install_tailscale="curl -fsSL https://tailscale.com/install.sh | sh"
 
-# VARIÁVEIS DE DIRETÓRIOS --------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 gamesdata="/mnt/Instalações/"
 arquivo="/mnt/Arquivo/"
 
 documents_source="$HOME/.mnt/NAS/mnt/dados/Documentos"
+downloads_source="/mnt/Backup/Downloads"
 images_source="$HOME/.mnt/NAS/mnt/dados/Imagens"
 music_source="$HOME/.mnt/NAS/mnt/dados/Músicas"
 videos_source="$HOME/.mnt/NAS/mnt/dados/Vídeos"
 documents_link="$HOME/Documentos/Documentos NAS"
+downloads_link="$HOME/Downloads/Arquivo"
 images_link="$HOME/Imagens/Imagens NAS"
 music_link="$HOME/Músicas/Músicas NAS"
 videos_link="$HOME/Vídeos/Vídeos NAS"
@@ -111,7 +113,7 @@ flatpak_filesystems=(
 # --- FUNÇÕES ---
 #----------------
 
-# Função 01 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 sudo_alive () {
 sudo -v
@@ -120,7 +122,7 @@ sudo_pid=$!
 trap 'kill "$sudo_pid"; sudo -k' EXIT
 }
 
-# Função 02 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 basic_dependencies () {
 command -v apt &>/dev/null || exit 1
@@ -130,7 +132,7 @@ command -v ping &>/dev/null || exit 4
 command -v chmod &>/dev/null || exit 5
 }
 
-# Função 03 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 internet_connection () {
 clear
@@ -148,7 +150,7 @@ else
 fi
 }
 
-# Função 04 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 starting_message () {
 
@@ -180,7 +182,7 @@ echo
 
 }
 
-# Função 05 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 dependencies_installation () {
 
@@ -192,7 +194,7 @@ sudo flatpak remote-add --system --if-not-exists flathub https://dl.flathub.org/
 echo -e "${coloryellow}Fase de instalação de dependências finalizada.${nocolor}"
 }
 
-# Função 06 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 apt_installation () {
 echo -e "${coloryellow}Iniciando instalação dos pacotes \"apt\".${nocolor}"
@@ -209,7 +211,7 @@ sudo apt autoremove --purge -y
 sudo apt clean -y
 }
 
-# Função 07 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 flatpak_installation () {
 echo -e "${coloryellow}Iniciando a instalação dos pacotes flatpak${nocolor}"
@@ -217,7 +219,7 @@ echo
 flatpak install --system -y flathub "${!flatpak_packages[@]}"
 }
 
-# Função 10 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 deb_downloads_list () {
 echo -e "${coloryellow}Iniciando o download dos pacotes .deb...${nocolor}"
@@ -228,7 +230,7 @@ for url2 in "${!deb_downloads[@]}"; do
 done
 }
 
-# Função 11 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 deb_installation () {
 echo -e "${coloryellow}Iniciando a instalação dos pacotes .deb.${nocolor}"
@@ -236,7 +238,7 @@ echo
 sudo apt install -y "$HOME/Downloads/DEBs/"*.deb
 }
 
-# -------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 appimages_downloads_list () {
 echo -e "${coloryellow}Iniciando o download dos pacotes .appimage...${nocolor}"
@@ -247,7 +249,7 @@ for url2 in "${!appimage_downloads[@]}"; do
 done
 }
 
-# Função 12 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 remove_packages_list () {
 echo -e "${coloryellow}Desinstalando os pacotes indesejados.${nocolor}"
@@ -257,7 +259,7 @@ sudo apt autoremove -y
 sudo apt autoclean -y
 }
 
-# Função 13 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 cpu_governor () {
 clear
@@ -292,7 +294,7 @@ cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 cpupower frequency-info
 }
 
-# Função 14 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 mylinks () {
 echo
@@ -302,10 +304,11 @@ ln -sfn "$documents_source" "$documents_link"
 ln -sfn "$images_source" "$images_link"
 ln -sfn "$music_source" "$music_link"
 ln -sfn "$videos_source" "$videos_link"
+ln -sfn "$downloads_source" "$downloads_link"
 
 }
 
-# Função 15 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 flatpak_permissions () {
 
@@ -319,7 +322,7 @@ echo
 
 }
 
-# Função 16 ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
 
 lembretes () {
 echo -e "${colorblue}Lembretes:${nocolor}"
