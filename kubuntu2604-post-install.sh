@@ -78,9 +78,8 @@ declare -A flatpak_packages=(
 )
 
 declare -A deb_downloads=(
-    ["https://github.com/strawberrymusicplayer/strawberry/releases/download/1.2.30/strawberry_1.2.30-resolute_amd64.deb"]="Strawberry Music Player"
     ["https://data.nephobox.com/issue/terabox/Linux/1.49.5/TeraBox_1.49.5_amd64.deb"]="TeraBox"
-    ["https://download.virtualbox.org/virtualbox/7.2.18/virtualbox-7.2_7.2.18-175117~Ubuntu~resolute_amd64.deb"]="VirtualBox"
+    ["https://download.virtualbox.org/virtualbox/7.2.20/virtualbox-7.2_7.2.20-175154~Ubuntu~resolute_amd64.deb"]="VirtualBox"
     ["https://cdn.fastly.steamstatic.com/client/installer/steam.deb"]="Steam"
     ["https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/download/v2.22.3/Heroic-2.22.3-linux-amd64.deb"]="Heroic Games Launcher"
 )
