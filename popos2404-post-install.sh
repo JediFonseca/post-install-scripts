@@ -115,7 +115,6 @@ flatpak_filesystems=(
 	"--filesystem=${images_link}:rw"
 	"--filesystem=${music_link}:rw"
 	"--filesystem=${videos_link}:rw"
-	"--filesystem=${gamesdata}:rw"
 )
 
 #----------------
@@ -137,7 +136,6 @@ basic_dependencies () {
 command -v apt &>/dev/null || exit 1
 command -v mkdir &>/dev/null || exit 3
 command -v ping &>/dev/null || exit 4
-command -v chmod &>/dev/null || exit 5
 }
 
 # --------------------------------------------------------------------------------------------------------
@@ -173,15 +171,16 @@ ${colorred}AVISO:${nocolor} Cheque todas as variáveis e listas antes de rodar o
 ${colorblue}Flags disponíveis:${nocolor}
 
 --dependencies - Instala e configura as dependências do script.
---dnf		   - Instala os pacotes com o dnf.
+--apt		   - Instala os pacotes com o apt.
 --flatpak 	   - Instala os flatpaks.
---rpmd		   - Baixa os .rpm.
---rpmi		   - Instala os .rpm.
+--debd		   - Baixa os .deb.
+--debi		   - Instala os .deb.
 --appimagesd   - Baixa os AppImages.
 --remove	   - Remove os pacotes indesejados.
 --flatpak-per  - Ajusta as permissões dos flatpaks.
 --mylinks	   - Cria os meus links simbólicos/atalhos.
 --tailscale	   - Instala o Tailscale.
+--gov		   - Define o CPU Governor para Performance.
 --lembretes    - Exibe os lembretes.
 "
 
@@ -291,6 +290,8 @@ mkdir -p "$HOME/Downloads/AppImages"
 for url2 in "${!appimage_downloads[@]}"; do
     wget --show-progress -P "$HOME/Downloads/AppImages" "$url2"
 done
+
+chmod +x "$HOME/Downloads/AppImages/"*.AppImage
 }
 
 # --------------------------------------------------------------------------------------------------------
