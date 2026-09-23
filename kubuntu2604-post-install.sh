@@ -105,7 +105,6 @@ flatpak_filesystems=(
 	"--filesystem=${images_link}:rw"
 	"--filesystem=${music_link}:rw"
 	"--filesystem=${videos_link}:rw"
-	"--filesystem=${gamesdata}:rw"
 )
 
 #----------------
@@ -128,7 +127,6 @@ command -v apt &>/dev/null || exit 1
 command -v wget &>/dev/null || exit 2
 command -v mkdir &>/dev/null || exit 3
 command -v ping &>/dev/null || exit 4
-command -v chmod &>/dev/null || exit 5
 }
 
 # --------------------------------------------------------------------------------------------------------
@@ -163,15 +161,16 @@ ${colorred}AVISO:${nocolor} Cheque todas as variáveis e listas antes de rodar o
 ${colorblue}Flags disponíveis:${nocolor}
 
 --dependencies - Instala e configura as dependências do script.
---dnf		   - Instala os pacotes com o dnf.
+--apt		   - Instala os pacotes com o apt.
 --flatpak 	   - Instala os flatpaks.
---rpmd		   - Baixa os .rpm.
---rpmi		   - Instala os .rpm.
+--debd		   - Baixa os .deb.
+--debi		   - Instala os .deb.
 --appimagesd   - Baixa os AppImages.
 --remove	   - Remove os pacotes indesejados.
 --flatpak-per  - Ajusta as permissões dos flatpaks.
 --mylinks	   - Cria os meus links simbólicos/atalhos.
 --tailscale	   - Instala o Tailscale.
+--gov		   - Ajusta o CPU Governor para Performance.
 --lembretes    - Exibe os lembretes.
 "
 
@@ -246,6 +245,9 @@ mkdir -p "$HOME/Downloads/AppImages"
 for url2 in "${!appimage_downloads[@]}"; do
     wget --show-progress -P "$HOME/Downloads/AppImages" "$url2"
 done
+
+chmod +x "$HOME/Downloads/AppImages/"*.AppImage
+
 }
 
 # --------------------------------------------------------------------------------------------------------
@@ -268,7 +270,7 @@ cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 cpupower frequency-info
 echo -e "${coloryellow}Verifique, acima, o modo de energia atual da sua CPU.${nocolor}"
 echo -e -n "${coloryellow}Pressione ENTER para ativar o modo \"performance\" ou CTRL+C para cancelar.${nocolor}"
-read
+read -r
 
 sudo cpupower frequency-set -g performance
 
