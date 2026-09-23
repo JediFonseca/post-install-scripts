@@ -16,6 +16,8 @@ coloryellow='\033[1;33m'   # Amarelo - para avisos.
 colorred='\033[0;31m' # Erros
 nocolor='\033[0m' # Reseta a cor para o padrão do terminal.
 
+install_tailscale="curl -fsSL https://tailscale.com/install.sh | sh"
+
 # VARIÁVEIS DE DIRETÓRIOS --------------------------------------------------------------------------------
 
 gamesdata="/mnt/Instalações/"
@@ -55,6 +57,7 @@ declare -A dnf_packages=(
     ["git"]="Git"
     ["curl"]="curl"
     ["wget"]="Wget"
+	["sshfs"]="sshfs"
 )
 
 declare -A flatpak_packages=(
@@ -187,6 +190,7 @@ ${colorblue}Flags disponíveis:${nocolor}
 --remove	   - Remove os pacotes indesejados.
 --flatpak-per  - Ajusta as permissões dos flatpaks.
 --mylinks	   - Cria os meus links simbólicos/atalhos.
+--tailscale	   - Instala o Tailscale.
 --lembretes    - Exibe os lembretes.
 "
 
@@ -340,6 +344,7 @@ if [[ $# -eq 0 ]]; then
     flatpak_installation
     rpm_downloads_list
     rpm_installation
+	eval "$install_tailscale"
 	appimages_downloads_list
     remove_packages_list
     mylinks
@@ -362,6 +367,7 @@ else
             --flatpak-per)  flatpak_permissions ;;
             --mylinks)      mylinks ;;
             --lembretes)    lembretes ;;
+			--tailscale)	eval "$install_tailscale" ;;
             *)
                 echo -e "${colorred}Opção inválida: $arg${nocolor}"
                 exit 7
