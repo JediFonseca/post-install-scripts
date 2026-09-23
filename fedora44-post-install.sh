@@ -147,7 +147,6 @@ basic_dependencies () {
 command -v dnf &>/dev/null || exit 1
 command -v mkdir &>/dev/null || exit 3
 command -v ping &>/dev/null || exit 4
-command -v chmod &>/dev/null || exit 5
 }
 
 # --------------------------------------------------------------------------------------------------------
@@ -273,6 +272,8 @@ mkdir -p "$HOME/Downloads/AppImages"
 for url2 in "${!appimage_downloads[@]}"; do
     wget --show-progress -P "$HOME/Downloads/AppImages" "$url2"
 done
+
+chmod +x "$HOME/Downloads/AppImages/"*.AppImage
 }
 
 # --------------------------------------------------------------------------------------------------------
