@@ -171,7 +171,6 @@ ${colorblue}Flags disponíveis:${nocolor}
 --mylinks	   - Cria os meus links simbólicos/atalhos.
 --tailscale	   - Instala o Tailscale.
 --gov		   - Ajusta o CPU Governor para Performance.
---lembretes    - Exibe os lembretes.
 "
 
 echo -e -n "${coloryellow}\nPressione ENTER para iniciar a execução do script ou CTRL+C para cancelar.${nocolor}"
