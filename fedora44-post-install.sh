@@ -83,21 +83,20 @@ declare -A flatpak_packages=(
     ["page.codeberg.libre_menu_editor.LibreMenuEditor"]="Menu Editor"
     ["com.bitwarden.desktop"]="BitWarden"
 	["org.gtk.Gtk3theme.Adwaita-dark"]="Adwaita Dark Theme for Flatpaks"
+	["io.ente.auth"]="Ente Auth"
 )
 
 declare -A rpm_downloads=(
     ["https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/download/v2.22.1/Heroic-2.22.1-linux-x86_64.rpm"]="Heroic Games Launcher"
-    ["https://github.com/ente/ente/releases/download/auth-v4.4.25/ente-auth-v4.4.25-x86_64.rpm"]="Ente Auth"
     ["https://download.virtualbox.org/virtualbox/7.2.16/VirtualBox-7.2-7.2.16_174877_fedora40-1.x86_64.rpm"]="VirtualBox"
     ["https://data.nephobox.com/issue/terabox/Linux/1.47.0/TeraBox-1.47.0.x86_64.rpm"]="Terabox"
-    ["https://github.com/strawberrymusicplayer/strawberry/releases/download/1.2.30/strawberry-1.2.30-1.fc44.x86_64.rpm"]="Strawberry Music Player"
 )
 
 declare -A appimage_downloads=(
     ["https://github.com/kem-a/AppManager/releases/download/v3.8.0/AppManager-3.8.0-anylinux-x86_64.AppImage"]="AppManager"
 	["https://github.com/jeffvli/feishin/releases/download/v1.17.0/Feishin-linux-x86_64.AppImage"]="Feishin"
 	["https://objects.joplinusercontent.com/v3.7.18/Joplin-3.7.18.AppImage?source=JoplinWebsite&type=New"]="Joplin"
-	["https://github.com/jely2002/youtube-dl-gui/releases/download/app-v3.2.1/Open.Video.Downloader_3.2.1_amd64.AppImage"]="Video Downloader"
+	["https://github.com/jely2002/youtube-dl-gui/releases/download/app-v3.2.1/Open.Video.Downloader_3.2.1_amd64.AppImage"]="Open Video Downloader"
 )
 
 declare -A remove_packages=(
