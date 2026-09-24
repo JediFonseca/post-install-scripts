@@ -21,7 +21,7 @@ install_tailscale="curl -fsSL https://tailscale.com/install.sh | sh"
 # --------------------------------------------------------------------------------------------------------
 
 gamesdata="/mnt/Instalações/"
-arquivo="/mnt/Arquivo/"
+arquivo="/mnt/Backup/"
 
 documents_source="$HOME/.mnt/NAS/mnt/dados/Documentos"
 downloads_source="/mnt/Backup/Downloads"
@@ -62,6 +62,7 @@ declare -A apt_packages=(
     ["perl"]="perl"
     ["linux-tools-generic"]="linux-tools-generic"
     ["linux-cloud-tools-generic"]="linux-cloud-tools-generic"
+	["sshfs"]="sshfs"
 )
 
 declare -A flatpak_packages=(
@@ -373,9 +374,9 @@ echo "- Configurar o rclone."
 
 if [[ $# -eq 0 ]]; then
 
-    basic_dependencies
-    internet_connection
     starting_message
+	basic_dependencies
+    internet_connection
     sudo_alive
     dependencies_installation
     apt_installation
