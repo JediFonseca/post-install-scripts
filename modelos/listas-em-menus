@@ -1,0 +1,46 @@
+#!/bin/bash
+
+declare -A apt_packages=(
+    ["tree"]="Tree"
+    ["mangohud"]="MangoHud"
+    ["gamemode"]="GameMode"
+    ["vlc"]="VLC"
+    ["soundconverter"]="Sound Converter"
+    ["audacity"]="Audacity"
+    ["pipewire-audio-client-libraries"]="Pipewire Libraries"
+    ["ratbagd"]="Ratbagd"
+    ["piper"]="Piper"
+    ["kde-config-flatpak"]="KDE Flatpak Config"
+    ["curl"]="Curl"
+    ["openssh-server"]="OpenSSH Server"
+    ["markdownpart"]="Markdown Part"
+    ["rclone"]="RClone"
+    ["ffmpeg"]="ffmpeg"
+    ["gparted"]="GParted"
+)
+
+declare -A apt2_packages=(
+["tree"]="Tree2"
+["mangohud"]="MangoHud2"
+["gamemode"]="GameMode2"
+["vlc"]="VLC2"
+)
+
+(
+
+# Cria um separador que deve ser de um caractere.
+IFS=,
+
+# Expande as listas com um "." no final e as adiciona à uma variável.
+lista1="${apt_packages[*]}."
+lista2="${apt2_packages[*]}."
+
+# O trecho "${nomedalista//,/, }" define a lista alvo, substitui o caractere indicado (,)
+# pelo substituto indicado (, ) e imprime a lista na tela.
+echo "Lista 1:"
+echo "Brave Origin, ${lista1//,/, }" | fold -s -w 90
+echo
+echo "Lista 2:"
+echo "${lista2//,/, }" | fold -s -w 90
+
+)
