@@ -1,0 +1,9 @@
+[Unit]
+Description=Monitor de conexão e reboot automático
+
+[Service]
+ExecStart=%h/.local/bin/network-monitor
+Restart=always
+
+[Install]
+WantedBy=default.target
