@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Variáveis ------------------------------------------------------------------------#
+
+marcador="$HOME/reboot_por_falha_de_rede"
+
+# Funções --------------------------------------------------------------------------#
+
+test_connection1 () {
+	ping -c 5 -W 3 -q 1.1.1.1
+}
+
+test_connection2 () {
+	ping -c 5 -W 3 -q 8.8.8.8
+}
+
+# Marcador de erro -----------------------------------------------------------------#
+
+if [ -f "$marcador" ]; then
+	sleep 3600
+else
+	sleep 180
+fi
+
+# Loop -----------------------------------------------------------------------------#
+
+while true; do
+	if test_connection1; then
+		sleep 600
+	else
+		sleep 120
+		if test_connection2; then
+			sleep 600
+		else
+			touch "$marcador"
+			sudo systemctl reboot
+		fi
+	fi
+done
